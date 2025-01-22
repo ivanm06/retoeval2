@@ -1,4 +1,4 @@
-package me.ivanmart.plaiaundi;
+package me.ivanmart.plaiaundi.Database;
 
 import org.mindrot.jbcrypt.BCrypt;
 

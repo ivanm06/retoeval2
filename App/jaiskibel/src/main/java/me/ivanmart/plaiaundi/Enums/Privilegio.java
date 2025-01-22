@@ -1,5 +1,5 @@
 package me.ivanmart.plaiaundi.Enums;
 
-public enum TipoCuenta {
+public enum Privilegio {
     ADMIN, CLIENTE
 }
