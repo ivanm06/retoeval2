@@ -18,7 +18,6 @@ public class Main {
             System.out.println("[Error] error al conectar con la BD. " + e.getMessage());
         }
         auth.start();
-        System.out.println("Hola");
 
         switch (AuthMenu.getUsuario().getPrivilegio()){
             case Privilegio.ADMIN:

@@ -1,6 +1,6 @@
 package me.ivanmart.plaiaundi.Menus;
 
-import me.ivanmart.plaiaundi.Database.Gestor;
+import me.ivanmart.plaiaundi.Database.AuthRepo;
 import me.ivanmart.plaiaundi.Enums.Privilegio;
 import me.ivanmart.plaiaundi.Enums.Sexo;
 import me.ivanmart.plaiaundi.Model.Usuario;
@@ -25,12 +25,8 @@ public class AuthMenu {
             c = Util.sc.nextInt();
         }
 
-        if (c == 1){
-            login();
-            System.out.println("1");
-        }
+        if (c == 1) login();
         else register();
-        System.out.println("0");
     }
 
     public void login(){
@@ -39,12 +35,12 @@ public class AuthMenu {
             dni = Util.getString("Inserta un DNI valido.");
         }
         String pass = Util.getString("Inserta tu contraseña.");
-        if (!Gestor.checkPassword(dni, pass)){
+        if (!AuthRepo.checkPassword(dni, pass)){
             System.out.println("Credenciales inválidas.");
             start();
         }else{
             System.out.println("[Info] Sesión iniciada.");
-            usuario = Gestor.getUsuario(dni);
+            usuario = AuthRepo.getUsuario(dni);
         }
     }
 
@@ -59,7 +55,7 @@ public class AuthMenu {
         Sexo sexo = Util.getEnum(Sexo.class, "Inserta tu sexo.");
         String pass = Util.getPass("Inserta tu contraseña.");
 
-        boolean registro = Gestor.registrar(new Usuario(dni, nombre, apellido1, apellido2, sexo, Privilegio.CLIENTE), pass);
+        boolean registro = AuthRepo.registrar(new Usuario(dni, nombre, apellido1, apellido2, sexo, Privilegio.CLIENTE), pass);
         if (registro) login();
         else start();
     }

@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Gestor {
+public class AuthRepo {
 
     public static boolean checkPassword(String dni, String password){
         try{
@@ -28,18 +28,16 @@ public class Gestor {
     }
 
     public static Usuario getUsuario(String dni){
-        System.out.println("3");
         try{
             String query = "select * from Usuario where dni = ?";
             PreparedStatement statement = DBConnector.con.prepareStatement(query);
             statement.setString(1, dni);
             statement.execute();
-            System.out.println("4");
             ResultSet rs = statement.getResultSet();
-            System.out.println("5");
             if (rs.next()){
-                System.out.println("6");
-                return new Usuario(dni, rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), Util.toEnum(Sexo.class, rs.getString("sexo")), Util.toEnum(Privilegio.class, rs.getString("privilegio")));
+                Sexo sexo = Util.toEnum(Sexo.class, rs.getString("sexo"), Sexo.M);
+                Privilegio privilegio = Util.toEnum(Privilegio.class, rs.getString("privilegio"), Privilegio.CLIENTE);
+                return new Usuario(dni, rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), sexo, privilegio);
             }else return new Usuario();
         }catch (SQLException e){
             System.out.printf("[Error] Ha habido un problema con la base de datos: %s%n", e.getMessage());
