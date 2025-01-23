@@ -4,15 +4,16 @@ public class Establecimiento {
     private String nombre;
     private int id;
 
-    public Establecimiento(String nombre) {
+    public Establecimiento(int id, String nombre) {
         this.nombre = nombre;
+        this.id = id;
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 }

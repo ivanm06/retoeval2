@@ -56,9 +56,6 @@ public class Util {
 
     public static String getPass(String txt){
         Console console = System.console();
-
-
-
         char[] pass = console.readPassword("Enter your password: ");
         String str = "";
         for (char c : pass) str += c;

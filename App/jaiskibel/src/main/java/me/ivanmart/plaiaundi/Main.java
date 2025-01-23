@@ -1,12 +1,16 @@
 package me.ivanmart.plaiaundi;
 
 import me.ivanmart.plaiaundi.Database.DBConnector;
+import me.ivanmart.plaiaundi.Database.ReservaRepo;
 import me.ivanmart.plaiaundi.Enums.Privilegio;
 import me.ivanmart.plaiaundi.Menus.AdminMenu;
 import me.ivanmart.plaiaundi.Menus.AuthMenu;
 import me.ivanmart.plaiaundi.Menus.ClientMenu;
+import me.ivanmart.plaiaundi.Model.ArticuloReserva;
+import me.ivanmart.plaiaundi.Model.Cesta;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Main {
     public static AuthMenu auth = new AuthMenu();
@@ -31,6 +35,10 @@ public class Main {
             default:
                 System.out.println("Ha habido un problema a la hora de iniciar sesion.");
                 break;
+        }
+
+        if (!Cesta.getCesta().isEmpty()){
+            ReservaRepo.reservar(Cesta.getCesta());
         }
 
         try{
