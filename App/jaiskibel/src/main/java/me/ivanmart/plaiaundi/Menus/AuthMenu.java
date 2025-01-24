@@ -18,11 +18,11 @@ public class AuthMenu {
                     +-------------------+
                     """);
 
-        int c = Util.sc.nextInt();
+        int c = Util.getInt();
 
-        while (c != 1 && c != 2){
+        while (c != 1 && c != 2){ // validar opción
             System.out.println("Inserta una opción válida.");
-            c = Util.sc.nextInt();
+            c = Util.getInt();
         }
 
         if (c == 1) login();
@@ -31,11 +31,11 @@ public class AuthMenu {
 
     public void login(){
         String dni = Util.getString("Inserta tu DNI.");
-        while (!Util.checkDNI(dni)){
+        while (!Util.checkDNI(dni)){ // verificar DNI
             dni = Util.getString("Inserta un DNI valido.");
         }
         String pass = Util.getString("Inserta tu contraseña.");
-        if (!AuthRepo.checkPassword(dni, pass)){
+        if (!AuthRepo.checkPassword(dni, pass)){ // verificar contraseña
             System.out.println("Credenciales inválidas.");
             start();
         }else{
@@ -46,18 +46,20 @@ public class AuthMenu {
 
     public void register() {
         String dni = Util.getString("Inserta tu DNI.");
-        while (!Util.checkDNI(dni)){
+        while (!Util.checkDNI(dni)){ // verificar DNI
             dni = Util.getString("Inserta un DNI valido.");
         }
+        // Pedir informacion sobre el usuario
         String nombre = Util.getString("Inserta tu nombre.");
         String apellido1 = Util.getString("Inserta tu primer apellido.");
         String apellido2 = Util.getString("Inserta tu segundo apellido.");
         Sexo sexo = Util.getEnum(Sexo.class, "Inserta tu sexo.");
         String pass = Util.getPass("Inserta tu contraseña.");
 
-        boolean registro = AuthRepo.registrar(new Usuario(dni, nombre, apellido1, apellido2, sexo, Privilegio.CLIENTE), pass);
-        if (registro) login();
-        else start();
+        boolean registro = AuthRepo.registrar(new Usuario(dni, nombre, apellido1, apellido2, sexo, Privilegio.CLIENTE), pass); // Agregar el usuario
+        if (registro) System.out.println("[Info] Registrado correctamente.");
+        else System.out.println("[Error] No se ha podido registrar la cuenta.");
+        start();
     }
 
     public static Usuario getUsuario(){

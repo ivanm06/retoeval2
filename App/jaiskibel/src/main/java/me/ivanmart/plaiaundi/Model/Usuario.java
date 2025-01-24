@@ -46,6 +46,10 @@ public class Usuario {
         return sexo;
     }
 
+    public String[] getDataArray(){
+        return new String[]{String.valueOf(this.getDNI()), this.getNombre(), this.getApellido1(), this.getApellido2(), this.getSexo().toString(), this.getPrivilegio().toString()};
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +

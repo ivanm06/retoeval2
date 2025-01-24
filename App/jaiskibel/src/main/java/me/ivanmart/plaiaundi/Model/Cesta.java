@@ -6,7 +6,9 @@ public class Cesta {
     private static final ArrayList<ArticuloReserva> cesta = new ArrayList<>();
 
     public static void addToCesta(ArticuloReserva art){
-        cesta.add(art);
+        boolean contains = cesta.contains(art);
+        if (contains) cesta.get(cesta.indexOf(art)).addCantidad(art.getCantidad());
+        else cesta.add(art);
     }
 
     public static ArrayList<ArticuloReserva> getCesta(){

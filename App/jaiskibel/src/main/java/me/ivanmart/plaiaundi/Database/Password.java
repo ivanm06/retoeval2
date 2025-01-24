@@ -2,7 +2,7 @@ package me.ivanmart.plaiaundi.Database;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-public class Password {
+public class Password { // Validar la contraseña y pasarla a hash
 
     public static String hash(String password){
         return BCrypt.hashpw(password, BCrypt.gensalt());

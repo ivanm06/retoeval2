@@ -8,6 +8,8 @@ import me.ivanmart.plaiaundi.Model.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class AuthRepo {
 
@@ -35,8 +37,8 @@ public class AuthRepo {
             statement.execute();
             ResultSet rs = statement.getResultSet();
             if (rs.next()){
-                Sexo sexo = Util.toEnum(Sexo.class, rs.getString("sexo"), Sexo.M);
-                Privilegio privilegio = Util.toEnum(Privilegio.class, rs.getString("privilegio"), Privilegio.CLIENTE);
+                Sexo sexo = Util.toEnum(Sexo.class, rs.getString("sexo"), Sexo.M); // Guardar sexo ususario
+                Privilegio privilegio = Util.toEnum(Privilegio.class, rs.getString("privilegio"), Privilegio.CLIENTE);// Guardar privilegio del usuario
                 return new Usuario(dni, rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), sexo, privilegio);
             }else return new Usuario();
         }catch (SQLException e){
@@ -45,7 +47,7 @@ public class AuthRepo {
         return new Usuario();
     }
 
-    public static boolean registrar(Usuario user, String pass){
+    public static boolean registrar(Usuario user, String pass){ // Guardar el usuario en la base de datos
         try{
             String query = "insert into Usuario values (?,?,?,?,?,?,?)";
             PreparedStatement statement = DBConnector.con.prepareStatement(query);
@@ -62,5 +64,28 @@ public class AuthRepo {
             System.out.printf("[Error] Ha habido un problema con la base de datos: %s%n", e.getMessage());
         }
         return false;
+    }
+
+    public static ArrayList<Usuario> getUsuarios(){
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        String query = "select dni, nombre, apellido1, apellido2, sexo, privilegio from Usuario";
+        try{
+            Statement statement = DBConnector.con.createStatement();
+            statement.execute(query);
+            ResultSet set = statement.getResultSet();
+            while (set.next()) usuarios.add( new Usuario(
+                set.getString("dni"),
+                    set.getString("nombre"),
+                    set.getString("apellido1"),
+                    set.getString("apellido2"),
+                    Util.toEnum(Sexo.class, set.getString("sexo"), Sexo.M),
+                    Util.toEnum(Privilegio.class, set.getString("privilegio"), Privilegio.CLIENTE)
+
+            ));
+            return usuarios;
+        }catch (SQLException e){
+            System.out.println("[Error] " + e.getMessage());
+        }
+        return usuarios;
     }
 }
