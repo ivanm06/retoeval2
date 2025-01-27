@@ -1,14 +1,9 @@
 package me.ivanmart.plaiaundi.Database;
 
-import me.ivanmart.plaiaundi.Enums.Privilegio;
-import me.ivanmart.plaiaundi.Enums.Sexo;
 import me.ivanmart.plaiaundi.Enums.Talla;
 import me.ivanmart.plaiaundi.Menus.AuthMenu;
 import me.ivanmart.plaiaundi.Menus.Util;
-import me.ivanmart.plaiaundi.Model.Articulo;
-import me.ivanmart.plaiaundi.Model.ArticuloReserva;
-import me.ivanmart.plaiaundi.Model.Reserva;
-import me.ivanmart.plaiaundi.Model.Usuario;
+import me.ivanmart.plaiaundi.Model.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,10 +18,11 @@ public class ReservaRepo {
         int idReserva = 1;
 
         try{
-            String query = "insert into Reserva (DNIUsuario, fechaInicio, fechaFin) values (?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL ? DAY);";
+            String query = "insert into Reserva (DNIUsuario, fechaInicio, fechaFin, idEstablecimiento) values (?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL ? DAY, ?);";
             PreparedStatement statement = DBConnector.con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getDNI());
             statement.setInt(2, 30);
+            statement.setInt(3, articulos.getFirst().getEstablecimiento().getId()); // TODO: Cambiar esto
             statement.execute();
 
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -53,27 +49,8 @@ public class ReservaRepo {
         }
     }
 
-    public static ArrayList<Reserva> getReservas(){
-        ArrayList<Reserva> reservas = new ArrayList<>();
-        String query = "select * from Reserva";
-        try{
-            Statement statement = DBConnector.con.createStatement();
-            statement.execute(query);
-            ResultSet set = statement.getResultSet();
-            while (set.next()) reservas.add( new Reserva(
-                    set.getInt("id"),
-                    set.getTimestamp("fechaInicio"),
-                    set.getTimestamp("fechaFin")
-            ));
-            return reservas;
-        }catch (SQLException e){
-            System.out.println("[Error] " + e.getMessage());
-        }
-        return reservas;
-    }
-
     public static ArrayList<ArticuloReserva> getArticulosFromReserva(int idReserva){
-        String query = "select * from articuloReservado ar join Articulo a on a.id = ar.idArticulo join Reserva r on r.id = ar.idReserva join Establecimiento e on e.id = r.idEstablecimiento where r.id = ?";
+        String query = "select a.id, a.nombre, a.descripcion, a.precio, a.talla, ar.cantidad from articuloReservado ar join Articulo a on a.id = ar.idArticulo join Reserva r on r.id = ar.idReserva join Establecimiento e on e.id = r.idEstablecimiento where r.id = ?";
         ArrayList<ArticuloReserva> articulos = new ArrayList<>();
 
         try{
@@ -90,7 +67,6 @@ public class ReservaRepo {
                         Util.toEnum(Talla.class, set.getString("talla"), Talla.M),
                         set.getInt("cantidad")
                 );
-                System.out.println(ar);
                 articulos.add(ar);
             }
             return articulos;

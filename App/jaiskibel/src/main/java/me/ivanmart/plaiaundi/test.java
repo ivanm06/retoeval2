@@ -4,8 +4,6 @@ package me.ivanmart.plaiaundi;
 import me.ivanmart.plaiaundi.Menus.Util;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
 
 public class test {
     public static void main(String[] args) {
@@ -15,6 +13,6 @@ public class test {
         vals.add(new String[]{"", ""});
         vals.add(new String[]{"TEST12345", ""});
         vals.add(new String[]{"a", "asadasdadasd"});
-        System.out.println(Util.generateTable(lista, vals));
+        Util.generateTable(lista, vals);
     }
 }

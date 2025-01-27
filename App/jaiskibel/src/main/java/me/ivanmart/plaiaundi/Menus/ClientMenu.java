@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class ClientMenu {
 
     public void start(){
-        ArrayList<Establecimiento> establecimientos = EstablecimientoRepo.getEstablecimientos();  // Istanciar el arryList de los Establecimiento
+        ArrayList<Establecimiento> establecimientos = EstablecimientoRepo.getEstablecimientos();  // Istanciar el ArrayList de los Establecimiento
         mostrarMenuEstablecimiento(establecimientos);   // Mostrar el menu 
 
         int c = Util.getInt(); // Guardar selección
@@ -22,7 +22,7 @@ public class ClientMenu {
         HashMap<Integer, Integer> stock = ArticuloRepo.getStock(establecimiento.getId());
         establecimiento.setStock(stock);
         boolean finalizar = menuReserva(establecimiento);
-        while (!finalizar) finalizar = menuReserva(establecimiento);
+        while (!finalizar) finalizar = menuReserva(establecimiento); // TODO: 0
     }
 
     private boolean menuReserva(Establecimiento establecimiento){
@@ -39,7 +39,7 @@ public class ClientMenu {
         while (c < 0 || c > 3) c = Util.getInt("Valor inválido."); // validar la seleción
         ArrayList<Articulo> articulos = new ArrayList<>(); // Crear el array de los articulos
         String[] titulos = new String[]{};
-        switch (c){ //Case que guarda los titulos dependiendo del articulo seleccionado
+        switch (c){ // Case que guarda los titulos dependiendo del articulo seleccionado
             case 1:
                 articulos = ArticuloRepo.getSkis(establecimiento.getId());
                 titulos = new String[]{"ID", "Nombre", "Descripcion", "Talla", "Modalidad", "Nivel", "Precio/Dia", "Stock"};
@@ -72,7 +72,7 @@ public class ClientMenu {
             valores.add(dataArray);
         }
 
-        System.out.println(Util.generateTable(titulos, valores));
+        Util.generateTable(titulos, valores);
 
         if (articulos.size() == articulosFS){
             System.out.println("No hay articulos en stock en este momento.");
@@ -98,7 +98,6 @@ public class ClientMenu {
         System.out.printf("%d articulos añadidos a la cesta.%n", cantidad);
         establecimiento.setPending(a, cantidad);
         Cesta.addToCesta(new ArticuloReserva(a, cantidad, establecimiento));
-        menuReserva(establecimiento);
         return false;
     }
 

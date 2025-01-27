@@ -38,6 +38,10 @@ public class ArticuloReserva {
         this.cantidad += cantidad;
     }
 
+    public Establecimiento getEstablecimiento() {
+        return establecimiento;
+    }
+
     public String[] getDataArray(int extra){
         String[] dataArray = new String[]{String.valueOf(this.id), this.nombre, this.descripcion, String.valueOf(this.talla), String.valueOf(this.precio), String.valueOf(this.cantidad)};
         String[] extended = new String[dataArray.length + extra];

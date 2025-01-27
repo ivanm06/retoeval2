@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Cesta {
     private static final ArrayList<ArticuloReserva> cesta = new ArrayList<>();
+    private Establecimiento establecimiento;
 
     public static void addToCesta(ArticuloReserva art){
         boolean contains = cesta.contains(art);
