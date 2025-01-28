@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="reserva.css">
+    <title>Reserva</title>
+</head>
+<body>
+    <div id="principal">
+        <header>
+            
+            <div class="logo">JaiSKIbel</div>
+            <nav>
+                <ul >
+                    <li><a href="index.html">Nosotros</a></li>
+                    <li><a href="Establecimiento.html">Establecimietnos</a></li>
+                    <li><a href="Contacto.html">Contacto</a></li>
+                    <li><a href="Reserva.html">Resevar</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <h1 style="text-align: center; color: white; font-size: 50px;">Reserva Kit</h1>
+            <section id="contacto">
+                <form action="#" method="post">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required>
+        
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos" required>
+        
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" required></input>
+                    <div id="formCant">
+                        <label for="kit">Seleccionar Kit</label>
+                        <input list="kits" id="kit" name="kit" required ></input> 
+                       
+                        <label for="cant">Cantidad</label>
+                        <input type="number" id="cant" name="cant" required style=" width: 50px; "></input>
+
+                        <datalist id="kits">
+                            <option value="Skis + gafas + funda para skis + botas"></option>
+                            <option value="Snowboard + gafas + botas"></option>
+                            <option value="Skis + botas"></option>
+                            <option value="Snowboard + botas"></option>
+                            <option value="skis + Snowboard"></option>
+                        </datalist>
+    
+                        
+                    </div>
+                    
+                    <label for="fecha">Fecha</label>
+                    <input type="datetime" id="fecha" name="fecha" required></input> 
+                   
+                    <button type="submit">Enviar</button>
+                </form>
+        </section>
+        
+    </div>
+    <footer>
+        <nav id="footInfo">
+            <a href="Establecimiento.html">Establecimietnos</a><br><br>
+            <a href="Contacto.html">Contacto</a><br><br>
+            <a href="#sobre-nosotros">Sobre Nosotros</a>
+        </nav>
+
+        <div id="footPolitica">
+            <p>Protegido por derecho de autor</p>
+            
+        </div>
+
+        <div id="footRedes">
+            <img class="imagen" src="Imagenes/icons8-twitterx-64.png" alt="twitter">
+            <img class="imagen" src="Imagenes/icons8-instagram-64.png" alt="instagram">
+            <img class="imagen" src="Imagenes/icons8-facebook-64.png" alt="facebook">
+        </div>
+        
+    </footer>
+</body>
+</html>
