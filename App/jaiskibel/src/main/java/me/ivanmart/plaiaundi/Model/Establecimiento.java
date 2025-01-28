@@ -3,8 +3,8 @@ package me.ivanmart.plaiaundi.Model;
 import java.util.HashMap;
 
 public class Establecimiento {
-    private String nombre;
-    private int id;
+    private final String nombre;
+    private final int id;
     private HashMap <Integer, Integer> stock = new HashMap<>();
 
     public Establecimiento(int id, String nombre) {

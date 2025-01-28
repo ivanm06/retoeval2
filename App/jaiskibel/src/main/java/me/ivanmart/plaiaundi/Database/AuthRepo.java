@@ -20,9 +20,9 @@ public class AuthRepo {
             statement.setString(1, dni);
             statement.execute();
             ResultSet rs = statement.getResultSet();
-            if (rs.next()){
-                return Password.check(password, rs.getString("contrasena"));
-            }else return false;
+
+            if (rs.next()) return Password.check(password, rs.getString("contrasena"));
+            else return false;
         }catch (SQLException e){
             System.out.printf("[Error] Ha habido un problema con la base de datos: %s%n", e.getMessage());
         }

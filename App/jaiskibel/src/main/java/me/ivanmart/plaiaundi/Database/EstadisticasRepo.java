@@ -1,8 +1,5 @@
 package me.ivanmart.plaiaundi.Database;
 
-
-import me.ivanmart.plaiaundi.Model.Reserva;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

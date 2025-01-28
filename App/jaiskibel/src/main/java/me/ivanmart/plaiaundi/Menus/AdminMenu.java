@@ -16,75 +16,57 @@ public class AdminMenu {
                 | 2. Administrador             |
                 +------------------------------+
                 """);
-        int c;
-        do {
-            c = Util.getInt();
-            switch (c){
-                case 1:
-                    ClientMenu menu = new ClientMenu();
-                    menu.start();
-                    break;
-                case 2:
-                    continuar();
-                    break;
-                default:
-                    System.out.println("[Info] Selecciona un valor válido.");
-                    break;
-            }
-        }while (c!=1 && c != 2);
+
+        int c = Util.getInt();
+        while (c != 1 && c != 2) c = Util.getInt("[Info] Selecciona un valor válido.");
+
+        if (c == 1){
+            ClientMenu menu = new ClientMenu();
+            menu.start();
+        }else{ // c == 2
+            continuar();
+        }
     }
 
-    private void continuar(){
-        int c;
-        do {
-            showMenu();
-            c = Util.getInt();
-            while (c < 0 || c > 5) c = Util.getInt("Valor inválido.");
-            ArrayList<String[]> valores2;
-            String[] titulos2;
-            switch (c){
-                case 2:
-                    valores2 = EstadisticasRepo.getArticulosMasPedidos();
-                    titulos2 = new String[]{"ID", "Nombre", "Cantidad"};
-                    break;
-                case 3:
-                    valores2 = EstadisticasRepo.getClientesHabituales();
-                    titulos2 = new String[]{"DNI", "Nombre", "Reservas"};
-                    break;
-                case 4:
-                    valores2 = new ArrayList<>();
-                    valores2.add(new String[]{String.valueOf(EstadisticasRepo.getNumeroClientes())});
-                    titulos2 = new String[]{"Cantidad"};
-                    break;
-                case 5:
-                    valores2 = EstadisticasRepo.getReservasPorDinero();
-                    titulos2 = new String[]{"DNI Cliente", "ID Reserva", "Fecha Inicio", "Fecha Fin", "ID Establecimiento", "Articulos", "Total"};
-                    break;
-                case 0:
-                    start();
-                    return;
-                default:
-                    valores2 = EstadisticasRepo.getReservas();
-                    titulos2 = new String[]{"ID", "Fecha Inicio", "Fecha Fin"};
-                    break;
-            }
+    private void continuar() {
+        showMenu();
+        int c = Util.getInt();
+        while (c < 0 || c > 5) c = Util.getInt("Valor inválido.");
 
-            Util.generateTable(titulos2, valores2);
+        ArrayList<String[]> valores2 = new ArrayList<>();
+        String[] titulos2 = new String[]{};
 
-            if (c == 1){
-                int r = Util.getInt("Inserta el id de la reserva a ver. (0 para volver atrás)");
-                while (r < 0) r = Util.getInt("Valor inválido.");
-                if (r == 0){
-                    continuar();
-                }
-                ArrayList<ArticuloReserva> articulos = ReservaRepo.getArticulosFromReserva(r);
-                String[] titulosArticulos = new String[]{"ID", "Nombre", "Descripcion", "Talla", "Precio", "Cantidad"};
-                ArrayList<String[]> valoresArticulo = new ArrayList<>();
-                for(ArticuloReserva a : articulos) valoresArticulo.add(a.getDataArray(0));
-                Util.generateTable(titulosArticulos, valoresArticulo);
-            }
-        }while (true);
+        switch (c) {
+            case 1:
+                valores2 = EstadisticasRepo.getReservas();
+                titulos2 = new String[]{"ID", "Fecha Inicio", "Fecha Fin"};
+                break;
+            case 2:
+                valores2 = EstadisticasRepo.getArticulosMasPedidos();
+                titulos2 = new String[]{"ID", "Nombre", "Cantidad"};
+                break;
+            case 3:
+                valores2 = EstadisticasRepo.getClientesHabituales();
+                titulos2 = new String[]{"DNI", "Nombre", "Reservas"};
+                break;
+            case 4:
+                valores2.add(new String[]{String.valueOf(EstadisticasRepo.getNumeroClientes())});
+                titulos2 = new String[]{"Cantidad"};
+                break;
+            case 5:
+                valores2 = EstadisticasRepo.getReservasPorDinero();
+                titulos2 = new String[]{"DNI Cliente", "ID Reserva", "Fecha Inicio", "Fecha Fin", "ID Establecimiento", "Articulos", "Total"};
+                break;
+            case 0:
+                start();
+                return;
+        }
+
+        Util.generateTable(titulos2, valores2);
+        if (c == 1) menuReservas();
+        continuar();
     }
+
 
     private void showMenu(){
         System.out.println("""
@@ -98,5 +80,18 @@ public class AdminMenu {
             | 0. Volver                      |
             +--------------------------------+
             """);
+    }
+    private void menuReservas(){
+        int r = Util.getInt("Inserta el id de la reserva a ver. (0 para volver atrás)");
+        while (r < 0) r = Util.getInt("Valor inválido.");
+        if (r == 0) return;
+
+        ArrayList<ArticuloReserva> articulos = ReservaRepo.getArticulosFromReserva(r);
+
+        String[] titulosArticulos = new String[]{"ID", "Nombre", "Descripcion", "Talla", "Precio", "Cantidad"};
+        ArrayList<String[]> valoresArticulo = new ArrayList<>();
+
+        for(ArticuloReserva a : articulos) valoresArticulo.add(a.getDataArray(0));
+        Util.generateTable(titulosArticulos, valoresArticulo);
     }
 }

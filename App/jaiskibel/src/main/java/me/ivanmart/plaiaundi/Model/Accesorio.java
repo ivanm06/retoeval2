@@ -3,7 +3,7 @@ package me.ivanmart.plaiaundi.Model;
 import me.ivanmart.plaiaundi.Enums.Talla;
 
 public class Accesorio extends Articulo{
-    private String tipo;
+    private final String tipo;
 
     public Accesorio(int id, String nombre, String descripcion, int precio, Talla talla, String tipo) {
         super(id, nombre, descripcion, precio, talla);
@@ -20,6 +20,6 @@ public class Accesorio extends Articulo{
 
     @Override
     public String toString() {
-        return super.toString() + "";
+        return super.toString();
     }
 }

@@ -9,18 +9,32 @@ public class Util {
     public static final Scanner sc = new Scanner(System.in);
 
     /**
-        Comprueba si un DNI es válido o no usando regex.
-
-
+        Calcula la letra de un número de DNI.
+        @param dni int de 0 a 99999999
+        @return {@code char}
     */
-    public static boolean checkDNI(String dni){ // Validar Dni
-        if (dni.length() != 9) return false;
-        return dni.matches("\\d{8}[A-Z]"); // TODO: Calcular si letra pertenece a número
+    public static char calcularLetraDNI(int dni) {
+        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int resto = dni % 23;
+        return letras.charAt(resto);
+    }
+
+    /**
+        Comprueba si un DNI es válido o no usando regex y calcula si la letra insertada
+        es realmente la que debería.
+        @param dni String de longitud 9 (8 números y 1 caracter)
+        @return {@code boolean}
+    */
+    public static boolean checkDNI(String dni){
+        if(!dni.matches("\\d{8}[A-Z]")) return false;
+        return dni.charAt(8) == calcularLetraDNI(Integer.parseInt(dni.substring(0, 8))); // Validar que se esté insertando la letra correcta
     }
 
     /**
         Le pide al usuario un {@link String} y se salta el problema de tener que
         limpiar el {@code buffer} cada vez que se pide un dato nuevo.
+        @return {@link String}
+        @param txt texto que se mostrará a la hora de pedirle el {@link String} al usuario
     */
     public static String getString(String txt){
         System.out.println(txt);
@@ -29,11 +43,20 @@ public class Util {
         return str;
     }
 
-    /** Le pide al usuario un {@code int} */
+    /**
+         Le pide al usuario un {@code int}
+         @return {@code int}
+         @param txt texto que se mostrará a la hora de pedirle el {@code int} al usuario
+    */
     public static int getInt(String txt){
         System.out.println(txt);
         return sc.nextInt();
     }
+
+    /**
+        Le pide al usuario un {@code int}
+        @return {@code int}
+    */
     public static int getInt(){
         return sc.nextInt();
     }
@@ -51,6 +74,7 @@ public class Util {
         }
         return tipo;
     }
+
     /**
          Convierte un {@link java.lang.String} a un {@link java.lang.Enum}
          @return Enum<T></T>

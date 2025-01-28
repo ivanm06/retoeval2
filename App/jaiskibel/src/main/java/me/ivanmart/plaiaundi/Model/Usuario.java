@@ -20,7 +20,8 @@ public class Usuario {
         this.privilegio = privilegio;
     }
 
-    public Usuario(){}
+    public Usuario() {
+    }
 
     public Privilegio getPrivilegio() {
         return privilegio;
@@ -46,19 +47,12 @@ public class Usuario {
         return sexo;
     }
 
-    public String[] getDataArray(){
+    public String[] getDataArray() {
         return new String[]{String.valueOf(this.getDNI()), this.getNombre(), this.getApellido1(), this.getApellido2(), this.getSexo().toString(), this.getPrivilegio().toString()};
     }
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "dni='" + dni + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellido1='" + apellido1 + '\'' +
-                ", apellido2='" + apellido2 + '\'' +
-                ", sexo=" + sexo +
-                ", privilegio=" + privilegio +
-                '}';
+        return "%s | %s | %s | %s | %s | %s".formatted(this.dni, this.nombre, this.apellido1, this.apellido2, this.sexo, this.privilegio);
     }
 }

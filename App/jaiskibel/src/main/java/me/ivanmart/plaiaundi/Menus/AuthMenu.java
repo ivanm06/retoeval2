@@ -19,11 +19,7 @@ public class AuthMenu {
                     """);
 
         int c = Util.getInt();
-
-        while (c != 1 && c != 2){ // validar opción
-            System.out.println("Inserta una opción válida.");
-            c = Util.getInt();
-        }
+        while (c != 1 && c != 2) c = Util.getInt("Inserta una opción válida.");
 
         if (c == 1) login();
         else register();
@@ -31,12 +27,11 @@ public class AuthMenu {
 
     public void login(){
         String dni = Util.getString("Inserta tu DNI.");
-        while (!Util.checkDNI(dni)){ // verificar DNI
-            dni = Util.getString("Inserta un DNI valido.");
-        }
-        String pass = Util.getString("Inserta tu contraseña.");
-        if (!AuthRepo.checkPassword(dni, pass)){ // verificar contraseña
-            System.out.println("Credenciales inválidas.");
+        while (!Util.checkDNI(dni)) dni = Util.getString("[Info] Inserta un DNI valido.");
+
+        String pass = Util.getPass("Inserta tu contraseña.");
+        if (!AuthRepo.checkPassword(dni, pass)){ // Verificar contraseña.
+            System.out.println("[Error] Credenciales inválidas.");
             start();
         }else{
             System.out.println("[Info] Sesión iniciada.");
@@ -46,9 +41,8 @@ public class AuthMenu {
 
     public void register() {
         String dni = Util.getString("Inserta tu DNI.");
-        while (!Util.checkDNI(dni)){ // verificar DNI
-            dni = Util.getString("Inserta un DNI valido.");
-        }
+        while (!Util.checkDNI(dni)) dni = Util.getString("Inserta un DNI valido.");
+
         // Pedir informacion sobre el usuario
         String nombre = Util.getString("Inserta tu nombre.");
         String apellido1 = Util.getString("Inserta tu primer apellido.");
@@ -56,6 +50,7 @@ public class AuthMenu {
         Sexo sexo = Util.getEnum(Sexo.class, "Inserta tu sexo.");
         String pass = Util.getPass("Inserta tu contraseña.");
 
+        // Registrar usuario
         boolean registro = AuthRepo.registrar(new Usuario(dni, nombre, apellido1, apellido2, sexo, Privilegio.CLIENTE), pass); // Agregar el usuario
         if (registro) System.out.println("[Info] Registrado correctamente.");
         else System.out.println("[Error] No se ha podido registrar la cuenta.");

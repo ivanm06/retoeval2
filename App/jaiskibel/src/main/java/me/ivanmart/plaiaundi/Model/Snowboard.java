@@ -5,17 +5,16 @@ import me.ivanmart.plaiaundi.Enums.Talla;
 
 public class Snowboard extends Articulo{
 
-    //Atributos
-    private Modalidad modalidad;
+    // Atributos
+    private final Modalidad modalidad;
 
-    //Builder
+    // Constructor
     public Snowboard(int id, String nombre, String descripcion, int precio, Talla talla, Modalidad modalidad) {
         super(id, nombre, descripcion, precio, talla);
         this.modalidad = modalidad;
     }
 
-    //Metodos
-
+    // Metodos
     @Override
     public String[] getDataArray(int extra){
         String[] dataArray = new String[]{String.valueOf(this.getId()), this.getNombre(), this.getDescripcion(), this.getTalla().toString(), this.modalidad.toString(), String.valueOf(this.getPrecio())};
@@ -26,6 +25,6 @@ public class Snowboard extends Articulo{
 
     @Override
     public String toString() {
-        return super.toString() + "";
+        return super.toString() + " | " + modalidad;
     }
 }
