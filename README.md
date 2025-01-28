@@ -93,7 +93,7 @@ El desarrollo se gestiona utilizando Scrum con las siguientes herramientas:
 ---
 
 ## Licencia
-Este proyecto está licenciado bajo la licencia [Creative Commons BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+Este proyecto está licenciado bajo la licencia [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ---
 
