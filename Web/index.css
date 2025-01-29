@@ -1,146 +1,9 @@
-body{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-}
-
-
-#principal{
-    color: white;
-    height: 700px;
-    background-image: url(Imagenes/ski\ \(3\).jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-
-section{
-
-    margin-left: 40px;
-}
-
-/*_______Header_______*/
-
-header{
-    background-color: rgba(61, 60, 60, 0.089);
-    color: white;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 10px;
-  
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-
-
-header nav ul {
-    list-style: none;
-    padding: 0;
-   
-}
-
-header nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-header nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-header nav ul li a:hover {
-    color: rgb(1, 245, 253);
-}
-#titulo{
-
-    font-size: 60px;
-}
-#SobreNosotros{
-    height: 200px;
-    margin:40px;
-    padding-bottom: 30px;
-}
-
-
-/*_______Footer_______*/
-
-footer{
-
-    background-color: black;
-    height: 100px;
-    color: white;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 20px;
-    font-size: 15px;
-}
-
-#footInfo a{
-    color: white;
-    text-decoration: none;
-    
-}
-
-#footInfo a:hover{
-    color: rgb(0, 225, 255);
-    
-}
-
-/*_______Bottones_______*/
-
-.bottones{
-    padding: 10px;
-    border: 0;
-    border-radius: 5px;
-    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.349);
-    transition: transform 0.3s ease;
-    font-size: 15px;
-}
-
-.bottones a {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.bottones:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px  #08080891;
-
-}
-
-
-#butReserva{
-    color: white;
-    background-color: rgb(76, 0, 255);
-}
-
-#butReserva a{
-    color: white;
-    
-}
-
-/*ADAPTAR A PANTALLAS*/
-
-
+/* ADAPTAR A PANTALLAS */
 @media screen and (max-width: 768px) {
     /* Estilos para tablets y pantallas más pequeñas */
     header nav ul li a {
         color: white;
         text-decoration: none;
-        font-size: 12px;
     }
     footer{
         height: 100px;
@@ -153,14 +16,6 @@ footer{
     #titulo{
         font-size: 30px;
     }
-    .bottones{
-        padding: 5px;
-        
-    }
-    .bottones a{
-       
-        font-size: 15px;
-    }
     #SobreNosotros{
         margin: 15px;
         font-size: 12px;
@@ -169,9 +24,4 @@ footer{
         width: 32px;
         height: 32px;
     }
-   
-
 }
- 
-  
-

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="./xsl/articulos.xsl" type="text/xsl"?>
+<articulos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="./xsd/articulos.xsd">
+    <articulo>
+        <id>1</id>
+        <tipo>ski</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Ski Premium</nombre>
+        <descripcion>ski premium que hace cosas</descripcion>
+        <talla>XL</talla>
+        <precio>43</precio>
+        <modalidad>competicion</modalidad>
+        <stock>0</stock>
+        <establecimiento>1</establecimiento>
+    </articulo>
+    <articulo>
+        <id>12</id>
+        <tipo>snowboard</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Snowboard Premium</nombre>
+        <descripcion>snowboard premium premium para montañeros experimentados</descripcion>
+        <talla>XS</talla>
+        <precio>21</precio>
+        <modalidad>montana</modalidad>
+        <nivel>experto</nivel>
+        <stock>10</stock>
+        <establecimiento>1</establecimiento>
+    </articulo>
+    <articulo>
+        <id>45</id>
+        <tipo>accesorio</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Nombre</nombre>
+        <descripcion>Descripcion</descripcion>
+        <talla>S</talla>
+        <precio>23</precio>
+        <tipoAccesorio>34</tipoAccesorio>
+        <stock>10</stock>
+        <establecimiento>1</establecimiento>
+    </articulo>
+    <articulo>
+        <id>50</id>
+        <tipo>ski</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Ski Avanzado</nombre>
+        <descripcion>ski avanzado para esquiadores experimentados</descripcion>
+        <talla>M</talla>
+        <precio>50</precio>
+        <modalidad>pista</modalidad>
+        <stock>15</stock>
+        <establecimiento>1</establecimiento>
+    </articulo>
+    <articulo>
+        <id>2</id>
+        <tipo>ski</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Ski Básico</nombre>
+        <descripcion>ski básico para principiantes</descripcion>
+        <talla>L</talla>
+        <precio>30</precio>
+        <modalidad>montana</modalidad>
+        <stock>20</stock>
+        <establecimiento>1</establecimiento>
+    </articulo>
+    <articulo>
+        <id>13</id>
+        <tipo>snowboard</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Snowboard Básico</nombre>
+        <descripcion>snowboard básico para principiantes</descripcion>
+        <talla>M</talla>
+        <precio>25</precio>
+        <modalidad>pista</modalidad>
+        <nivel>medio</nivel>
+        <stock>12</stock>
+        <establecimiento>3</establecimiento>
+    </articulo>
+    <articulo>
+        <id>46</id>
+        <tipo>accesorio</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Casco</nombre>
+        <descripcion>casco de protección</descripcion>
+        <talla>L</talla>
+        <precio>15</precio>
+        <tipoAccesorio>12</tipoAccesorio>
+        <stock>30</stock>
+        <establecimiento>1</establecimiento>
+    </articulo>
+    <articulo>
+        <id>51</id>
+        <tipo>ski</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Ski Intermedio</nombre>
+        <descripcion>ski intermedio para esquiadores con experiencia</descripcion>
+        <talla>S</talla>
+        <precio>40</precio>
+        <modalidad>competicion</modalidad>
+        <stock>18</stock>
+        <establecimiento>3</establecimiento>
+    </articulo>
+    <articulo>
+        <id>3</id>
+        <tipo>ski</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Ski Profesional</nombre>
+        <descripcion>ski profesional para expertos</descripcion>
+        <talla>XXL</talla>
+        <precio>60</precio>
+        <modalidad>competicion</modalidad>
+        <stock>8</stock>
+        <establecimiento>3</establecimiento>
+    </articulo>
+    <articulo>
+        <id>14</id>
+        <tipo>snowboard</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Snowboard Profesional</nombre>
+        <descripcion>snowboard profesional para expertos</descripcion>
+        <talla>XL</talla>
+        <precio>55</precio>
+        <modalidad>montana</modalidad>
+        <nivel>experto</nivel>
+        <stock>10</stock>
+        <establecimiento>2</establecimiento>
+    </articulo>
+    <articulo>
+        <id>47</id>
+        <tipo>accesorio</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Guantes</nombre>
+        <descripcion>guantes de protección</descripcion>
+        <talla>M</talla>
+        <precio>10</precio>
+        <tipoAccesorio>22</tipoAccesorio>
+        <stock>25</stock>
+        <establecimiento>2</establecimiento>
+    </articulo>
+    <articulo>
+        <id>52</id>
+        <tipo>ski</tipo>
+        <imagen>./images/establecimiento1.jpg</imagen>
+        <nombre>Ski Avanzado</nombre>
+        <descripcion>ski avanzado para esquiadores experimentados</descripcion>
+        <talla>L</talla>
+        <precio>50</precio>
+        <modalidad>pista</modalidad>
+        <stock>15</stock>
+        <establecimiento>2</establecimiento>
+    </articulo>
+</articulos>

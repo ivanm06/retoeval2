@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="articulos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="articulo" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element name="id" type="xs:int"/>
+                            <xs:element name="tipo">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="ski"/>
+                                        <xs:enumeration value="snowboard"/>
+                                        <xs:enumeration value="accesorio"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="imagen" type="xs:string"/>
+                            <xs:element name="nombre" type="xs:string"/>
+                            <xs:element name="descripcion" type="xs:string"/>
+                            <xs:element name="talla">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="XS"/>
+                                        <xs:enumeration value="S"/>
+                                        <xs:enumeration value="M"/>
+                                        <xs:enumeration value="L"/>
+                                        <xs:enumeration value="XL"/>
+                                        <xs:enumeration value="XXL"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="precio" type="xs:int"/>
+                            <xs:element name="modalidad" minOccurs="0">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="competicion"/>
+                                        <xs:enumeration value="pista"/>
+                                        <xs:enumeration value="montana"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="nivel" minOccurs="0">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="principiante"/>
+                                        <xs:enumeration value="medio"/>
+                                        <xs:enumeration value="experto"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="tipoAccesorio" type="xs:string" minOccurs="0"/>
+                            <xs:element name="stock" type="xs:int"/>
+                            <xs:element name="establecimiento" type="xs:int"/>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

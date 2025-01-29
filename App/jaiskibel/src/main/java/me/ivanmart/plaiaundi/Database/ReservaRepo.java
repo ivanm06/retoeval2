@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ReservaRepo {
 
-    public static boolean reservar(ArrayList<ArticuloReserva> articulos){
+    public static boolean reservar(ArrayList<ArticuloReserva> articulos, int dias){
         Usuario user = AuthMenu.getUsuario();
         int idReserva = 1;
 
@@ -22,7 +22,7 @@ public class ReservaRepo {
             String query = "insert into Reserva (DNIUsuario, fechaInicio, fechaFin, idEstablecimiento) values (?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL ? DAY, ?);";
             PreparedStatement statement = DBConnector.con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getDNI());
-            statement.setInt(2, 30);
+            statement.setInt(2, dias);
             statement.setInt(3, Cesta.getEstablecimiento().getId());
             statement.execute();
 

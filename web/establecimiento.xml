@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="./xsl/establecimiento.xsl" type="text/xsl"?>
+<establecimientos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="./xsd/establecimiento.xsd">
+    <establecimiento>
+        <id>1</id>
+        <nombre>Tienda Paco</nombre>
+        <localizacion>Calle cuatrocientos 34s</localizacion>
+        <imagen>/images/establecimiento1.jpg</imagen>
+    </establecimiento>
+    <establecimiento>
+        <id>2</id>
+        <nombre>Tienda Pacos</nombre>
+        <localizacion>Calles cuatrocientos 34s</localizacion>
+        <imagen>/images/establecimiento1.jpg</imagen>
+    </establecimiento>
+</establecimientos>

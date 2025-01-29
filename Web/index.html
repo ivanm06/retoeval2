@@ -1,67 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="globals.css"/>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"/>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <title>JaiSKIbel</title>
 </head>
 <body>
-    <div id="principal">
-        <header>
-            
-            <div class="logo">JaiSKIbel</div>
-            <nav>
-                <ul >
-                    <li><a href="index.html">Nosotros</a></li>
-                    <li><a href="Establecimiento.html">Establecimietnos</a></li>
-                    <li><a href="Contacto.html">Contacto</a></li>
-                    <li><a href="Reserva.html">Resevar</a></li>
-                </ul>
-            </nav>
-        </header>
-        <section>
-            <h1 id="titulo"> Tu Aventura En La Nieve <br> Comienza Aquí</h1>
-            <p> Equipo ....... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo nihil <br>laudantium iusto labore quidem veritatis esse repellendus perspiciatis perferendis odio sed <br> ipsum libero modi atque autem voluptatem, ducimus culpa inventore?</p>
-            <br>
-            <button class="bottones" id="butReserva"><a href="Reserva.html">Reserva Ahora &#129046;</a> </button> 
-            <button class="bottones" style="margin-left: 40px;"> <a href="Equipamiento.html">Ver Equipamiento &#129046;</a></button>
-        </section>
-        
-    </div>
-    
-
-    <div id="SobreNosotros">
-
-        <h1> Sobre Notros</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eveniet eos voluptate maxime natus facilis fugit ducimus, molestiae, aliquid inventore, quas minima ipsam quae repellendus atque? Fugiat aliquam facere quidem.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eveniet eos voluptate maxime natus facilis fugit ducimus, molestiae, aliquid inventore, quas minima ipsam quae repellendus atque? Fugiat aliquam facere quidem.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eveniet eos voluptate maxime natus facilis fugit ducimus, molestiae, aliquid inventore, quas minima ipsam quae repellendus atque? Fugiat aliquam facere quidem.
-            
-        </p>
-
-    </div>
-
-    <footer>
-        <nav id="footInfo">
-            <a href="Establecimiento.html">Establecimietnos</a><br><br>
-            <a href="Contacto.html">Contacto</a><br><br>
-            <a href="#sobre-nosotros">Sobre Nosotros</a>
+    <header class="w-screen text-white flex flex-row justify-between items-center align-center p-6 bg-black relative">
+        <a href="/" class="text-[1.4rem] md:text-[2rem]" style='font-family: "Nosifer", serif;'>Jai<span class="text-blue-200">SKI</span>bel</a>
+        <label class="md:hidden" for="menu"><svg class="w-10 h-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 18h18"/><path d="M3 6h18"/></svg></label>
+        <input class="hidden" type="checkbox" name="menu" id="menu">
+        <nav class="dp hidden absolute top-[99%] bg-[#111] p-2 px-4 z-[5] right-0 min-w-[60vw] justify-center rounded-b-md text-md">
+            <ul class="flex flex-col gap-4">
+                <li><a href="/index.html#aboutme">Nosotros</a></li>
+                <li><a href="/establecimiento.xml">Establecimientos</a></li>
+                <li><a href="/contacto.html">Contacto</a></li>
+                <li><a href="/reserva.html">Reservar</a></li>
+            </ul>
         </nav>
+        <nav class="hidden md:block">
+            <ul class="gap-[2rem]">
+                <li><a href="/index.html#aboutme">Nosotros</a></li>
+                <li><a href="/establecimiento.xml">Establecimientos</a></li>
+                <li><a href="/contacto.html">Contacto</a></li>
+                <li><a href="/reserva.html">Reservar</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div id="footPolitica">
-            <p>Protegido por derecho de autor</p>
-            
+    <main>
+        <div id="landing-bg" class="relative flex items-center px-2 md:pl-20 h-screen text-white">
+            <section class="max-w-[700px] z-[3] flex flex-col gap-4">
+                <h1 class="font-bold text-4xl md:text-[4rem]">Tu Aventura En La Nieve Comienza Aquí</h1>
+                <p>Equipo profesional de ski y snowboard para todos los niveles. Reserva ahora y disfruta de la mejor experiencia en la nieve.</p>
+                <div class="flex gap-4 flex-wrap">
+                    <a class="bg-blue-700 p-2 px-4 rounded-lg cursor-pointer hover:bg-blue-600 flex items-center gap-2" href="/reserva.html">Reserva Ahora <span class="text-3xl">&#129046;</span></a> 
+                    <a class="bg-white text-black p-2 px-4 rounded-lg cursor-pointer hover:bg-gray-100 flex items-center gap-2" href="/establecimiento.xml">Ver Equipamiento <span class="text-3xl">&#129046;</span></a>
+                </div>
+            </section>
+            <div class="bg-black/20 absolute w-screen h-screen left-0 top-0 z-[2]"></div>
         </div>
+        <a href="/index.html#aboutme"><svg class="animate-[bounce_2s_infinite] absolute w-20 h-auto z-[10] top-[95vh] md:top-[90vh] text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:text-gray-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></a>
 
-        <div id="footRedes">
-            <img class="imagen" src="Imagenes/icons8-twitterx-64.png" alt="twitter">
-            <img class="imagen" src="Imagenes/icons8-instagram-64.png" alt="instagram">
-            <img class="imagen" src="Imagenes/icons8-facebook-64.png" alt="facebook">
+        <div class="text-sm p-4 px-4 md:px-20 min-h-[30vh] flex flex-col justify-center gap-4">
+            <h1 class="text-3xl md:text-4xl" id="aboutme">Sobre Nosotros</h1>
+            <p>
+                ¡Bienvenidos a nuestro servicio de alquiler de equipos de esquí y snowboard! Ofrecemos equipos de alta calidad para todos los niveles de habilidad, 
+                asegurando que tengas la mejor experiencia en las pistas. Ya seas principiante o un profesional experimentado, nuestro equipo profesional te ayudará 
+                a aprovechar al máximo tu tiempo en la nieve. ¡Reserva ahora y disfruta de la aventura invernal definitiva con nosotros!
+            </p>
         </div>
-        
+    </main>
+
+    <footer class="p-4 pt-8 flex flex-col h-fit items-center bg-black text-white">
+        <section class="flex justify-between w-full">
+            <div class="flex flex-col justify-between">
+                <a href="/establecimiento.xml" class="hover:text-gray-500">Establecimientos</a>
+                <a href="/contacto.html" class="hover:text-gray-500">Contacto</a>
+                <a href="/index.html#aboutme" class="hover:text-gray-500">Sobre Nosotros</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://1dam3.es"><svg class="w-10 h-auto hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                <a href="https://1dam3.es"><svg class="w-10 h-auto hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                <a href="https://1dam3.es"><svg class="w-10 h-auto hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            </div>
+        </section>
+        <span>© 2025 JaiSKIbel. Todos los derechos reservados.</span>
     </footer>
-
 </body>
 </html>
