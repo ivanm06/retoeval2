@@ -152,3 +152,91 @@ INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(3, 7, 34)
 INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(4, 8, 37);
 INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(2, 9, 27);
 INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(3, 10, 20);
+
+
+-- Extra
+
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES
+("Guantes térmicos", "Guantes con aislamiento térmico y resistencia al agua para el esquí.", "M", 12),
+("Casco de esquí", "Casco ligero y resistente para mayor seguridad en la nieve.", "L", 30),
+("Gafas de esquí antivaho", "Gafas con tecnología antivaho y protección UV.", "S", 20),
+("Pantalones de esquí", "Pantalones impermeables y transpirables para esquiar con comodidad.", "XL", 25),
+("Calcetines térmicos", "Calcetines con tecnología de retención de calor para temperaturas extremas.", "M", 8),
+("Mochila para nieve", "Mochila con compartimentos especiales para equipo de esquí y snowboard.", "L", 18),
+("Rodilleras de protección", "Rodilleras acolchonadas para amortiguar impactos en la nieve.", "M", 10),
+("Camiseta térmica", "Camiseta de manga larga con tejido térmico para mantener el calor corporal.", "S", 15),
+("Polainas para nieve", "Polainas impermeables para evitar la entrada de nieve en las botas.", "M", 9),
+("Cera para esquís", "Cera especial para mejorar el deslizamiento de los esquís en la nieve.", "S", 5),
+("Bastones de esquí", "Bastones ligeros y ergonómicos para mejorar la estabilidad en el esquí.", "M", 22),
+("Protector de espalda", "Protector con diseño ergonómico para prevenir lesiones en caídas.", "L", 35),
+("Botella térmica", "Botella de acero inoxidable con aislamiento térmico para bebidas calientes.", "S", 12),
+("Bufanda polar", "Bufanda suave y térmica para protegerse del frío en la nieve.", "M", 7),
+("Mono de esquí", "Traje completo impermeable y térmico para protección máxima en la nieve.", "XL", 55),
+("Crampones para nieve", "Crampones antideslizantes para caminar con seguridad en superficies heladas.", "L", 20),
+("Gorro de lana", "Gorro ajustado y térmico para mantener la cabeza caliente.", "M", 6),
+("Forro polar", "Chaqueta con forro polar para mayor abrigo en condiciones de frío extremo.", "XL", 28),
+("Linterna frontal", "Linterna con ajuste para la cabeza, ideal para condiciones de poca luz.", "S", 14),
+("Cinturón portaobjetos", "Cinturón con bolsillos para llevar objetos esenciales en la nieve.", "M", 10),
+("Esquís Freeride", "Esquís diseñados para máxima flotabilidad en nieve profunda.", "L", 90),
+("Esquís de travesía", "Esquís ligeros para subir montañas con pieles de foca y descender con control.", "M", 85),
+("Snowboard All-Mountain", "Tabla versátil para todo tipo de terrenos y estilos de conducción.", "L", 80),
+("Snowboard Freeride", "Snowboard diseñado para nieve polvo y terrenos escarpados.", "XL", 95);
+
+-- Inserción de accesorios en la tabla Accesorios
+INSERT INTO Accesorios (idArticulo, tipo) VALUES
+((SELECT id FROM Articulo WHERE nombre = "Guantes térmicos"), "Guantes"),
+((SELECT id FROM Articulo WHERE nombre = "Casco de esquí"), "Casco"),
+((SELECT id FROM Articulo WHERE nombre = "Gafas de esquí antivaho"), "Gafas"),
+((SELECT id FROM Articulo WHERE nombre = "Pantalones de esquí"), "Pantalones"),
+((SELECT id FROM Articulo WHERE nombre = "Calcetines térmicos"), "Calcetines"),
+((SELECT id FROM Articulo WHERE nombre = "Mochila para nieve"), "Mochila"),
+((SELECT id FROM Articulo WHERE nombre = "Rodilleras de protección"), "Rodilleras"),
+((SELECT id FROM Articulo WHERE nombre = "Camiseta térmica"), "Camiseta térmica"),
+((SELECT id FROM Articulo WHERE nombre = "Polainas para nieve"), "Polainas"),
+((SELECT id FROM Articulo WHERE nombre = "Cera para esquís"), "Cera"),
+((SELECT id FROM Articulo WHERE nombre = "Bastones de esquí"), "Bastones"),
+((SELECT id FROM Articulo WHERE nombre = "Protector de espalda"), "Protector de espalda"),
+((SELECT id FROM Articulo WHERE nombre = "Botella térmica"), "Botella térmica"),
+((SELECT id FROM Articulo WHERE nombre = "Bufanda polar"), "Bufanda"),
+((SELECT id FROM Articulo WHERE nombre = "Mono de esquí"), "Mono de esquí"),
+((SELECT id FROM Articulo WHERE nombre = "Crampones para nieve"), "Crampones"),
+((SELECT id FROM Articulo WHERE nombre = "Gorro de lana"), "Gorro"),
+((SELECT id FROM Articulo WHERE nombre = "Forro polar"), "Forro polar"),
+((SELECT id FROM Articulo WHERE nombre = "Linterna frontal"), "Linterna"),
+((SELECT id FROM Articulo WHERE nombre = "Cinturón portaobjetos"), "Cinturón");
+
+-- Inserción de esquís en la tabla Ski
+INSERT INTO Ski (idArticulo, modalidad, nivel) VALUES
+((SELECT id FROM Articulo WHERE nombre = "Esquís Freeride"), "Montaña", "Avanzado"),
+((SELECT id FROM Articulo WHERE nombre = "Esquís de travesía"), "Montaña", "Medio");
+
+-- Inserción de snowboards en la tabla Snowboard
+INSERT INTO Snowboard (idArticulo, modalidad) VALUES
+((SELECT id FROM Articulo WHERE nombre = "Snowboard All-Mountain"), "Pista"),
+((SELECT id FROM Articulo WHERE nombre = "Snowboard Freeride"), "Montaña");
+
+INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VALUES
+(11, 1, 10),  -- Guantes térmicos
+(12, 1, 10),  -- Casco de esquí
+(13, 1, 10),  -- Gafas de esquí antivaho
+(14, 1, 10),  -- Pantalones de esquí
+(15, 1, 10),  -- Calcetines térmicos
+(16, 1, 10),  -- Mochila para nieve
+(17, 1, 10),  -- Rodilleras de protección
+(18, 1, 10),  -- Camiseta térmica
+(19, 1, 10),  -- Polainas para nieve
+(20, 1, 10), -- Cera para esquís
+(21, 1, 10), -- Bastones de esquí
+(22, 1, 10), -- Protector de espalda
+(23, 1, 10), -- Botella térmica
+(24, 1, 10), -- Bufanda polar
+(25, 1, 10), -- Mono de esquí
+(26, 1, 10), -- Crampones para nieve
+(27, 1, 10), -- Gorro de lana
+(28, 1, 10), -- Forro polar
+(29, 1, 10), -- Linterna frontal
+(30, 1, 10), -- Cinturón portaobjetos
+(31, 1, 10), -- Esquís Freeride
+(32, 1, 10), -- Esquís de travesía
+(33, 1, 10), -- Snowboard All-Mountain
+(34, 1, 10); -- Snowboard Freeride

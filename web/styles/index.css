@@ -1,0 +1,27 @@
+/* ADAPTAR A PANTALLAS */
+@media screen and (max-width: 768px) {
+    /* Estilos para tablets y pantallas más pequeñas */
+    header nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+    footer{
+        height: 100px;
+        padding: 20px;
+        font-size: 10px;
+    }
+    section{
+        font-size: 12px;
+    }
+    #titulo{
+        font-size: 30px;
+    }
+    #SobreNosotros{
+        margin: 15px;
+        font-size: 12px;
+    }
+    .imagen{
+        width: 32px;
+        height: 32px;
+    }
+}

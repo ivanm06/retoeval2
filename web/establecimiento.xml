@@ -4,14 +4,17 @@
  xsi:noNamespaceSchemaLocation="./xsd/establecimiento.xsd">
     <establecimiento>
         <id>1</id>
-        <nombre>Tienda Paco</nombre>
-        <localizacion>Calle cuatrocientos 34s</localizacion>
-        <imagen>/images/establecimiento1.jpg</imagen>
+        <nombre>SkiMaster Pro</nombre>
+        <localizacion>Calle de las Nieves, 123, Montaña Blanca, España.</localizacion>
     </establecimiento>
     <establecimiento>
         <id>2</id>
-        <nombre>Tienda Pacos</nombre>
-        <localizacion>Calles cuatrocientos 34s</localizacion>
-        <imagen>/images/establecimiento1.jpg</imagen>
+        <nombre>Alpine Adventures</nombre>
+        <localizacion>Avenida de los Picos, 456, Valle Nevado, España.</localizacion>
+    </establecimiento>
+    <establecimiento>
+        <id>3</id>
+        <nombre>ASnowPeak Rentals</nombre>
+        <localizacion>Plaza de las Montañas, 789, Sierra Nevada, España.</localizacion>
     </establecimiento>
 </establecimientos>

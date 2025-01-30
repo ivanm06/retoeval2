@@ -113,7 +113,7 @@ public class Util {
      *
      * @return {@link String}
      */
-    public static String getPass(String txt) { //Recoger la contraseña del ususario
+    public static String getPass(String txt) { // Recoger la contraseña del ususario.
         Console console = System.console();
         char[] pass = console.readPassword(txt);
         String str = "";

@@ -1,152 +1,374 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="./xsl/articulos.xsl" type="text/xsl"?>
-<articulos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="./xsd/articulos.xsd">
-    <articulo>
-        <id>1</id>
-        <tipo>ski</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Ski Premium</nombre>
-        <descripcion>ski premium que hace cosas</descripcion>
-        <talla>XL</talla>
-        <precio>43</precio>
-        <modalidad>competicion</modalidad>
-        <stock>0</stock>
-        <establecimiento>1</establecimiento>
-    </articulo>
-    <articulo>
-        <id>12</id>
-        <tipo>snowboard</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Snowboard Premium</nombre>
-        <descripcion>snowboard premium premium para montañeros experimentados</descripcion>
-        <talla>XS</talla>
-        <precio>21</precio>
-        <modalidad>montana</modalidad>
-        <nivel>experto</nivel>
-        <stock>10</stock>
-        <establecimiento>1</establecimiento>
-    </articulo>
-    <articulo>
-        <id>45</id>
-        <tipo>accesorio</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Nombre</nombre>
-        <descripcion>Descripcion</descripcion>
-        <talla>S</talla>
-        <precio>23</precio>
-        <tipoAccesorio>34</tipoAccesorio>
-        <stock>10</stock>
-        <establecimiento>1</establecimiento>
-    </articulo>
-    <articulo>
-        <id>50</id>
-        <tipo>ski</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Ski Avanzado</nombre>
-        <descripcion>ski avanzado para esquiadores experimentados</descripcion>
-        <talla>M</talla>
-        <precio>50</precio>
-        <modalidad>pista</modalidad>
-        <stock>15</stock>
-        <establecimiento>1</establecimiento>
-    </articulo>
-    <articulo>
-        <id>2</id>
-        <tipo>ski</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Ski Básico</nombre>
-        <descripcion>ski básico para principiantes</descripcion>
-        <talla>L</talla>
-        <precio>30</precio>
-        <modalidad>montana</modalidad>
-        <stock>20</stock>
-        <establecimiento>1</establecimiento>
-    </articulo>
-    <articulo>
-        <id>13</id>
-        <tipo>snowboard</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Snowboard Básico</nombre>
-        <descripcion>snowboard básico para principiantes</descripcion>
-        <talla>M</talla>
-        <precio>25</precio>
-        <modalidad>pista</modalidad>
-        <nivel>medio</nivel>
-        <stock>12</stock>
-        <establecimiento>3</establecimiento>
-    </articulo>
-    <articulo>
-        <id>46</id>
-        <tipo>accesorio</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Casco</nombre>
-        <descripcion>casco de protección</descripcion>
-        <talla>L</talla>
-        <precio>15</precio>
-        <tipoAccesorio>12</tipoAccesorio>
-        <stock>30</stock>
-        <establecimiento>1</establecimiento>
-    </articulo>
-    <articulo>
-        <id>51</id>
-        <tipo>ski</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Ski Intermedio</nombre>
-        <descripcion>ski intermedio para esquiadores con experiencia</descripcion>
-        <talla>S</talla>
-        <precio>40</precio>
-        <modalidad>competicion</modalidad>
-        <stock>18</stock>
-        <establecimiento>3</establecimiento>
-    </articulo>
-    <articulo>
-        <id>3</id>
-        <tipo>ski</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Ski Profesional</nombre>
-        <descripcion>ski profesional para expertos</descripcion>
-        <talla>XXL</talla>
-        <precio>60</precio>
-        <modalidad>competicion</modalidad>
-        <stock>8</stock>
-        <establecimiento>3</establecimiento>
-    </articulo>
-    <articulo>
-        <id>14</id>
-        <tipo>snowboard</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Snowboard Profesional</nombre>
-        <descripcion>snowboard profesional para expertos</descripcion>
-        <talla>XL</talla>
-        <precio>55</precio>
-        <modalidad>montana</modalidad>
-        <nivel>experto</nivel>
-        <stock>10</stock>
-        <establecimiento>2</establecimiento>
-    </articulo>
-    <articulo>
-        <id>47</id>
-        <tipo>accesorio</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Guantes</nombre>
-        <descripcion>guantes de protección</descripcion>
-        <talla>M</talla>
-        <precio>10</precio>
-        <tipoAccesorio>22</tipoAccesorio>
-        <stock>25</stock>
-        <establecimiento>2</establecimiento>
-    </articulo>
-    <articulo>
-        <id>52</id>
-        <tipo>ski</tipo>
-        <imagen>./images/establecimiento1.jpg</imagen>
-        <nombre>Ski Avanzado</nombre>
-        <descripcion>ski avanzado para esquiadores experimentados</descripcion>
-        <talla>L</talla>
-        <precio>50</precio>
-        <modalidad>pista</modalidad>
-        <stock>15</stock>
-        <establecimiento>2</establecimiento>
-    </articulo>
+<articulos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./xsd/articulos.xsd">
+   <articulo>
+       <id>1</id>
+       <tipo>ski</tipo>
+       <nombre>Esquís All Mountain</nombre>
+       <descripcion>Esquís versátiles ideales para todo tipo de terrenos y condiciones de nieve.</descripcion>
+       <talla>M</talla>
+       <precio>35</precio>
+       <establecimiento>1</establecimiento>
+       <nivel>Medio</nivel>
+       <modalidad>Montaña</modalidad>
+       <stock>48</stock>
+   </articulo>
+   <articulo>
+       <id>5</id>
+       <tipo>accesorio</tipo>
+       <nombre>Funda para Esquís</nombre>
+       <descripcion>Funda de protección para esquís ideal para el transporte y almacenamiento fabricada en material resistente.</descripcion>
+       <talla>M</talla>
+       <precio>5</precio>
+       <establecimiento>1</establecimiento>
+       <tipoAccesorio>Funda</tipoAccesorio>
+       <stock>76</stock>
+   </articulo>
+   <articulo>
+       <id>9</id>
+       <tipo>ski</tipo>
+       <nombre>Esquís Racing</nombre>
+       <descripcion>Esquís  ideales para los mejores competidores</descripcion>
+       <talla>XL</talla>
+       <precio>85</precio>
+       <establecimiento>1</establecimiento>
+       <nivel>Avanzado</nivel>
+       <modalidad>Competicion</modalidad>
+       <stock>68</stock>
+   </articulo>
+   <articulo>
+       <id>11</id>
+       <tipo>accesorio</tipo>
+       <nombre>Guantes térmicos</nombre>
+       <descripcion>Guantes con aislamiento térmico y resistencia al agua para el esquí.</descripcion>
+       <talla>M</talla>
+       <precio>12</precio>
+       <establecimiento>1</establecimiento>
+       <tipoAccesorio>Guantes</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>12</id>
+       <tipo>accesorio</tipo>
+       <nombre>Casco de esquí</nombre>
+       <descripcion>Casco ligero y resistente para mayor seguridad en la nieve.</descripcion>
+       <talla>L</talla>
+       <precio>30</precio>
+       <establecimiento>4</establecimiento>
+       <tipoAccesorio>Casco</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>13</id>
+       <tipo>accesorio</tipo>
+       <nombre>Gafas de esquí antivaho</nombre>
+       <descripcion>Gafas con tecnología antivaho y protección UV.</descripcion>
+       <talla>S</talla>
+       <precio>20</precio>
+       <establecimiento>3</establecimiento>
+       <tipoAccesorio>Gafas</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>14</id>
+       <tipo>accesorio</tipo>
+       <nombre>Pantalones de esquí</nombre>
+       <descripcion>Pantalones impermeables y transpirables para esquiar con comodidad.</descripcion>
+       <talla>XL</talla>
+       <precio>25</precio>
+       <establecimiento>3</establecimiento>
+       <tipoAccesorio>Pantalones</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>15</id>
+       <tipo>accesorio</tipo>
+       <nombre>Calcetines térmicos</nombre>
+       <descripcion>Calcetines con tecnología de retención de calor para temperaturas extremas.</descripcion>
+       <talla>M</talla>
+       <precio>8</precio>
+       <establecimiento>2</establecimiento>
+       <tipoAccesorio>Calcetines</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>16</id>
+       <tipo>accesorio</tipo>
+       <nombre>Mochila para nieve</nombre>
+       <descripcion>Mochila con compartimentos especiales para equipo de esquí y snowboard.</descripcion>
+       <talla>L</talla>
+       <precio>18</precio>
+       <establecimiento>2</establecimiento>
+       <tipoAccesorio>Mochila</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>17</id>
+       <tipo>accesorio</tipo>
+       <nombre>Rodilleras de protección</nombre>
+       <descripcion>Rodilleras acolchonadas para amortiguar impactos en la nieve.</descripcion>
+       <talla>M</talla>
+       <precio>10</precio>
+       <establecimiento>2</establecimiento>
+       <tipoAccesorio>Rodilleras</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>18</id>
+       <tipo>accesorio</tipo>
+       <nombre>Camiseta térmica</nombre>
+       <descripcion>Camiseta de manga larga con tejido térmico para mantener el calor corporal.</descripcion>
+       <talla>S</talla>
+       <precio>15</precio>
+       <establecimiento>1</establecimiento>
+       <tipoAccesorio>Camiseta térmica</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>19</id>
+       <tipo>accesorio</tipo>
+       <nombre>Polainas para nieve</nombre>
+       <descripcion>Polainas impermeables para evitar la entrada de nieve en las botas.</descripcion>
+       <talla>M</talla>
+       <precio>9</precio>
+       <establecimiento>1</establecimiento>
+       <tipoAccesorio>Polainas</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>20</id>
+       <tipo>accesorio</tipo>
+       <nombre>Cera para esquís</nombre>
+       <descripcion>Cera especial para mejorar el deslizamiento de los esquís en la nieve.</descripcion>
+       <talla>S</talla>
+       <precio>5</precio>
+       <establecimiento>3</establecimiento>
+       <tipoAccesorio>Cera</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>21</id>
+       <tipo>accesorio</tipo>
+       <nombre>Bastones de esquí</nombre>
+       <descripcion>Bastones ligeros y ergonómicos para mejorar la estabilidad en el esquí.</descripcion>
+       <talla>M</talla>
+       <precio>22</precio>
+       <establecimiento>3</establecimiento>
+       <tipoAccesorio>Bastones</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>22</id>
+       <tipo>accesorio</tipo>
+       <nombre>Protector de espalda</nombre>
+       <descripcion>Protector con diseño ergonómico para prevenir lesiones en caídas.</descripcion>
+       <talla>L</talla>
+       <precio>35</precio>
+       <establecimiento>4</establecimiento>
+       <tipoAccesorio>Protector de espalda</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>23</id>
+       <tipo>accesorio</tipo>
+       <nombre>Botella térmica</nombre>
+       <descripcion>Botella de acero inoxidable con aislamiento térmico para bebidas calientes.</descripcion>
+       <talla>S</talla>
+       <precio>12</precio>
+       <establecimiento>1</establecimiento>
+       <tipoAccesorio>Botella térmica</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>24</id>
+       <tipo>accesorio</tipo>
+       <nombre>Bufanda polar</nombre>
+       <descripcion>Bufanda suave y térmica para protegerse del frío en la nieve.</descripcion>
+       <talla>M</talla>
+       <precio>7</precio>
+       <establecimiento>1</establecimiento>
+       <tipoAccesorio>Bufanda</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>25</id>
+       <tipo>accesorio</tipo>
+       <nombre>Mono de esquí</nombre>
+       <descripcion>Traje completo impermeable y térmico para protección máxima en la nieve.</descripcion>
+       <talla>XL</talla>
+       <precio>55</precio>
+       <establecimiento>2</establecimiento>
+       <tipoAccesorio>Mono de esquí</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>26</id>
+       <tipo>accesorio</tipo>
+       <nombre>Crampones para nieve</nombre>
+       <descripcion>Crampones antideslizantes para caminar con seguridad en superficies heladas.</descripcion>
+       <talla>L</talla>
+       <precio>20</precio>
+       <establecimiento>2</establecimiento>
+       <tipoAccesorio>Crampones</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>27</id>
+       <tipo>accesorio</tipo>
+       <nombre>Gorro de lana</nombre>
+       <descripcion>Gorro ajustado y térmico para mantener la cabeza caliente.</descripcion>
+       <talla>M</talla>
+       <precio>6</precio>
+       <establecimiento>1</establecimiento>
+       <tipoAccesorio>Gorro</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>28</id>
+       <tipo>accesorio</tipo>
+       <nombre>Forro polar</nombre>
+       <descripcion>Chaqueta con forro polar para mayor abrigo en condiciones de frío extremo.</descripcion>
+       <talla>XL</talla>
+       <precio>28</precio>
+       <establecimiento>3</establecimiento>
+       <tipoAccesorio>Forro polar</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>29</id>
+       <tipo>accesorio</tipo>
+       <nombre>Linterna frontal</nombre>
+       <descripcion>Linterna con ajuste para la cabeza ideal para condiciones de poca luz.</descripcion>
+       <talla>S</talla>
+       <precio>14</precio>
+       <establecimiento>3</establecimiento>
+       <tipoAccesorio>Linterna</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>30</id>
+       <tipo>accesorio</tipo>
+       <nombre>Cinturón portaobjetos</nombre>
+       <descripcion>Cinturón con bolsillos para llevar objetos esenciales en la nieve.</descripcion>
+       <talla>M</talla>
+       <precio>10</precio>
+       <establecimiento>2</establecimiento>
+       <tipoAccesorio>Cinturón</tipoAccesorio>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>31</id>
+       <tipo>ski</tipo>
+       <nombre>Esquís Freeride</nombre>
+       <descripcion>Esquís diseñados para máxima flotabilidad en nieve profunda.</descripcion>
+       <talla>L</talla>
+       <precio>90</precio>
+       <establecimiento>1</establecimiento>
+       <nivel>Avanzado</nivel>
+       <modalidad>Montaña</modalidad>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>32</id>
+       <tipo>ski</tipo>
+       <nombre>Esquís de travesía</nombre>
+       <descripcion>Esquís ligeros para subir montañas con pieles de foca y descender con control.</descripcion>
+       <talla>M</talla>
+       <precio>85</precio>
+       <establecimiento>1</establecimiento>
+       <nivel>Medio</nivel>
+       <modalidad>Montaña</modalidad>
+       <stock>10</stock>
+   </articulo>
+   <articulo>
+       <id>6</id>
+       <tipo>accesorio</tipo>
+       <nombre>Cinta para Gafas de Esquí</nombre>
+       <descripcion>Cinta ajustable para sujetar las gafas de esquí cómoda y con diseño antideslizante.</descripcion>
+       <talla>S</talla>
+       <precio>3</precio>
+       <establecimiento>2</establecimiento>
+       <tipoAccesorio>Cinta</tipoAccesorio>
+       <stock>114</stock>
+   </articulo>
+   <articulo>
+       <id>9</id>
+       <tipo>ski</tipo>
+       <nombre>Esquís Racing</nombre>
+       <descripcion>Esquís  ideales para los mejores competidores</descripcion>
+       <talla>XL</talla>
+       <precio>85</precio>
+       <establecimiento>2</establecimiento>
+       <nivel>Avanzado</nivel>
+       <modalidad>Competicion</modalidad>
+       <stock>55</stock>
+   </articulo>
+   <articulo>
+       <id>3</id>
+       <tipo>accesorio</tipo>
+       <nombre>Botas de Esquí Rápidas</nombre>
+       <descripcion>Botas de esquí de alta calidad con cierre rápido y ajuste perfecto para mayor comodidad.</descripcion>
+       <talla>S</talla>
+       <precio>8</precio>
+       <establecimiento>3</establecimiento>
+       <tipoAccesorio>Botas</tipoAccesorio>
+       <stock>65</stock>
+   </articulo>
+   <articulo>
+       <id>7</id>
+       <tipo>accesorio</tipo>
+       <nombre>Cadenas para Neumáticos</nombre>
+       <descripcion>Cadenas para neumáticos de coche ideales para circular con seguridad en carreteras nevadas o heladas.</descripcion>
+       <talla>M</talla>
+       <precio>13</precio>
+       <establecimiento>3</establecimiento>
+       <tipoAccesorio>Cadenas para Neumáticos</tipoAccesorio>
+       <stock>80</stock>
+   </articulo>
+   <articulo>
+       <id>9</id>
+       <tipo>ski</tipo>
+       <nombre>Esquís Racing</nombre>
+       <descripcion>Esquís  ideales para los mejores competidores</descripcion>
+       <talla>XL</talla>
+       <precio>85</precio>
+       <establecimiento>3</establecimiento>
+       <nivel>Avanzado</nivel>
+       <modalidad>Competicion</modalidad>
+       <stock>48</stock>
+   </articulo>
+   <articulo>
+       <id>4</id>
+       <tipo>accesorio</tipo>
+       <nombre>Chaqueta de Esquí Impermeable</nombre>
+       <descripcion>Chaqueta de esquí con aislamiento térmico y tecnología impermeable ideal para condiciones frías y mojadas.</descripcion>
+       <talla>XL</talla>
+       <precio>10</precio>
+       <establecimiento>4</establecimiento>
+       <tipoAccesorio>Chaqueta</tipoAccesorio>
+       <stock>67</stock>
+   </articulo>
+   <articulo>
+       <id>8</id>
+       <tipo>accesorio</tipo>
+       <nombre>Bolsa Térmica para Botellas</nombre>
+       <descripcion>Bolsa térmica para mantener las bebidas calientes durante el día de esquí con cierre hermético.</descripcion>
+       <talla>L</talla>
+       <precio>7</precio>
+       <establecimiento>4</establecimiento>
+       <tipoAccesorio>Bolsa Térmica para Botellas</tipoAccesorio>
+       <stock>93</stock>
+   </articulo>
+   <articulo>
+       <id>9</id>
+       <tipo>ski</tipo>
+       <nombre>Esquís Racing</nombre>
+       <descripcion>Esquís  ideales para los mejores competidores</descripcion>
+       <talla>XL</talla>
+       <precio>85</precio>
+       <establecimiento>4</establecimiento>
+       <nivel>Avanzado</nivel>
+       <modalidad>Competicion</modalidad>
+       <stock>32</stock>
+   </articulo>
 </articulos>

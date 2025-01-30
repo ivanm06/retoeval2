@@ -16,7 +16,6 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
-                            <xs:element name="imagen" type="xs:string"/>
                             <xs:element name="nombre" type="xs:string"/>
                             <xs:element name="descripcion" type="xs:string"/>
                             <xs:element name="talla">
@@ -35,18 +34,18 @@
                             <xs:element name="modalidad" minOccurs="0">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
-                                        <xs:enumeration value="competicion"/>
-                                        <xs:enumeration value="pista"/>
-                                        <xs:enumeration value="montana"/>
+                                        <xs:enumeration value="Competicion"/>
+                                        <xs:enumeration value="Pista"/>
+                                        <xs:enumeration value="Montaña"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
                             <xs:element name="nivel" minOccurs="0">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
-                                        <xs:enumeration value="principiante"/>
-                                        <xs:enumeration value="medio"/>
-                                        <xs:enumeration value="experto"/>
+                                        <xs:enumeration value="Principiante"/>
+                                        <xs:enumeration value="Medio"/>
+                                        <xs:enumeration value="Avanzado"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
