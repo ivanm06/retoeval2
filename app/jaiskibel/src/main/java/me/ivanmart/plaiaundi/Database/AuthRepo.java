@@ -2,8 +2,9 @@ package me.ivanmart.plaiaundi.Database;
 
 import me.ivanmart.plaiaundi.Enums.Privilegio;
 import me.ivanmart.plaiaundi.Enums.Sexo;
-import me.ivanmart.plaiaundi.Menus.Util;
+import me.ivanmart.plaiaundi.Utils.MenuUtil;
 import me.ivanmart.plaiaundi.Model.Usuario;
+import me.ivanmart.plaiaundi.Utils.Password;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,8 +38,8 @@ public class AuthRepo {
             statement.execute();
             ResultSet rs = statement.getResultSet();
             if (rs.next()){
-                Sexo sexo = Util.toEnum(Sexo.class, rs.getString("sexo"), Sexo.M); // Guardar sexo ususario
-                Privilegio privilegio = Util.toEnum(Privilegio.class, rs.getString("privilegio"), Privilegio.CLIENTE);// Guardar privilegio del usuario
+                Sexo sexo = MenuUtil.toEnum(Sexo.class, rs.getString("sexo"), Sexo.M); // Guardar sexo ususario
+                Privilegio privilegio = MenuUtil.toEnum(Privilegio.class, rs.getString("privilegio"), Privilegio.CLIENTE);// Guardar privilegio del usuario
                 return new Usuario(dni, rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), sexo, privilegio);
             }else return new Usuario();
         }catch (SQLException e){
@@ -78,8 +79,8 @@ public class AuthRepo {
                     set.getString("nombre"),
                     set.getString("apellido1"),
                     set.getString("apellido2"),
-                    Util.toEnum(Sexo.class, set.getString("sexo"), Sexo.M),
-                    Util.toEnum(Privilegio.class, set.getString("privilegio"), Privilegio.CLIENTE)
+                    MenuUtil.toEnum(Sexo.class, set.getString("sexo"), Sexo.M),
+                    MenuUtil.toEnum(Privilegio.class, set.getString("privilegio"), Privilegio.CLIENTE)
 
             ));
             return usuarios;

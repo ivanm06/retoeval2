@@ -3,6 +3,7 @@ package me.ivanmart.plaiaundi.Menus;
 import me.ivanmart.plaiaundi.Database.EstadisticasRepo;
 import me.ivanmart.plaiaundi.Database.ReservaRepo;
 import me.ivanmart.plaiaundi.Model.ArticuloReserva;
+import me.ivanmart.plaiaundi.Utils.MenuUtil;
 
 import java.util.ArrayList;
 
@@ -17,8 +18,8 @@ public class AdminMenu {
                 +------------------------------+
                 """);
 
-        int c = Util.getInt();
-        while (c != 1 && c != 2) c = Util.getInt("[Info] Selecciona un valor válido.");
+        int c = MenuUtil.getInt();
+        while (c != 1 && c != 2) c = MenuUtil.getInt("[Info] Selecciona un valor válido.");
 
         if (c == 1){
             ClientMenu menu = new ClientMenu();
@@ -30,8 +31,8 @@ public class AdminMenu {
 
     private void continuar() {
         showMenu();
-        int c = Util.getInt();
-        while (c < 0 || c > 5) c = Util.getInt("Valor inválido.");
+        int c = MenuUtil.getInt();
+        while (c < 0 || c > 5) c = MenuUtil.getInt("Valor inválido.");
 
         ArrayList<String[]> valores2 = new ArrayList<>();
         String[] titulos2 = new String[]{};
@@ -62,7 +63,7 @@ public class AdminMenu {
                 return;
         }
 
-        Util.generateTable(titulos2, valores2);
+        MenuUtil.generateTable(titulos2, valores2);
         if (c == 1) menuReservas();
         continuar();
     }
@@ -82,8 +83,8 @@ public class AdminMenu {
             """);
     }
     private void menuReservas(){
-        int r = Util.getInt("Inserta el id de la reserva a ver. (0 para volver atrás)");
-        while (r < 0) r = Util.getInt("Valor inválido.");
+        int r = MenuUtil.getInt("Inserta el id de la reserva a ver. (0 para volver atrás)");
+        while (r < 0) r = MenuUtil.getInt("Valor inválido.");
         if (r == 0) return;
 
         ArrayList<ArticuloReserva> articulos = ReservaRepo.getArticulosFromReserva(r);
@@ -92,6 +93,6 @@ public class AdminMenu {
         ArrayList<String[]> valoresArticulo = new ArrayList<>();
 
         for(ArticuloReserva a : articulos) valoresArticulo.add(a.getDataArray(0));
-        Util.generateTable(titulosArticulos, valoresArticulo);
+        MenuUtil.generateTable(titulosArticulos, valoresArticulo);
     }
 }

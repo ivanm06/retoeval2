@@ -1,11 +1,11 @@
-package me.ivanmart.plaiaundi.Menus;
+package me.ivanmart.plaiaundi.Utils;
 
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Util {
+public class MenuUtil {
     public static final Scanner sc = new Scanner(System.in);
 
     /**
@@ -41,6 +41,16 @@ public class Util {
      */
     public static String getString(String txt) {
         System.out.println(txt);
+        return getString();
+    }
+
+    /**
+     * Le pide al usuario un {@link String} y se salta el problema de tener que
+     * limpiar el {@code buffer} cada vez que se pide un dato nuevo.
+     *
+     * @return {@link String}
+     */
+    public static String getString() {
         String str = sc.nextLine();
         if (str.isBlank() || str.equals("\n")) return sc.nextLine();
         return str;
@@ -54,7 +64,7 @@ public class Util {
      */
     public static int getInt(String txt) {
         System.out.println(txt);
-        return sc.nextInt();
+        return getInt();
     }
 
     /**
@@ -63,7 +73,15 @@ public class Util {
      * @return {@code int}
      */
     public static int getInt() {
-        return sc.nextInt();
+        int val;
+        try{
+            val = sc.nextInt();
+        }catch (Exception _){
+            // Vaciar el buffer.
+            sc.nextLine();
+            return getInt("[Error] Inserta número positivo.");
+        }
+        return val;
     }
 
     /**
@@ -101,24 +119,8 @@ public class Util {
     public static <T extends Enum<T>> T getEnum(Class<T> enumClass, String txt) {
         String str = getString(txt);
         T en = toEnum(enumClass, str);
-        while (en == null) {
-            System.out.print("[Error] Valor inválido. ");
-            en = toEnum(enumClass, str);
-        }
+        if (en == null) return getEnum(enumClass, "[Error] Valor inválido. ");
         return en;
-    }
-
-    /**
-     * Le pide al usuario una contraseña y la convierte a {@link String}
-     *
-     * @return {@link String}
-     */
-    public static String getPass(String txt) { // Recoger la contraseña del ususario.
-        Console console = System.console();
-        char[] pass = console.readPassword(txt);
-        String str = "";
-        for (char c : pass) str += c;
-        return str;
     }
 
     /**
@@ -152,7 +154,8 @@ public class Util {
         String header = "|";
 
         // Genera los títulos.
-        for (int i = 0; i < titles.length; i++) header += " %s%s |".formatted(titles[i], " ".repeat(max[i] - titles[i].length()));
+        for (int i = 0; i < titles.length; i++)
+            header += " %s%s |".formatted(titles[i], " ".repeat(max[i] - titles[i].length()));
         inner += header + "\n" + bar;
 
         // Genera los datos.

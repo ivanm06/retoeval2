@@ -6,13 +6,13 @@ import me.ivanmart.plaiaundi.Enums.Privilegio;
 import me.ivanmart.plaiaundi.Menus.AdminMenu;
 import me.ivanmart.plaiaundi.Menus.AuthMenu;
 import me.ivanmart.plaiaundi.Menus.ClientMenu;
-import me.ivanmart.plaiaundi.Menus.Util;
+import me.ivanmart.plaiaundi.Utils.MenuUtil;
 import me.ivanmart.plaiaundi.Model.Cesta;
-
 import java.sql.SQLException;
 
 public class Main {
     private static final AuthMenu auth = new AuthMenu();
+
 
     public static void main(String[] args) {
         // Conectarse a la Base de Datos.
@@ -38,8 +38,8 @@ public class Main {
 
         // Una vez finalizado el programa.
         if (!Cesta.getCesta().isEmpty()){
-            int dias = Util.getInt("Por cuantos dias quieres reservar? [1-30]");
-            while (dias < 0 || dias > 30) dias = Util.getInt("[Error] Selecciona un valor dentro del rango.");
+            int dias = MenuUtil.getInt("Por cuantos dias quieres reservar? [1-30]");
+            while (dias < 0 || dias > 30) dias = MenuUtil.getInt("[Error] Selecciona un valor dentro del rango.");
 
             boolean res = ReservaRepo.reservar(Cesta.getCesta(), dias);
             if (res) System.out.println("[Info] Se han reservado los artículos con éxito.");

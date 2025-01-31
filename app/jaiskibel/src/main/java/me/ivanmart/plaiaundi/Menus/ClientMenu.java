@@ -6,6 +6,7 @@ import me.ivanmart.plaiaundi.Model.Articulo;
 import me.ivanmart.plaiaundi.Model.ArticuloReserva;
 import me.ivanmart.plaiaundi.Model.Cesta;
 import me.ivanmart.plaiaundi.Model.Establecimiento;
+import me.ivanmart.plaiaundi.Utils.MenuUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +18,8 @@ public class ClientMenu {
         ArrayList<Establecimiento> establecimientos = EstablecimientoRepo.getEstablecimientos();
         mostrarMenuEstablecimiento(establecimientos);
 
-        int c = Util.getInt();
-        while (c <= 0 || c > establecimientos.size()) c = Util.getInt("Valor inválido.");
+        int c = MenuUtil.getInt();
+        while (c <= 0 || c > establecimientos.size()) c = MenuUtil.getInt("[Error] Selecciona un establecimiento válido.");
         Establecimiento establecimiento = establecimientos.get(c-1);
         Cesta.setEstablecimiento(establecimiento);
 
@@ -41,8 +42,8 @@ public class ClientMenu {
                 +-------------------------------+
                 """);
 
-        int c = Util.getInt();
-        while (c < 0 || c > 3) c = Util.getInt("[Error] Selecciona un artículo válido.");
+        int c = MenuUtil.getInt();
+        while (c < 0 || c > 3) c = MenuUtil.getInt("[Error] Selecciona un artículo válido.");
 
         // Inicializar listas.
         ArrayList<Articulo> articulos = new ArrayList<>();
@@ -84,7 +85,7 @@ public class ClientMenu {
             }else dataArray[dataArray.length-1] = stock + " en stock";
             valores.add(dataArray);
         }
-        Util.generateTable(titulos, valores);
+        MenuUtil.generateTable(titulos, valores);
 
         // Si todos los artículos están fuera de stock, salir.
         if (articulos.size() == articulosFS){
@@ -92,10 +93,10 @@ public class ClientMenu {
             return false;
         }
 
-        int a = Util.getInt("Selecciona el id del articulo a reservar. (0 para ir atrás.)");
+        int a = MenuUtil.getInt("Selecciona el id del articulo a reservar. (0 para ir atrás.)");
 
         // El id del artículo no puede ser negativo y tiene que estár en ese establecimiento
-        while (a < 0 || (!establecimiento.containsArticulo(a) && a != 0)) a = Util.getInt("Artículo inválido");
+        while (a < 0 || (!establecimiento.containsArticulo(a) && a != 0)) a = MenuUtil.getInt("[Error] Selecciona un artículo válido.");
         if (a == 0) return false;
 
         int stock = establecimiento.getStock(a);
@@ -104,10 +105,11 @@ public class ClientMenu {
             return false;
         }
 
-        int cantidad = Util.getInt("Cuantos quieres?");
+        int cantidad = MenuUtil.getInt("Cuantos quieres?");
+        while (cantidad <= 0) cantidad = MenuUtil.getInt("[Error] La cantidad tiene que ser un número entero positivo.");
 
         // El valor de la cantidad no puede ser negativo ni mayor al stock del articulo
-        while (cantidad < 0 || cantidad > stock) cantidad = Util.getInt("[Error] No hay suficientes artículos en stock.");
+        while (cantidad < 0 || cantidad > stock) cantidad = MenuUtil.getInt("[Error] No hay suficientes artículos en stock.");
         if (cantidad == 0) return false;
 
         System.out.printf("[Info] %d articulos añadidos a la cesta.%n", cantidad);

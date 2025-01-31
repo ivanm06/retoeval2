@@ -3,7 +3,7 @@ package me.ivanmart.plaiaundi.Database;
 import me.ivanmart.plaiaundi.Enums.Modalidad;
 import me.ivanmart.plaiaundi.Enums.Nivel;
 import me.ivanmart.plaiaundi.Enums.Talla;
-import me.ivanmart.plaiaundi.Menus.Util;
+import me.ivanmart.plaiaundi.Utils.MenuUtil;
 import me.ivanmart.plaiaundi.Model.Accesorio;
 import me.ivanmart.plaiaundi.Model.Articulo;
 import me.ivanmart.plaiaundi.Model.Ski;
@@ -31,9 +31,9 @@ public class ArticuloRepo {
                     rs.getString("nombre"),
                     rs.getString("descripcion"),
                     rs.getInt("precio"),
-                    Util.toEnum(Talla.class, rs.getString("talla"), Talla.M),
-                    Util.toEnum(Modalidad.class, rs.getString("talla"), Modalidad.PISTA),
-                    Util.toEnum(Nivel.class, rs.getString("talla"), Nivel.PRINCIPIANTE)
+                    MenuUtil.toEnum(Talla.class, rs.getString("talla"), Talla.M),
+                    MenuUtil.toEnum(Modalidad.class, rs.getString("modalidad"), Modalidad.PISTA),
+                    MenuUtil.toEnum(Nivel.class, rs.getString("nivel"), Nivel.PRINCIPIANTE)
             ));
             return articulos;
         }catch (SQLException e){
@@ -56,8 +56,8 @@ public class ArticuloRepo {
                     rs.getString("nombre"),
                     rs.getString("descripcion"),
                     rs.getInt("precio"),
-                    Util.toEnum(Talla.class, rs.getString("talla"), Talla.M),
-                    Util.toEnum(Modalidad.class, rs.getString("talla"), Modalidad.PISTA)
+                    MenuUtil.toEnum(Talla.class, rs.getString("talla"), Talla.M),
+                    MenuUtil.toEnum(Modalidad.class, rs.getString("modalidad"), Modalidad.PISTA)
             ));
             return articulos;
         }catch (SQLException e){
@@ -80,7 +80,7 @@ public class ArticuloRepo {
                     rs.getString("nombre"),
                     rs.getString("descripcion"),
                     rs.getInt("precio"),
-                    Util.toEnum(Talla.class, rs.getString("talla"), Talla.M),
+                    MenuUtil.toEnum(Talla.class, rs.getString("talla"), Talla.M),
                     rs.getString("tipo")
             ));
             return articulos;

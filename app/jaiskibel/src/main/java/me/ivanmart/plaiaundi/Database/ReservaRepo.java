@@ -2,7 +2,7 @@ package me.ivanmart.plaiaundi.Database;
 
 import me.ivanmart.plaiaundi.Enums.Talla;
 import me.ivanmart.plaiaundi.Menus.AuthMenu;
-import me.ivanmart.plaiaundi.Menus.Util;
+import me.ivanmart.plaiaundi.Utils.MenuUtil;
 import me.ivanmart.plaiaundi.Model.*;
 
 import java.sql.PreparedStatement;
@@ -70,7 +70,7 @@ public class ReservaRepo {
                         set.getString("nombre"),
                         set.getString("descripcion"),
                         set.getInt("precio"),
-                        Util.toEnum(Talla.class, set.getString("talla"), Talla.M),
+                        MenuUtil.toEnum(Talla.class, set.getString("talla"), Talla.M),
                         set.getInt("cantidad")
                 );
                 articulos.add(ar);
