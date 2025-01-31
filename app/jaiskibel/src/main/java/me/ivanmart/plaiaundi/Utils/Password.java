@@ -64,7 +64,6 @@ public class Password {
 
 class Eraser implements Runnable {
     private boolean stop;
-    private boolean started = false;
 
     /**
      * @param prompt mensaje mostrado al usuario.
