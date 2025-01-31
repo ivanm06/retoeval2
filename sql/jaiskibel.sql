@@ -13,11 +13,11 @@ CREATE TABLE Usuario(
     PRIMARY KEY (dni)
 ); 
 
-INSERT INTO Usuario VALUES("763497M","Paco","Calleja","Santos","H","PACO1999","Cliente");
-INSERT INTO Usuario VALUES("12345678A", "Juan", "Pérez", "García", "H", "12345678", "Admin");
-INSERT INTO Usuario VALUES("23456789B", "María", "López", "Fernández", "M", "abc12345", "Cliente");
-INSERT INTO Usuario VALUES("34567890C", "Pedro", "Sánchez", "Martín", "H", "p@ssw0rd", "Cliente");
-INSERT INTO Usuario VALUES("45678901D", "Laura", "García", "Rodríguez", "M", "qwerty123", "Admin");
+INSERT INTO Usuario VALUES("763497M","Paco","Calleja","Santos","H","$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS","Cliente");
+INSERT INTO Usuario VALUES("12345678A", "Juan", "Pérez", "García", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
+INSERT INTO Usuario VALUES("23456789B", "María", "López", "Fernández", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
+INSERT INTO Usuario VALUES("34567890C", "Pedro", "Sánchez", "Martín", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
+INSERT INTO Usuario VALUES("45678901D", "Laura", "García", "Rodríguez", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
 
 CREATE TABLE Establecimiento(
 	id SMALLINT AUTO_INCREMENT,

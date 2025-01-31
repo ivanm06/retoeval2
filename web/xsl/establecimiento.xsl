@@ -38,7 +38,7 @@
                     <section class="flex gap-10 flex-wrap max-w-[80%] justify-center">
                         <xsl:for-each select="//establecimiento">
                             <div class="establecimiento w-[40vh] h-fit bg-[#eee] min-h-[35vh] rounded-md shadow-md hover:scale-105 cursor-pointer flex flex-col" data-id="{id}">
-                                <img class="rounded-md aspect-video" src="./images/establecimientos/establecimiento{id}.png" alt="establecimiento" onerror="this.onerror=null; this.src='./images/placeholder.png';" />
+                                <img class="rounded-md aspect-video" src="./images/establecimientos/establecimiento{id}.jpg" alt="establecimiento" onerror="this.onerror=null; this.src='./images/placeholder.png';" />
                                 <div class="p-4 flex-grow flex">
                                     <div class="flex flex-col gap-2 justify-between h-auto flex-grow">
                                         <h2 class="text-xl font-semibold text-center"><xsl:value-of select="nombre"/></h2>
