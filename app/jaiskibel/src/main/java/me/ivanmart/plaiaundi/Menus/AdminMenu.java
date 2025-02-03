@@ -1,8 +1,10 @@
 package me.ivanmart.plaiaundi.Menus;
 
+import me.ivanmart.plaiaundi.Database.AuthRepo;
 import me.ivanmart.plaiaundi.Database.EstadisticasRepo;
 import me.ivanmart.plaiaundi.Database.ReservaRepo;
 import me.ivanmart.plaiaundi.Model.ArticuloReserva;
+import me.ivanmart.plaiaundi.Model.Usuario;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class AdminMenu {
                 """);
 
         int c = MenuUtil.getInt();
-        while (c != 1 && c != 2) c = MenuUtil.getInt("[Info] Selecciona un valor válido.");
+        while (c != 1 && c != 2) c = MenuUtil.getInt("[Error] Selecciona un valor válido.");
 
         if (c == 1){
             ClientMenu menu = new ClientMenu();
@@ -32,7 +34,7 @@ public class AdminMenu {
     private void continuar() {
         showMenu();
         int c = MenuUtil.getInt();
-        while (c < 0 || c > 5) c = MenuUtil.getInt("Valor inválido.");
+        while (c < 0 || c > 6) c = MenuUtil.getInt("[Error] Valor inválido.");
 
         ArrayList<String[]> valores2 = new ArrayList<>();
         String[] titulos2 = new String[]{};
@@ -58,12 +60,19 @@ public class AdminMenu {
                 valores2 = EstadisticasRepo.getReservasPorDinero();
                 titulos2 = new String[]{"DNI Cliente", "ID Reserva", "Fecha Inicio", "Fecha Fin", "ID Establecimiento", "Articulos", "Total"};
                 break;
+            case 6:
+                valores2 = new ArrayList<>();
+                ArrayList<Usuario> usuarios = AuthRepo.getUsuarios();
+                for(Usuario u : usuarios) valores2.add(u.getDataArray());
+                titulos2 = new String[]{"DNI", "Nombre", "Primer Apellido", "Segundo Apellido", "Sexo", "Privilegio"};
+                break;
             case 0:
                 start();
                 return;
         }
 
         MenuUtil.generateTable(titulos2, valores2);
+        if (c==5) mostrarIngresosTotales();
         if (c == 1) menuReservas();
         continuar();
     }
@@ -78,6 +87,7 @@ public class AdminMenu {
             | 3. Clientes habituales         |
             | 4. Número de clientes          |
             | 5. Dinero ingresado            |
+            | 6. Mostrar todos los clientes  |
             | 0. Volver                      |
             +--------------------------------+
             """);
@@ -94,5 +104,11 @@ public class AdminMenu {
 
         for(ArticuloReserva a : articulos) valoresArticulo.add(a.getDataArray(0));
         MenuUtil.generateTable(titulosArticulos, valoresArticulo);
+    }
+
+    private void mostrarIngresosTotales(){
+        int total = EstadisticasRepo.getIngresosTotales();
+        System.out.println("\033[F\r" + "| Ingresos totales: " + total + "\u20ac" + " |");
+        System.out.println("+" + "-".repeat(21 + (total+"").length()) + "+");
     }
 }

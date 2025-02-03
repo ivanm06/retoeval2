@@ -2,6 +2,7 @@ package me.ivanmart.plaiaundi.Menus;
 
 import me.ivanmart.plaiaundi.Database.ArticuloRepo;
 import me.ivanmart.plaiaundi.Database.EstablecimientoRepo;
+import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 import me.ivanmart.plaiaundi.Model.Articulo;
 import me.ivanmart.plaiaundi.Model.ArticuloReserva;
 import me.ivanmart.plaiaundi.Model.Cesta;
@@ -44,29 +45,32 @@ public class ClientMenu {
 
         int c = MenuUtil.getInt();
         while (c < 0 || c > 3) c = MenuUtil.getInt("[Error] Selecciona un artículo válido.");
+        if (c == 0) return true;
+
+        TipoArticulo[] tipos = {TipoArticulo.SKI, TipoArticulo.SNOWBOARD, TipoArticulo.ACCESORIO};
+        TipoArticulo tipo = tipos[c-1];
 
         // Inicializar listas.
         ArrayList<Articulo> articulos = new ArrayList<>();
         String[] titulos = new String[]{};
 
         // Generar títulos en base al tipo de articulo seleccionado.
-        switch (c){
-            case 1:
+        switch (tipo){
+            case TipoArticulo.SKI:
                 articulos = ArticuloRepo.getSkis(establecimiento.getId());
                 titulos = new String[]{"ID", "Nombre", "Descripcion", "Talla", "Modalidad", "Nivel", "Precio/Dia", "Stock"};
                 break;
-            case 2:
+            case TipoArticulo.SNOWBOARD:
                 articulos = ArticuloRepo.getSnowboards(establecimiento.getId());
                 titulos = new String[]{"ID", "Nombre", "Descripcion", "Talla", "Modalidad", "Precio/Dia", "Stock"};
                 break;
-            case 3:
+            case TipoArticulo.ACCESORIO:
                 articulos = ArticuloRepo.getAccesorios(establecimiento.getId());
                 titulos = new String[]{"ID", "Nombre", "Descripcion", "Talla", "Tipo", "Precio/Dia", "Stock"};
                 break;
-            case 0:
-                return true;
         }
 
+        // Verificar si hay artículos de ese tipo en el establecimiento.
         if (articulos.isEmpty()){
             System.out.println("[Info] No hay artículos de este tipo.");
             return false;
@@ -83,6 +87,7 @@ public class ClientMenu {
                 dataArray[dataArray.length-1] = "Fuera de Stock";
                 articulosFS++;
             }else dataArray[dataArray.length-1] = stock + " en stock";
+
             valores.add(dataArray);
         }
         MenuUtil.generateTable(titulos, valores);
@@ -95,7 +100,7 @@ public class ClientMenu {
 
         int a = MenuUtil.getInt("Selecciona el id del articulo a reservar. (0 para ir atrás.)");
 
-        // El id del artículo no puede ser negativo y tiene que estár en ese establecimiento
+        // El id del artículo no puede ser negativo y tiene que estár en ese establecimiento.
         while (a < 0 || (!establecimiento.containsArticulo(a) && a != 0)) a = MenuUtil.getInt("[Error] Selecciona un artículo válido.");
         if (a == 0) return false;
 
@@ -108,13 +113,27 @@ public class ClientMenu {
         int cantidad = MenuUtil.getInt("Cuantos quieres?");
         while (cantidad <= 0) cantidad = MenuUtil.getInt("[Error] La cantidad tiene que ser un número entero positivo.");
 
-        // El valor de la cantidad no puede ser negativo ni mayor al stock del articulo
+        // El valor de la cantidad no puede ser negativo ni mayor al stock del articulo.
         while (cantidad < 0 || cantidad > stock) cantidad = MenuUtil.getInt("[Error] No hay suficientes artículos en stock.");
         if (cantidad == 0) return false;
 
         System.out.printf("[Info] %d articulos añadidos a la cesta.%n", cantidad);
         establecimiento.setPending(a, cantidad);
-        Cesta.addToCesta(new ArticuloReserva(a, cantidad));
+
+        // Buscar información del artículo y añadir a la cesta.
+        for (Articulo art : articulos){
+            if (art.getId() == a){
+                Cesta.addToCesta(new ArticuloReserva(
+                        art.getId(),
+                        art.getNombre(),
+                        art.getDescripcion(),
+                        art.getPrecio(),
+                        art.getTalla(),
+                        cantidad,
+                        art.getTipo()));
+                break;
+            }
+        }
         return false;
     }
 

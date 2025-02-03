@@ -1,6 +1,7 @@
 package me.ivanmart.plaiaundi.Model;
 
 import me.ivanmart.plaiaundi.Enums.Talla;
+import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 
 public class ArticuloReserva extends Articulo {
     private int cantidad;
@@ -10,10 +11,11 @@ public class ArticuloReserva extends Articulo {
         this.cantidad = cantidad;
     }
 
-    public ArticuloReserva(int id, String nombre, String descripcion, int precio, Talla talla, int cantidad) {
-        super(id, nombre, descripcion, precio, talla);
+    public ArticuloReserva(int id, String nombre, String descripcion, int precio, Talla talla, int cantidad, TipoArticulo tipo) {
+        super(id, nombre, descripcion, precio, talla, tipo);
         this.cantidad = cantidad;
     }
+
 
     public int getCantidad() {
         return cantidad;

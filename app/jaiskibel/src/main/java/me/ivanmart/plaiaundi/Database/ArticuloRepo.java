@@ -3,6 +3,7 @@ package me.ivanmart.plaiaundi.Database;
 import me.ivanmart.plaiaundi.Enums.Modalidad;
 import me.ivanmart.plaiaundi.Enums.Nivel;
 import me.ivanmart.plaiaundi.Enums.Talla;
+import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
 import me.ivanmart.plaiaundi.Model.Accesorio;
 import me.ivanmart.plaiaundi.Model.Articulo;
@@ -33,7 +34,8 @@ public class ArticuloRepo {
                     rs.getInt("precio"),
                     MenuUtil.toEnum(Talla.class, rs.getString("talla"), Talla.M),
                     MenuUtil.toEnum(Modalidad.class, rs.getString("modalidad"), Modalidad.PISTA),
-                    MenuUtil.toEnum(Nivel.class, rs.getString("nivel"), Nivel.PRINCIPIANTE)
+                    MenuUtil.toEnum(Nivel.class, rs.getString("nivel"), Nivel.PRINCIPIANTE),
+                    TipoArticulo.SKI
             ));
             return articulos;
         }catch (SQLException e){
@@ -57,7 +59,8 @@ public class ArticuloRepo {
                     rs.getString("descripcion"),
                     rs.getInt("precio"),
                     MenuUtil.toEnum(Talla.class, rs.getString("talla"), Talla.M),
-                    MenuUtil.toEnum(Modalidad.class, rs.getString("modalidad"), Modalidad.PISTA)
+                    MenuUtil.toEnum(Modalidad.class, rs.getString("modalidad"), Modalidad.PISTA),
+                    TipoArticulo.SNOWBOARD
             ));
             return articulos;
         }catch (SQLException e){
@@ -81,7 +84,8 @@ public class ArticuloRepo {
                     rs.getString("descripcion"),
                     rs.getInt("precio"),
                     MenuUtil.toEnum(Talla.class, rs.getString("talla"), Talla.M),
-                    rs.getString("tipo")
+                    rs.getString("tipo"),
+                    TipoArticulo.ACCESORIO
             ));
             return articulos;
         }catch (SQLException e){

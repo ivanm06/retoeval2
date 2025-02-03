@@ -9,7 +9,7 @@ CREATE TABLE Usuario(
     apellido2 VARCHAR(30) NOT NULL,
     sexo ENUM("H","M"),
     contrasena VARCHAR(255) NOT NULL,
-    privilegio ENUM("Admin", "Cliente") NOT NULL,
+    privilegio ENUM("Admin", "Cliente") NOT NULL DEFAULT "Cliente",
     PRIMARY KEY (dni)
 ); 
 
@@ -18,6 +18,7 @@ INSERT INTO Usuario VALUES("12345678A", "Juan", "Pérez", "García", "H", "$2a$1
 INSERT INTO Usuario VALUES("23456789B", "María", "López", "Fernández", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
 INSERT INTO Usuario VALUES("34567890C", "Pedro", "Sánchez", "Martín", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
 INSERT INTO Usuario VALUES("45678901D", "Laura", "García", "Rodríguez", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
+INSERT INTO Usuario VALUES("49580251W", "Ivan", "Martin", "Rivas", "H", "$2a$10$xCOMkdedEz04R86kNN.MK.HK55XADgb0CeiH3XWq5l0Yd6.EOV72e", "Admin");
 
 CREATE TABLE Establecimiento(
 	id SMALLINT AUTO_INCREMENT,
@@ -43,10 +44,10 @@ CREATE TABLE Reserva(
     CHECK(fechaFin>=fechaInicio)
 ); 
 
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("12345678A", 1,"2025-01-01", "2025-12-31");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("23456789B", 1,"2025-01-15", "2025-06-15");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("34567890C", 2,"2025-02-01", "2025-08-01");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("45678901D", 4,"2025-03-10", "2025-09-10");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("12345678A", 1,"2025-01-01", "2025-01-05");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("23456789B", 1,"2025-01-20", "2025-01-23");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("34567890C", 2,"2025-02-01", "2025-02-06");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("45678901D", 4,"2025-03-10", "2025-03-11");
 
 CREATE TABLE Articulo(
 	id SMALLINT AUTO_INCREMENT,
@@ -57,16 +58,16 @@ CREATE TABLE Articulo(
     PRIMARY KEY (id)
 ); 
 
-INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Esquís All Mountain", "Esquís versátiles ideales para todo tipo de terrenos y condiciones de nieve.", "M", 35);
-INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Tabla de Snowboard Freestyle", "Snowboard diseñada para saltos y trucos en el parque de nieve, con un diseño más flexible.", "L", 45);
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Esquís All Mountain", "Esquís versátiles ideales para todo tipo de terrenos y condiciones de nieve.", "M", 20);
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Tabla de Snowboard Freestyle", "Snowboard diseñada para saltos y trucos en el parque de nieve, con un diseño más flexible.", "L", 25);
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Botas de Esquí Rápidas", "Botas de esquí de alta calidad con cierre rápido y ajuste perfecto para mayor comodidad.", "S", 8);
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Chaqueta de Esquí Impermeable", "Chaqueta de esquí con aislamiento térmico y tecnología impermeable, ideal para condiciones frías y mojadas.", "XL", 10);
-INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Funda para Esquís", "Funda de protección para esquís, ideal para el transporte y almacenamiento, fabricada en material resistente.", "M", 5);
-INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Cinta para Gafas de Esquí", "Cinta ajustable para sujetar las gafas de esquí, cómoda y con diseño antideslizante.", "S", 3);
-INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Cadenas para Neumáticos", "Cadenas para neumáticos de coche, ideales para circular con seguridad en carreteras nevadas o heladas.", "M", 13);
-INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Bolsa Térmica para Botellas", "Bolsa térmica para mantener las bebidas calientes durante el día de esquí, con cierre hermético.", "L", 7);
-INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Esquís Racing", "Esquís  ideales para los mejores competidores", "XL", 85);
-INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Tabla de Snowboard Competición", "Snowboard diseñada para alcanzar mayor velocidad y maniobraridad.", "L", 75);
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Funda para Esquís", "Funda de protección para esquís, ideal para el transporte y almacenamiento, fabricada en material resistente.", "M", 4);
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Cinta para Gafas de Esquí", "Cinta ajustable para sujetar las gafas de esquí, cómoda y con diseño antideslizante.", "S", 2);
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Cadenas para Neumáticos", "Cadenas para neumáticos de coche, ideales para circular con seguridad en carreteras nevadas o heladas.", "M", 8);
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Bolsa Térmica para Botellas", "Bolsa térmica para mantener las bebidas calientes durante el día de esquí, con cierre hermético.", "L", 5);
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Esquís Racing", "Esquís  ideales para los mejores competidores", "XL", 40);
+INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Tabla de Snowboard Competición", "Snowboard diseñada para alcanzar mayor velocidad y maniobraridad.", "L", 35);
 
 CREATE TABLE Ski(
 	idArticulo SMALLINT NOT NULL,
@@ -157,30 +158,30 @@ INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(3, 10, 20
 -- Extra
 
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES
-("Guantes térmicos", "Guantes con aislamiento térmico y resistencia al agua para el esquí.", "M", 12),
-("Casco de esquí", "Casco ligero y resistente para mayor seguridad en la nieve.", "L", 30),
-("Gafas de esquí antivaho", "Gafas con tecnología antivaho y protección UV.", "S", 20),
-("Pantalones de esquí", "Pantalones impermeables y transpirables para esquiar con comodidad.", "XL", 25),
-("Calcetines térmicos", "Calcetines con tecnología de retención de calor para temperaturas extremas.", "M", 8),
-("Mochila para nieve", "Mochila con compartimentos especiales para equipo de esquí y snowboard.", "L", 18),
-("Rodilleras de protección", "Rodilleras acolchonadas para amortiguar impactos en la nieve.", "M", 10),
-("Camiseta térmica", "Camiseta de manga larga con tejido térmico para mantener el calor corporal.", "S", 15),
-("Polainas para nieve", "Polainas impermeables para evitar la entrada de nieve en las botas.", "M", 9),
-("Cera para esquís", "Cera especial para mejorar el deslizamiento de los esquís en la nieve.", "S", 5),
-("Bastones de esquí", "Bastones ligeros y ergonómicos para mejorar la estabilidad en el esquí.", "M", 22),
-("Protector de espalda", "Protector con diseño ergonómico para prevenir lesiones en caídas.", "L", 35),
-("Botella térmica", "Botella de acero inoxidable con aislamiento térmico para bebidas calientes.", "S", 12),
-("Bufanda polar", "Bufanda suave y térmica para protegerse del frío en la nieve.", "M", 7),
-("Mono de esquí", "Traje completo impermeable y térmico para protección máxima en la nieve.", "XL", 55),
-("Crampones para nieve", "Crampones antideslizantes para caminar con seguridad en superficies heladas.", "L", 20),
-("Gorro de lana", "Gorro ajustado y térmico para mantener la cabeza caliente.", "M", 6),
-("Forro polar", "Chaqueta con forro polar para mayor abrigo en condiciones de frío extremo.", "XL", 28),
-("Linterna frontal", "Linterna con ajuste para la cabeza, ideal para condiciones de poca luz.", "S", 14),
-("Cinturón portaobjetos", "Cinturón con bolsillos para llevar objetos esenciales en la nieve.", "M", 10),
-("Esquís Freeride", "Esquís diseñados para máxima flotabilidad en nieve profunda.", "L", 90),
-("Esquís de travesía", "Esquís ligeros para subir montañas con pieles de foca y descender con control.", "M", 85),
-("Snowboard All-Mountain", "Tabla versátil para todo tipo de terrenos y estilos de conducción.", "L", 80),
-("Snowboard Freeride", "Snowboard diseñado para nieve polvo y terrenos escarpados.", "XL", 95);
+("Guantes térmicos", "Guantes con aislamiento térmico y resistencia al agua para el esquí.", "M", 5),
+("Casco de esquí", "Casco ligero y resistente para mayor seguridad en la nieve.", "L", 12),
+("Gafas de esquí antivaho", "Gafas con tecnología antivaho y protección UV.", "S", 8),
+("Pantalones de esquí", "Pantalones impermeables y transpirables para esquiar con comodidad.", "XL", 15),
+("Calcetines térmicos", "Calcetines con tecnología de retención de calor para temperaturas extremas.", "M", 4),
+("Mochila para nieve", "Mochila con compartimentos especiales para equipo de esquí y snowboard.", "L", 10),
+("Rodilleras de protección", "Rodilleras acolchonadas para amortiguar impactos en la nieve.", "M", 6),
+("Camiseta térmica", "Camiseta de manga larga con tejido térmico para mantener el calor corporal.", "S", 7),
+("Polainas para nieve", "Polainas impermeables para evitar la entrada de nieve en las botas.", "M", 5),
+("Cera para esquís", "Cera especial para mejorar el deslizamiento de los esquís en la nieve.", "S", 3),
+("Bastones de esquí", "Bastones ligeros y ergonómicos para mejorar la estabilidad en el esquí.", "M", 10),
+("Protector de espalda", "Protector con diseño ergonómico para prevenir lesiones en caídas.", "L", 15),
+("Botella térmica", "Botella de acero inoxidable con aislamiento térmico para bebidas calientes.", "S", 6),
+("Bufanda polar", "Bufanda suave y térmica para protegerse del frío en la nieve.", "M", 3),
+("Mono de esquí", "Traje completo impermeable y térmico para protección máxima en la nieve.", "XL", 25),
+("Crampones para nieve", "Crampones antideslizantes para caminar con seguridad en superficies heladas.", "L", 10),
+("Gorro de lana", "Gorro ajustado y térmico para mantener la cabeza caliente.", "M", 3),
+("Forro polar", "Chaqueta con forro polar para mayor abrigo en condiciones de frío extremo.", "XL", 12),
+("Linterna frontal", "Linterna con ajuste para la cabeza, ideal para condiciones de poca luz.", "S", 6),
+("Cinturón portaobjetos", "Cinturón con bolsillos para llevar objetos esenciales en la nieve.", "M", 5),
+("Esquís Freeride", "Esquís diseñados para máxima flotabilidad en nieve profunda.", "L", 35),
+("Esquís de travesía", "Esquís ligeros para subir montañas con pieles de foca y descender con control.", "M", 30),
+("Snowboard All-Mountain", "Tabla versátil para todo tipo de terrenos y estilos de conducción.", "L", 28),
+("Snowboard Freeride", "Snowboard diseñado para nieve polvo y terrenos escarpados.", "XL", 20);
 
 -- Inserción de accesorios en la tabla Accesorios
 INSERT INTO Accesorios (idArticulo, tipo) VALUES

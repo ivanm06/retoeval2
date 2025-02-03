@@ -31,13 +31,14 @@ public class AuthMenu {
         String dni = MenuUtil.getString("Inserta tu DNI.");
         while (!MenuUtil.checkDNI(dni)) dni = MenuUtil.getString("[Info] Inserta un DNI valido.");
 
-        String pass = Password.read("Inserta tu contraseña.");
+        String pass = Password.read("Inserta tu contraseña:");
         if (!AuthRepo.checkPassword(dni, pass)){ // Verificar contraseña.
             System.out.println("[Error] Credenciales inválidas.");
             start();
         }else{
             System.out.println("[Info] Sesión iniciada.");
             usuario = AuthRepo.getUsuario(dni);
+            System.out.printf("[Info] Bienvenido %s %s %s.%n", usuario.getNombre(), usuario.getApellido1(), usuario.getApellido2());
         }
     }
 
@@ -50,7 +51,7 @@ public class AuthMenu {
         String apellido1 = MenuUtil.getString("Inserta tu primer apellido.");
         String apellido2 = MenuUtil.getString("Inserta tu segundo apellido.");
         Sexo sexo = MenuUtil.getEnum(Sexo.class, "Inserta tu sexo. (H/M)");
-        String pass = Password.read("Inserta tu contraseña.");
+        String pass = Password.read("Inserta tu contraseña:");
 
         // Registrar usuario
         boolean registro = AuthRepo.registrar(new Usuario(dni, nombre, apellido1, apellido2, sexo, Privilegio.CLIENTE), pass); // Agregar el usuario

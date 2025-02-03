@@ -69,7 +69,7 @@ class Eraser implements Runnable {
      * @param prompt mensaje mostrado al usuario.
      */
     public Eraser(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt + "  ");
     }
 
     /**

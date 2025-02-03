@@ -1,6 +1,7 @@
 package me.ivanmart.plaiaundi.Model;
 
 import me.ivanmart.plaiaundi.Enums.Talla;
+import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 
 public class Articulo {
     // Atributos
@@ -9,14 +10,16 @@ public class Articulo {
     private String descripcion;
     private int precio;
     private Talla talla;
+    private TipoArticulo tipo;
 
     // Constructor
-    public Articulo(int id, String nombre, String descripcion, int precio, Talla talla) {
+    public Articulo(int id, String nombre, String descripcion, int precio, Talla talla, TipoArticulo tipo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.talla = talla;
+        this.tipo = tipo;
     }
 
     public Articulo(int id) {
@@ -44,6 +47,9 @@ public class Articulo {
         return talla;
     }
 
+    public TipoArticulo getTipo() {
+        return tipo;
+    }
 
     // Metodos
 

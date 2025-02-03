@@ -74,14 +74,25 @@ public class MenuUtil {
      */
     public static int getInt() {
         int val;
-        try{
+        try {
             val = sc.nextInt();
-        }catch (Exception _){
+        } catch (Exception _) {
             // Vaciar el buffer.
             sc.nextLine();
             return getInt("[Error] Inserta número positivo.");
         }
         return val;
+    }
+
+    /**
+     * Le pide al usuario un condicional (true/false)
+     *
+     * @param cmdTrue Texto identificado como {@code true}
+     * @return {@code boolean}- true si el texto coincide, false si no coincide.
+     */
+    public static boolean getBoolean(String cmdTrue, String txt) {
+        String cmd = getString(txt).toLowerCase();
+        return cmd.equals(cmdTrue);
     }
 
     /**
@@ -169,6 +180,6 @@ public class MenuUtil {
         inner += bar;
 
         // Printea la tabla en la terminal.
-        System.out.println(inner);
+        System.out.printf("%n%s", inner);
     }
 }

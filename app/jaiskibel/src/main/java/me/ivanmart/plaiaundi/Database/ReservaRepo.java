@@ -1,10 +1,12 @@
 package me.ivanmart.plaiaundi.Database;
 
 import me.ivanmart.plaiaundi.Enums.Talla;
+import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 import me.ivanmart.plaiaundi.Menus.AuthMenu;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
 import me.ivanmart.plaiaundi.Model.*;
 
+import java.awt.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,7 +58,7 @@ public class ReservaRepo {
      * @return {@link ArrayList}<{@link ArticuloReserva}>
      * */
     public static ArrayList<ArticuloReserva> getArticulosFromReserva(int idReserva){
-        String query = "select a.id, a.nombre, a.descripcion, a.precio, a.talla, ar.cantidad from articuloReservado ar join Articulo a on a.id = ar.idArticulo join Reserva r on r.id = ar.idReserva join Establecimiento e on e.id = r.idEstablecimiento where r.id = ?";
+        String query = "select a.id, a.nombre, a.descripcion, a.precio, a.talla, ar.cantidad, case when sn.idArticulo is not null then 'snowboard' when sk.idArticulo is not null then 'ski' else 'accesorio' end as tipo from articuloReservado ar join Articulo a on a.id = ar.idArticulo join Reserva r on r.id = ar.idReserva join Establecimiento e on e.id = r.idEstablecimiento left join Ski sk using(idArticulo) left join Snowboard sn using(idArticulo) where r.id = ?";
         ArrayList<ArticuloReserva> articulos = new ArrayList<>();
 
         try{
@@ -71,7 +73,8 @@ public class ReservaRepo {
                         set.getString("descripcion"),
                         set.getInt("precio"),
                         MenuUtil.toEnum(Talla.class, set.getString("talla"), Talla.M),
-                        set.getInt("cantidad")
+                        set.getInt("cantidad"),
+                        MenuUtil.toEnum(TipoArticulo.class, set.getString("tipo"), TipoArticulo.ACCESORIO)
                 );
                 articulos.add(ar);
             }

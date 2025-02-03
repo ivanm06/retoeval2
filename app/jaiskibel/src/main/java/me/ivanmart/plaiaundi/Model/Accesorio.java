@@ -1,12 +1,13 @@
 package me.ivanmart.plaiaundi.Model;
 
 import me.ivanmart.plaiaundi.Enums.Talla;
+import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 
 public class Accesorio extends Articulo{
     private final String tipo;
 
-    public Accesorio(int id, String nombre, String descripcion, int precio, Talla talla, String tipo) {
-        super(id, nombre, descripcion, precio, talla);
+    public Accesorio(int id, String nombre, String descripcion, int precio, Talla talla, String tipo, TipoArticulo tipoArticulo) {
+        super(id, nombre, descripcion, precio, talla, tipoArticulo);
         this.tipo = tipo;
     }
 

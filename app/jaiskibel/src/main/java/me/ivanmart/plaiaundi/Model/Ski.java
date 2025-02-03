@@ -3,6 +3,7 @@ package me.ivanmart.plaiaundi.Model;
 import me.ivanmart.plaiaundi.Enums.Modalidad;
 import me.ivanmart.plaiaundi.Enums.Nivel;
 import me.ivanmart.plaiaundi.Enums.Talla;
+import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 
 public class Ski extends Articulo{
     // Atributos
@@ -10,8 +11,8 @@ public class Ski extends Articulo{
     private final Nivel nivel;
 
     // Constructor
-    public Ski(int id, String nombre, String descripcion, int precio, Talla talla, Modalidad modalidad, Nivel nivel) {
-        super(id, nombre, descripcion, precio, talla);
+    public Ski(int id, String nombre, String descripcion, int precio, Talla talla, Modalidad modalidad, Nivel nivel, TipoArticulo tipo) {
+        super(id, nombre, descripcion, precio, talla, tipo);
         this.nivel = nivel;
         this.modalidad = modalidad;
     }
