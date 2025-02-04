@@ -77,7 +77,6 @@ public class AdminMenu {
         continuar();
     }
 
-
     private void showMenu(){
         System.out.println("""
             +--------------------------------+
@@ -94,7 +93,7 @@ public class AdminMenu {
     }
     private void menuReservas(){
         int r = MenuUtil.getInt("Inserta el id de la reserva a ver. (0 para volver atrás)");
-        while (r < 0) r = MenuUtil.getInt("Valor inválido.");
+        while (r < 0) r = MenuUtil.getInt("[Error] inserta un id válido.");
         if (r == 0) return;
 
         ArrayList<ArticuloReserva> articulos = ReservaRepo.getArticulosFromReserva(r);

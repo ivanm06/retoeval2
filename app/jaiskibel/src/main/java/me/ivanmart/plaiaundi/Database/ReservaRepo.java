@@ -6,11 +6,7 @@ import me.ivanmart.plaiaundi.Menus.AuthMenu;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
 import me.ivanmart.plaiaundi.Model.*;
 
-import java.awt.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ReservaRepo {
@@ -83,5 +79,36 @@ public class ReservaRepo {
             System.out.println("[Error] " + e.getMessage());
         }
         return articulos;
+    }
+
+
+    /**
+     * Devuelve las reservas de un cliente
+     *
+     * @param dni Dni del usuario
+     * @return {@link ArrayList}<{@link Reserva}>
+     * */
+
+    public static ArrayList<Reserva> getReservasDeCliente(String dni){
+        String query = "select r.id, r.fechaInicio, r.fechaFin, e.id as idEstablecimiento, e.nombre as establecimiento, sum(ar.cantidad) as articulos, (sum(a.precio) * timestampdiff(DAY, r.fechaInicio, r.fechaFin)) as precio from Reserva r join Establecimiento e on e.id = r.idEstablecimiento join articuloReservado ar on r.id = ar.idReserva join Articulo a on ar.idArticulo = a.id where r.dniUsuario = ? group by r.id order by precio desc;";
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        try{
+            PreparedStatement statement = DBConnector.con.prepareStatement(query);
+            statement.setString(1, dni);
+            statement.execute();
+            ResultSet set = statement.getResultSet();
+            while (set.next()) reservas.add(new Reserva(
+                    set.getInt("id"),
+                    set.getTimestamp("fechaInicio"),
+                    set.getTimestamp("fechaFin"),
+                    set.getInt("idEstablecimiento"),
+                    set.getString("establecimiento"),
+                    set.getInt("articulos"),
+                    set.getInt("precio")
+            ));
+        }catch (SQLException e){
+            System.out.printf("[Error] %s%n", e.getMessage());
+        }
+        return reservas;
     }
 }

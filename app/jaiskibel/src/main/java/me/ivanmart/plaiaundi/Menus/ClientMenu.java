@@ -2,11 +2,9 @@ package me.ivanmart.plaiaundi.Menus;
 
 import me.ivanmart.plaiaundi.Database.ArticuloRepo;
 import me.ivanmart.plaiaundi.Database.EstablecimientoRepo;
+import me.ivanmart.plaiaundi.Database.ReservaRepo;
 import me.ivanmart.plaiaundi.Enums.TipoArticulo;
-import me.ivanmart.plaiaundi.Model.Articulo;
-import me.ivanmart.plaiaundi.Model.ArticuloReserva;
-import me.ivanmart.plaiaundi.Model.Cesta;
-import me.ivanmart.plaiaundi.Model.Establecimiento;
+import me.ivanmart.plaiaundi.Model.*;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
 
 import java.util.ArrayList;
@@ -15,12 +13,61 @@ import java.util.HashMap;
 public class ClientMenu {
 
     public void start(){
-        // Recuperar lista de establecimientos de la base de datos.
-        ArrayList<Establecimiento> establecimientos = EstablecimientoRepo.getEstablecimientos();
-        mostrarMenuEstablecimiento(establecimientos);
+        System.out.println("""
+                +---------------------+
+                |  ¿Qué desea hacer?  |
+                | 1. Ver mis reservas |
+                | 2. Reservar         |
+                | 0. Salir            |
+                +---------------------+\n
+                """);
 
         int c = MenuUtil.getInt();
-        while (c <= 0 || c > establecimientos.size()) c = MenuUtil.getInt("[Error] Selecciona un establecimiento válido.");
+        while (c < 0 || c > 2) c = MenuUtil.getInt("[Error] Inserta una opción válida.");
+        if (c == 0) return;
+
+        switch (c){
+            case 1:
+                mostrarReservas();
+                break;
+            case 2:
+                menuReserva();
+                break;
+        }
+        start();
+    }
+
+    private void mostrarReservas(){
+        String[] titulos = {"ID", "Fecha Inicio", "Fecha Fin", "Establecimiento", "Articulos", "A Pagar"};
+
+        ArrayList<Reserva> reservas = ReservaRepo.getReservasDeCliente(AuthMenu.getUsuario().getDNI());
+        ArrayList<String[]> valores = new ArrayList<>();
+        for (Reserva r : reservas) valores.add(r.getDataArray());
+        MenuUtil.generateTable(titulos, valores);
+
+        // Ver Artículos de la reserva.
+        int r = MenuUtil.getInt("Inserta el id de la reserva a ver. (0 para volver atrás)");
+        while (r < 0) r = MenuUtil.getInt("[Error] inserta un id válido.");
+        if (r == 0) return;
+
+        ArrayList<ArticuloReserva> articulos = ReservaRepo.getArticulosFromReserva(r);
+
+        String[] titulosArticulos = new String[]{"ID", "Nombre", "Descripcion", "Talla", "Precio", "Cantidad"};
+        ArrayList<String[]> valoresArticulo = new ArrayList<>();
+
+        for(ArticuloReserva a : articulos) valoresArticulo.add(a.getDataArray(0));
+        MenuUtil.generateTable(titulosArticulos, valoresArticulo);
+
+    }
+
+    private void menuReserva(){
+        // Recuperar lista de establecimientos de la base de datos.
+        ArrayList<Establecimiento> establecimientos = EstablecimientoRepo.getEstablecimientos();
+        mostrarEstablecimientos(establecimientos);
+
+        int c = MenuUtil.getInt();
+        while (c < 0 || c > establecimientos.size()) c = MenuUtil.getInt("[Error] Selecciona un establecimiento válido.");
+        if (c == 0) return;
         Establecimiento establecimiento = establecimientos.get(c-1);
         Cesta.setEstablecimiento(establecimiento);
 
@@ -28,11 +75,11 @@ public class ClientMenu {
         HashMap<Integer, Integer> stock = ArticuloRepo.getStock(establecimiento.getId());
         establecimiento.setStock(stock);
 
-        boolean finalizar = menuReserva(establecimiento);
-        while (!finalizar) finalizar = menuReserva(establecimiento);
+        boolean finalizar = menuEstablecimiento(establecimiento);
+        while (!finalizar) finalizar = menuEstablecimiento(establecimiento);
     }
 
-    private boolean menuReserva(Establecimiento establecimiento){
+    private boolean menuEstablecimiento(Establecimiento establecimiento){
         System.out.println("""
                 +-------------------------------+
                 | Qué tipo de artículo quieres? |
@@ -40,7 +87,7 @@ public class ClientMenu {
                 | 2. Snowboard                  |
                 | 3. Accesorios                 |
                 | 0. Finalizar                  |
-                +-------------------------------+
+                +-------------------------------+\n
                 """);
 
         int c = MenuUtil.getInt();
@@ -137,7 +184,7 @@ public class ClientMenu {
         return false;
     }
 
-    private void mostrarMenuEstablecimiento(ArrayList<Establecimiento> establecimientos){
+    private void mostrarEstablecimientos(ArrayList<Establecimiento> establecimientos){
         if (establecimientos.isEmpty()){
             System.out.println("[Info] No hay establecimientos disponibles.");
             return;
@@ -148,7 +195,7 @@ public class ClientMenu {
             String nombre = establecimientos.get(i).getNombre();
             inner += "| " + (i+1) + ". " + nombre + " ".repeat(base.length() - nombre.length() - 8) + " |\n";
         }
-        inner += base;
+        inner += "| 0. Atrás                                |\n" + base;
         System.out.println(inner);
     }
 }
