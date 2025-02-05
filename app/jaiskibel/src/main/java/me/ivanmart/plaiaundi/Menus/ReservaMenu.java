@@ -33,8 +33,8 @@ public class ReservaMenu {
         int precioTotal = 0;
         for (ArticuloReserva articulo : Cesta.getCesta()){
             String[] valor = articulo.getDataArray(1);
-            valor[valor.length-1] = String.valueOf(articulo.getTipo());
-            valor[valor.length-2] = String.valueOf(articulo.getCantidad());
+            valor[valor.length-1] = String.valueOf(articulo.getCantidad());
+            valor[valor.length-2] = String.valueOf(articulo.getTipo());
             valores.add(valor);
             precioTotal += articulo.getCantidad() * articulo.getPrecio();
         }
@@ -47,7 +47,7 @@ public class ReservaMenu {
     private void reservar(int dias){
         boolean res = ReservaRepo.reservar(Cesta.getCesta(), dias);
 
-        if (res) System.out.println("[Info] Se han reservado los artículos con éxito.");
+        if (res) System.out.println("[Info] Se han reservado los artículos con éxito.Gracias por contar con nosotros!");
         else System.out.println("[Error] Error al reservar los artículos.");
     }
 }

@@ -28,6 +28,21 @@ public class AuthMenu {
     }
 
     public void login(){
+        /*
+         * Insertar opción paravolver atras
+         * */
+        System.out.println("""
+                    +----------------------------+
+                    |  Quieres seguir adelante?  |
+                    | 1. Seguir                  |
+                    | 2. Vorlver atras           |
+                    +----------------------------+
+                    """);
+        int c = MenuUtil.getInt();
+        while (c != 1 && c != 2) c = MenuUtil.getInt("Inserta una opción válida.");
+        if (c != 1) start();
+
+        //Insertar DNI
         String dni = MenuUtil.getString("Inserta tu DNI.");
         while (!MenuUtil.checkDNI(dni)) dni = MenuUtil.getString("[Info] Inserta un DNI valido.");
 
@@ -43,6 +58,21 @@ public class AuthMenu {
     }
 
     public void register() {
+        /*
+         * Insertar opción paravolver atras
+         * */
+        System.out.println("""
+                    +----------------------------+
+                    |  Quieres seguir adelante?  |
+                    | 1. Seguir                  |
+                    | 2. Vorlver atras           |
+                    +----------------------------+
+                    """);
+        int c = MenuUtil.getInt();
+        while (c != 1 && c != 2) c = MenuUtil.getInt("Inserta una opción válida.");
+        if (c != 1) start();
+
+        //Insertar DNI
         String dni = MenuUtil.getString("Inserta tu DNI.");
         while (!MenuUtil.checkDNI(dni)) dni = MenuUtil.getString("Inserta un DNI valido.");
 
@@ -51,6 +81,10 @@ public class AuthMenu {
         String apellido1 = MenuUtil.getString("Inserta tu primer apellido.");
         String apellido2 = MenuUtil.getString("Inserta tu segundo apellido.");
         Sexo sexo = MenuUtil.getEnum(Sexo.class, "Inserta tu sexo. (H/M)");
+        /*
+         * Solucionar contraseña(Solo me funciona cuando copio y la pego, si la escribo no )
+         *
+         * */
         String pass = Password.read("Inserta tu contraseña:");
 
         // Registrar usuario

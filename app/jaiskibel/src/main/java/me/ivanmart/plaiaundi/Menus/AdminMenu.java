@@ -87,6 +87,8 @@ public class AdminMenu {
             | 4. Número de clientes          |
             | 5. Dinero ingresado            |
             | 6. Mostrar todos los clientes  |
+            | 7. Eliminar usuario            |
+            | 8. Anular Reserva              |
             | 0. Volver                      |
             +--------------------------------+
             """);
@@ -110,4 +112,10 @@ public class AdminMenu {
         System.out.println("\033[F\r" + "| Ingresos totales: " + total + "\u20ac" + " |");
         System.out.println("+" + "-".repeat(21 + (total+"").length()) + "+");
     }
+
+    /*
+     * Función Eliminar un usuario
+     *
+     * Función Anular Reserva
+     * */
 }
