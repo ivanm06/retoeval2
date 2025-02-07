@@ -9,6 +9,9 @@ import me.ivanmart.plaiaundi.Utils.MenuUtil;
 
 import java.util.ArrayList;
 
+import static me.ivanmart.plaiaundi.Database.AuthRepo.eliminarUsuario;
+import static me.ivanmart.plaiaundi.Database.ReservaRepo.anularReserva;
+
 public class AdminMenu {
 
     public void start(){
@@ -34,7 +37,7 @@ public class AdminMenu {
     private void continuar() {
         showMenu();
         int c = MenuUtil.getInt();
-        while (c < 0 || c > 6) c = MenuUtil.getInt("[Error] Valor inválido.");
+        while (c < 0 || c > 8) c = MenuUtil.getInt("[Error] Valor inválido.");
 
         ArrayList<String[]> valores2 = new ArrayList<>();
         String[] titulos2 = new String[]{};
@@ -65,6 +68,45 @@ public class AdminMenu {
                 ArrayList<Usuario> usuarios = AuthRepo.getUsuarios();
                 for(Usuario u : usuarios) valores2.add(u.getDataArray());
                 titulos2 = new String[]{"DNI", "Nombre", "Primer Apellido", "Segundo Apellido", "Sexo", "Privilegio"};
+                break;
+            case 7:
+                // Generar tabala
+                valores2 = new ArrayList<>();
+                ArrayList<Usuario> usuariosElim = AuthRepo.getUsuarios();
+                for (Usuario u : usuariosElim) {
+                    valores2.add(u.getDataArray());
+                }
+                titulos2 = new String[]{"DNI", "Nombre", "Primer Apellido", "Segundo Apellido", "Sexo", "Privilegio"};
+
+                // Mostrar la tabla solo cuando se entra en esta sección
+                MenuUtil.generateTable(titulos2, valores2);
+
+                // Solicitar el DNI del usuario a eliminar
+                String dni = obtenerDNIParaEliminar();
+
+                // Eliminar usuario si el DNI es válido y no es "0"
+                if (!dni.equals("0")) {
+                    eliminarUsuario(dni);  // Realiza la eliminación y no vuelve a mostrar la tabla
+                }
+                break;
+            case 8:
+                // Mostrar tabla de reservas
+                valores2 = EstadisticasRepo.getReservas();
+                titulos2 = new String[]{"ID", "Fecha Inicio", "Fecha Fin"};
+                MenuUtil.generateTable(titulos2, valores2);
+
+                // Solicitar el ID de la reserva a anular
+                int reservaId = MenuUtil.getInt("Introduce el ID de la reserva a anular. (0 para volver atrás)");
+                while (reservaId < 0) {
+                    reservaId = MenuUtil.getInt("[Error] Introduce un ID válido.");
+                }
+
+                // Si el usuario elige 0 volver atrás
+                if (reservaId == 0) {
+                   showMenu();
+                } else {
+                    anularReserva(reservaId);  // Realiza la anulación de la reserva
+                }
                 break;
             case 0:
                 start();
@@ -109,13 +151,25 @@ public class AdminMenu {
 
     private void mostrarIngresosTotales(){
         int total = EstadisticasRepo.getIngresosTotales();
-        System.out.println("\033[F\r" + "| Ingresos totales: " + total + "\u20ac" + " |");
+        System.out.println("\033[F\r" + "| Ingresos totales: " + total + "€€" + " |");
         System.out.println("+" + "-".repeat(21 + (total+"").length()) + "+");
     }
 
-    /*
-     * Función Eliminar un usuario
-     *
-     * Función Anular Reserva
-     * */
+    //Obtener DNI
+    private String obtenerDNIParaEliminar() {
+        String dni;
+        do {
+            dni = MenuUtil.getString("Introduce el DNI del Usuario a eliminar. (0 para volver atrás)");
+            if (dni.equals("0")) {
+                showMenu();  // Si el usuario quiere volver atrás, se regresa al menú principal
+                return dni;
+            }
+            if (dni.isEmpty() /* || !MenuUtil.checkDNI(dni) ---> si se quiere verificar que sea real*/ ) {
+                System.out.println("[Info] Inserta un DNI válido.");
+            }
+        } while (dni.isEmpty() /* || !MenuUtil.checkDNI(dni) ---> si se quiere verificar que sea real*/ );
+        return dni;
+    }
+
+
 }

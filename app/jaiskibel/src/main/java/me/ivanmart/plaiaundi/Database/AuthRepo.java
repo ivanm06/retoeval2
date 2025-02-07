@@ -89,4 +89,26 @@ public class AuthRepo {
         }
         return usuarios;
     }
+
+    public static void eliminarUsuario(String dni) {
+        String query = "DELETE FROM Usuario WHERE dni = ?";
+        try (PreparedStatement statement = DBConnector.con.prepareStatement(query)) {
+            // Establecer el parámetro del DNI
+            statement.setString(1, dni);
+
+            // Ejecutar la consulta
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("Usuario con DNI " + dni + " ha sido eliminado correctamente.");
+            } else {
+                if(!dni.equals("0")){
+                    System.out.println("[Info] No se encontró ningún usuario con el DNI " + dni);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.printf("[Error] Ha habido un problema con la base de datos: %s%n", e.getMessage());
+        }
+    }
+
 }

@@ -111,4 +111,21 @@ public class ReservaRepo {
         }
         return reservas;
     }
+
+    //Eliminar un reserva
+
+    public static void anularReserva(int reservaID) {
+        String query = "DELETE FROM Reserva WHERE id = ?;";
+        try {
+            PreparedStatement statement = DBConnector.con.prepareStatement(query);
+            statement.setString(1, String.valueOf(reservaID));
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.printf("[Error] Ha habido un problema con la base de datos: %s%n", e.getMessage());
+        }
+        System.out.println("Reserva con ID '" + reservaID + "' ha sido anulada correctamente.");
+
+
+    }
+
 }
