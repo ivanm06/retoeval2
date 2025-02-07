@@ -15,7 +15,7 @@ CONCAT(
                 WHEN sb.idArticulo IS NOT NULL THEN 'snowboard'
                 WHEN acc.idArticulo IS NOT NULL THEN 'accesorio'
             END, 
-            '</tipo>',
+            '</tipo>',	
             '<nombre>', a.nombre, '</nombre>',
             '<descripcion>', a.descripcion, '</descripcion>',
             '<talla>', a.talla, '</talla>',

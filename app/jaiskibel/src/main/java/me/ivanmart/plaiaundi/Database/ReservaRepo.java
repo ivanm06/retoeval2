@@ -11,17 +11,18 @@ import java.util.ArrayList;
 
 public class ReservaRepo {
 
-    public static boolean reservar(ArrayList<ArticuloReserva> articulos, int dias){
+    public static boolean reservar(ArrayList<ArticuloReserva> articulos, Fecha fecha){
         Usuario user = AuthMenu.getUsuario();
         int idReserva = 1;
 
         // Crea la reserva en la base de datos.
         try{
-            String query = "insert into Reserva (DNIUsuario, fechaInicio, fechaFin, idEstablecimiento) values (?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL ? DAY, ?);";
+            String query = "insert into Reserva (DNIUsuario, fechaInicio, fechaFin, idEstablecimiento) values (?, ?, ?, ?);";
             PreparedStatement statement = DBConnector.con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getDNI());
-            statement.setInt(2, dias);
-            statement.setInt(3, Cesta.getEstablecimiento().getId());
+            statement.setTimestamp(2, fecha.getInicio());
+            statement.setTimestamp(3, fecha.getFin());
+            statement.setInt(4, Cesta.getEstablecimiento().getId());
             statement.execute();
 
             ResultSet generatedKeys = statement.getGeneratedKeys();

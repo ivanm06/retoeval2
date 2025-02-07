@@ -61,6 +61,10 @@ public class ClientMenu {
     }
 
     private void menuReserva(){
+        // Pedir fecha de reserva
+        Fecha f = MenuUtil.getFecha("Para cuando quieres reservar? (YYYY-MM-DD)", "Cuando quieres terminar la reserva? (YYYY-MM-DD)");
+        Cesta.setFecha(f);
+
         // Recuperar lista de establecimientos de la base de datos.
         ArrayList<Establecimiento> establecimientos = EstablecimientoRepo.getEstablecimientos();
         mostrarEstablecimientos(establecimientos);
@@ -72,7 +76,7 @@ public class ClientMenu {
         Cesta.setEstablecimiento(establecimiento);
 
         // Mapa de articulos en stock en el establecimiento.
-        HashMap<Integer, Integer> stock = ArticuloRepo.getStock(establecimiento.getId());
+        HashMap<Integer, Integer> stock = ArticuloRepo.getStock(establecimiento.getId(), Cesta.getFecha());
         establecimiento.setStock(stock);
 
         boolean finalizar = menuEstablecimiento(establecimiento);

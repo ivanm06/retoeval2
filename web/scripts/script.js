@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const snow = document.getElementById("snow").checked;
         const accesorios = document.getElementById("acc").checked;
 
+        console.log(ski, snow, accesorios);
+
         // Verificar si el artículo cumple los filtros por cada artículo.
         document.querySelectorAll(".articulo").forEach(articulo => {
             const tipo = articulo.getAttribute("data-tipo");

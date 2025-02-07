@@ -81,11 +81,16 @@ public class AuthMenu {
         String apellido1 = MenuUtil.getString("Inserta tu primer apellido.");
         String apellido2 = MenuUtil.getString("Inserta tu segundo apellido.");
         Sexo sexo = MenuUtil.getEnum(Sexo.class, "Inserta tu sexo. (H/M)");
+<<<<<<< Updated upstream
         /*
          * Solucionar contraseña(Solo me funciona cuando copio y la pego, si la escribo no )
          *
          * */
+=======
+
+>>>>>>> Stashed changes
         String pass = Password.read("Inserta tu contraseña:");
+        while (!Password.validate(pass)) pass = Password.read("[Info] La contraseña debe de tener al menos 8 carácteres, entre los cuales una mayuscula, una minuscula y un número.\n");
 
         // Registrar usuario
         boolean registro = AuthRepo.registrar(new Usuario(dni, nombre, apellido1, apellido2, sexo, Privilegio.CLIENTE), pass); // Agregar el usuario

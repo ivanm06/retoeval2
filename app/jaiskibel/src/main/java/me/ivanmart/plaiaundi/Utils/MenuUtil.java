@@ -1,6 +1,9 @@
 package me.ivanmart.plaiaundi.Utils;
 
+import me.ivanmart.plaiaundi.Model.Fecha;
+
 import java.io.Console;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -132,6 +135,30 @@ public class MenuUtil {
         T en = toEnum(enumClass, str);
         if (en == null) return getEnum(enumClass, "[Error] Valor inválido. ");
         return en;
+    }
+
+    /**
+     * Le pide al usuario un timestampo con el siguiente frmato: (YYYY-MM-DD) (año-mes-dia)
+     *
+     * @return {@link Timestamp}
+     */
+    public static Timestamp getTimestamp(String txt) {
+        try {
+            return Timestamp.valueOf(getString(txt) + " 00:00:00");
+        } catch (Exception e) {
+            return getTimestamp("[Error] La fecha tiene que tener el siguiente formato: (YYYY-MM-DD)");
+        }
+    }
+
+    /**
+     * Le pide al usuario dos fechas "{@link Timestamp}" y devuelve un objeto {@link Fecha}.
+     *
+     * @return {@link Fecha} - Rango de Fecha (fechaInicio - fechaFin)
+     */
+    public static Fecha getFecha(String txt1, String txt2) {
+        Timestamp t1 = getTimestamp(txt1);
+        Timestamp t2 = getTimestamp(txt2);
+        return new Fecha(t1, t2);
     }
 
     /**

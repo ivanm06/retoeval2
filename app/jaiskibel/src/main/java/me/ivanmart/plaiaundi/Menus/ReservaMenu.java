@@ -3,6 +3,7 @@ package me.ivanmart.plaiaundi.Menus;
 import me.ivanmart.plaiaundi.Database.ReservaRepo;
 import me.ivanmart.plaiaundi.Model.ArticuloReserva;
 import me.ivanmart.plaiaundi.Model.Cesta;
+import me.ivanmart.plaiaundi.Model.Fecha;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
 
 import java.util.ArrayList;
@@ -15,18 +16,17 @@ public class ReservaMenu {
         }
 
         // Pedirle al usuario los dias de la reserva.
-        int dias = MenuUtil.getInt("Por cuantos dias quieres reservar? [1-30]");
-        while (dias < 0 || dias > 30) dias = MenuUtil.getInt("[Error] Selecciona un valor dentro del rango.");
+        Fecha fecha = Cesta.getFecha();
 
         // Mostrar tabla de reserva.
-        mostrarArticulos(dias);
+        mostrarArticulos(fecha);
 
         boolean reservar = MenuUtil.getBoolean("si", "Quieres Reservar los articulos seleccionados? (si/no)");
         // Reservar artículos
-        if (reservar) reservar(dias);
+        if (reservar) reservar(fecha);
     }
 
-    private void mostrarArticulos(int dias){
+    private void mostrarArticulos(Fecha fecha){
         String[] titulos = new String[]{"ID", "Nombre", "Descripcion", "Talla", "Precio/Dia", "Tipo", "Cantidad"};
         ArrayList<String[]> valores = new ArrayList<>();
 
@@ -40,12 +40,12 @@ public class ReservaMenu {
         }
 
         MenuUtil.generateTable(titulos, valores);
-        System.out.printf("| Precio Total: %s |%n", precioTotal * dias);
-        System.out.printf("+---------------%s-+%n", "-".repeat(String.valueOf(precioTotal*dias).length()));
+        System.out.printf("| Precio Total: %s |%n", precioTotal * fecha.getDias());
+        System.out.printf("+---------------%s-+%n", "-".repeat(String.valueOf(precioTotal*fecha.getDias()).length()));
     }
 
-    private void reservar(int dias){
-        boolean res = ReservaRepo.reservar(Cesta.getCesta(), dias);
+    private void reservar(Fecha fecha){
+        boolean res = ReservaRepo.reservar(Cesta.getCesta(), fecha);
 
         if (res) System.out.println("[Info] Se han reservado los artículos con éxito.Gracias por contar con nosotros!");
         else System.out.println("[Error] Error al reservar los artículos.");
