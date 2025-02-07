@@ -1,8 +1,8 @@
 package me.ivanmart.plaiaundi.Utils;
 
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Password {
@@ -36,20 +36,18 @@ public class Password {
      * @return {@link String} Contraseña insertada por el usuario.
      */
     public static String read(String text) {
-        String password;
-        System.out.println(isCMD());
-        if (isCMD()){
-            // Iniciar Ocultar texto en un hilo nuevo.
-            Eraser et = new Eraser(text);
-            Thread mask = new Thread(et);
-            mask.start();
-            // Recibir contraseña del usuario
-            password = MenuUtil.getString(text);
-            // Dejar de Ocultar.
-            et.stopMasking();
-        } else {
-            password = MenuUtil.getString(text);
-        }
+        boolean prod = true;
+        if (prod) return MenuUtil.getString(text); // En intellij, no funciona el Eraser.
+
+        String password = "";
+        Eraser td = new Eraser(text + " ");
+        Thread t = new Thread(td);
+        t.start();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            password = br.readLine();
+            td.maskEnd();
+        } catch (IOException ioe) {}
         return password;
     }
 
@@ -63,65 +61,27 @@ public class Password {
         return pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$");
     }
 
-    /**
-     * Verifica si se está usando el CMD de windows. (El Eraser solo funciona en el cmd)
-     *
-     * @return {@code boolean}
-     * */
-    private static boolean isCMD(){
-        try {
-            // Get current process ID (PID)
-            long pid = ProcessHandle.current().pid();
-
-            // Get parent process ID (PPID)
-            Process process = Runtime.getRuntime().exec("wmic process where ProcessId=" + pid + " get ParentProcessId");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            reader.readLine(); // Skip header
-            String parentPid = reader.readLine().trim(); // Read the parent PID
-
-            // Get parent process name
-            Process parentProcess = Runtime.getRuntime().exec("wmic process where ProcessId=" + parentPid + " get Name");
-            BufferedReader parentReader = new BufferedReader(new InputStreamReader(parentProcess.getInputStream()));
-            parentReader.readLine(); // Skip header
-            String parentName = parentReader.readLine().trim(); // Read parent process name
-            System.out.println(parentName);
-            boolean is = parentName.equalsIgnoreCase("cmd.exe");
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
 }
 
 class Eraser implements Runnable {
-    private boolean stop;
-
-    /**
-     * @param prompt mensaje mostrado al usuario.
-     */
+    private boolean end;
     public Eraser(String prompt) {
-        System.out.print(prompt + "  ");
+        System.out.print(prompt);
     }
-
-    /**
-     * Empezar a ocultar...
-     */
     public void run() {
-        stop = true;
-        while (stop) {
-            System.out.print("\010*"); // Mostrar asterisco reemplazando el anterior caracter por este.
+        end = true;
+        while (end) {
+            System.out.print("\010*");
             try {
-                Thread.sleep(1);
-            } catch (InterruptedException _) {
+                Thread.currentThread().sleep(1);
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
             }
         }
     }
 
-    /**
-     * Dejar de ocultar el texto.
-     */
-    public void stopMasking() {
-        this.stop = false;
+    public void maskEnd() {
+        this.end = false;
+
     }
 }
