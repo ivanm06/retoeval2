@@ -2,6 +2,9 @@ package me.ivanmart.plaiaundi.Utils;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class Password {
 
     /**
@@ -33,20 +36,20 @@ public class Password {
      * @return {@link String} Contraseña insertada por el usuario.
      */
     public static String read(String text) {
-        // Iniciar Ocultar texto en un hilo nuevo.
-        Eraser et = new Eraser(text);
-        Thread mask = new Thread(et);
-        mask.start();
-        // Recibir contraseña del usuario
-        String password = MenuUtil.getString();
-        // Dejar de Ocultar.
-        et.stopMasking();
-
-        // validar contraseña
-        if (!validate(password)) {
-            return read("[Info] La contraseña debe de tener al menos 8 carácteres, entre los cuales una mayuscula, una minuscula y un número.");
+        String password;
+        System.out.println(isCMD());
+        if (isCMD()){
+            // Iniciar Ocultar texto en un hilo nuevo.
+            Eraser et = new Eraser(text);
+            Thread mask = new Thread(et);
+            mask.start();
+            // Recibir contraseña del usuario
+            password = MenuUtil.getString(text);
+            // Dejar de Ocultar.
+            et.stopMasking();
+        } else {
+            password = MenuUtil.getString(text);
         }
-
         return password;
     }
 
@@ -56,8 +59,37 @@ public class Password {
      * @param pass Contraseña del usuario.
      * @return {@code boolean} true si es válida, false si no lo es.
      **/
-    private static boolean validate(String pass) {
+    public static boolean validate(String pass) {
         return pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+    }
+
+    /**
+     * Verifica si se está usando el CMD de windows. (El Eraser solo funciona en el cmd)
+     *
+     * @return {@code boolean}
+     * */
+    private static boolean isCMD(){
+        try {
+            // Get current process ID (PID)
+            long pid = ProcessHandle.current().pid();
+
+            // Get parent process ID (PPID)
+            Process process = Runtime.getRuntime().exec("wmic process where ProcessId=" + pid + " get ParentProcessId");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            reader.readLine(); // Skip header
+            String parentPid = reader.readLine().trim(); // Read the parent PID
+
+            // Get parent process name
+            Process parentProcess = Runtime.getRuntime().exec("wmic process where ProcessId=" + parentPid + " get Name");
+            BufferedReader parentReader = new BufferedReader(new InputStreamReader(parentProcess.getInputStream()));
+            parentReader.readLine(); // Skip header
+            String parentName = parentReader.readLine().trim(); // Read parent process name
+            System.out.println(parentName);
+            boolean is = parentName.equalsIgnoreCase("cmd.exe");
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
 }

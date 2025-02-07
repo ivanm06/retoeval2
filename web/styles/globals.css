@@ -47,19 +47,19 @@ header input:checked ~ .dp{
 }
 
 #contacto-bg{
-    background-image: url(/images/ski2.jpg);
+    background-image: url(/images/ski2.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 #landing-bg{
-    background-image: url(/images/ski3.jpg);
+    background-image: url(/images/ski3.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 #reserva-bg{
-    background-image: url(/images/ski4.jpg);
+    background-image: url(/images/ski4.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
