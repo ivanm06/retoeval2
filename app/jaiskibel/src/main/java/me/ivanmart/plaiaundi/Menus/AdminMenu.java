@@ -163,6 +163,7 @@ public class AdminMenu {
             if (dni.equals("0")) {
                 showMenu();  // Si el usuario quiere volver atrás, se regresa al menú principal
                 return dni;
+
             }
             if (dni.isEmpty() /* || !MenuUtil.checkDNI(dni) ---> si se quiere verificar que sea real*/ ) {
                 System.out.println("[Info] Inserta un DNI válido.");
