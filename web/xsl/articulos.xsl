@@ -62,7 +62,7 @@
                         <xsl:for-each select="//articulo">
                             <div class="articulo w-[40vh] h-fit bg-[#eee] min-h-100 rounded-md shadow-md cursor-pointer flex flex-col relative border border-black/5" data-tipo="{tipo}" data-e="{establecimiento}">
                                 <div class="overflow-hidden relative bg-[#fdfdfd] min-h-[50%] flex items-center justify-center rounded-md">
-                                    <img class="rounded-md" id="placeholder-{establecimiento}-{id}" src="../images/placeholder.webp" alt="Cargando imagen..."/>
+                                    <img class="rounded-md" id="placeholder-{establecimiento}-{id}" src="./images/placeholder.webp" alt="Cargando imagen..."/>
                                     <img decoding="async" class="hover:scale-105 transition-transform rounded-md bg-[#fdfdfd] w-auto max-h-[40vh] place-self-center" src="./images/articulos/articulo{id}.webp" alt="JaiSKIbel" onload="this.style.display='block'; document.getElementById('placeholder-{establecimiento}-{id}').style.display='none';" style="display: none;"/>
                                     <div class="absolute top-1 right-1 px-2 flex justify-start items-center w-full gap-2">
                                         <xsl:choose>

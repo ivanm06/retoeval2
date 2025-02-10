@@ -78,6 +78,7 @@ public class AuthMenu {
         String apellido2 = MenuUtil.getString("Inserta tu segundo apellido.");
         Sexo sexo = MenuUtil.getEnum(Sexo.class, "Inserta tu sexo. (H/M)");
         String pass = Password.read("Inserta tu contraseña:");
+        while (!Password.validate(pass)) pass = Password.read("[Error] La contraseña debe de tener al menos 8 caracteres, entre los cuales: una mayúscula, una minúscula y un número.");
 
         // Registrar usuario
         boolean registro = AuthRepo.registrar(new Usuario(dni, nombre, apellido1, apellido2, sexo, Privilegio.CLIENTE), pass); // Agregar el usuario
