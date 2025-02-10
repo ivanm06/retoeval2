@@ -28,21 +28,8 @@ public class AuthMenu {
     }
 
     public void login(){
-
-        System.out.println("""
-                    +----------------------------+
-                    |  Quieres seguir adelante?  |
-                    | 1. Seguir                  |
-                    | 2. Vorlver atras           |
-                    +----------------------------+
-                    """);
-        int c = MenuUtil.getInt();
-        while (c != 1 && c != 2) c = MenuUtil.getInt("Inserta una opción válida.");
-        if (c != 1) start();
-
-        //Insertar DNI
-        String dni = MenuUtil.getString("Inserta tu DNI.");
-        while (!MenuUtil.checkDNI(dni)) dni = MenuUtil.getString("[Info] Inserta un DNI valido.");
+        // Insertar DNI
+        String dni = MenuUtil.getDNI("Inserta tu DNI.");
 
         String pass = Password.read("Inserta tu contraseña:");
         if (!AuthRepo.checkPassword(dni, pass)){ // Verificar contraseña.
@@ -56,23 +43,10 @@ public class AuthMenu {
     }
 
     public void register() {
+        // Insertar DNI
+        String dni = MenuUtil.getDNI("Inserta tu DNI.");
 
-        System.out.println("""
-                    +----------------------------+
-                    |  Quieres seguir adelante?  |
-                    | 1. Seguir                  |
-                    | 2. Vorlver atras           |
-                    +----------------------------+
-                    """);
-        int c = MenuUtil.getInt();
-        while (c != 1 && c != 2) c = MenuUtil.getInt("Inserta una opción válida.");
-        if (c != 1) start();
-
-        //Insertar DNI
-        String dni = MenuUtil.getString("Inserta tu DNI.");
-        while (!MenuUtil.checkDNI(dni)) dni = MenuUtil.getString("Inserta un DNI valido.");
-
-        // Pedir informacion sobre el usuario
+        // Pedir información sobre el usuario
         String nombre = MenuUtil.getString("Inserta tu nombre.");
         String apellido1 = MenuUtil.getString("Inserta tu primer apellido.");
         String apellido2 = MenuUtil.getString("Inserta tu segundo apellido.");

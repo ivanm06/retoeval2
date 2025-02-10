@@ -4,6 +4,10 @@ import me.ivanmart.plaiaundi.Model.Fecha;
 
 import java.io.Console;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -17,7 +21,7 @@ public class MenuUtil {
      * @param dni int de 0 a 99999999
      * @return {@code char}
      */
-    public static char calcularLetraDNI(int dni) {
+    private static char calcularLetraDNI(int dni) {
         String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         int resto = dni % 23;
         return letras.charAt(resto);
@@ -28,11 +32,17 @@ public class MenuUtil {
      * es realmente la que debería.
      *
      * @param dni String de longitud 9 (8 números y 1 caracter)
-     * @return {@code boolean}
+     * @return {@code boolean} - true si es válido.
      */
-    public static boolean checkDNI(String dni) {
+    private static boolean checkDNI(String dni) {
         if (!dni.matches("\\d{8}[A-Z]")) return false;
         return dni.charAt(8) == calcularLetraDNI(Integer.parseInt(dni.substring(0, 8))); // Validar que se esté insertando la letra correcta
+    }
+
+    public static String getDNI(String txt) {
+        String dni = getString(txt);
+        while (!checkDNI(dni)) dni = getDNI("[Error] inserta un dni válido.");
+        return dni;
     }
 
     /**
@@ -138,13 +148,25 @@ public class MenuUtil {
     }
 
     /**
-     * Le pide al usuario un timestampo con el siguiente frmato: (YYYY-MM-DD) (año-mes-dia)
+     * Le pide al usuario un timestamp con el siguiente formato: (YYYY-MM-DD) (año-mes-dia).
+     * Si el timestamp no es válida (ya tenga un formato incorrecto o la fecha no exista) se le
+     * pedirá otro timestamp al usuario.
      *
      * @return {@link Timestamp}
      */
     public static Timestamp getTimestamp(String txt) {
+        String date = getString(txt);
         try {
-            return Timestamp.valueOf(getString(txt) + " 00:00:00");
+            // Parseamos la fecha.
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate ld = LocalDate.parse(date, dateFormatter);
+            // Si la fecha es anterior a la fecha de hoy, preguntar otra.
+            if (ld.isBefore(LocalDate.now())) return getTimestamp("[Error] La fecha tiene que ser posterior a hoy.");
+            // Comparamos los dias de la fecha para confirmar que la fecha existe y el parser no la ha modificado.
+            int day = Integer.parseInt(date.split("-")[2]);
+            if (ld.getDayOfMonth() == day) return Timestamp.valueOf(ld + " 00:00:00");
+            // Preguntar por otra fecha si la introducida no es válida.
+            return getTimestamp("[Error] Introduce una fecha válida.");
         } catch (Exception e) {
             return getTimestamp("[Error] La fecha tiene que tener el siguiente formato: (YYYY-MM-DD)");
         }
@@ -158,6 +180,7 @@ public class MenuUtil {
     public static Fecha getFecha(String txt1, String txt2) {
         Timestamp t1 = getTimestamp(txt1);
         Timestamp t2 = getTimestamp(txt2);
+        while (t1.after(t2)) t2 = getTimestamp("[Error] La segunda fecha debe ser mayor a la primera.");
         return new Fecha(t1, t2);
     }
 

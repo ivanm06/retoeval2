@@ -39,9 +39,16 @@ public class ReservaMenu {
             precioTotal += articulo.getCantidad() * articulo.getPrecio();
         }
 
+        // Generar tabla resumen.
         MenuUtil.generateTable(titulos, valores);
-        System.out.printf("| Precio Total: %s |%n", precioTotal * fecha.getDias());
-        System.out.printf("+---------------%s-+%n", "-".repeat(String.valueOf(precioTotal*fecha.getDias()).length()));
+
+        int dias = fecha.getDias()+1;
+
+        // Calcular Precio Total.
+        int total = precioTotal * dias;
+        System.out.printf("| Dias: %s%s |%n", dias, " ".repeat(8 + String.valueOf(total).length() - String.valueOf(dias).length()));
+        System.out.printf("| Precio Total: %s |%n", total);
+        System.out.printf("+---------------%s-+%n", "-".repeat(String.valueOf(total).length()));
     }
 
     private void reservar(Fecha fecha){

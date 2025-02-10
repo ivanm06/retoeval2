@@ -5,7 +5,6 @@ import me.ivanmart.plaiaundi.Enums.Privilegio;
 import me.ivanmart.plaiaundi.Menus.AdminMenu;
 import me.ivanmart.plaiaundi.Menus.AuthMenu;
 import me.ivanmart.plaiaundi.Menus.ClientMenu;
-import me.ivanmart.plaiaundi.Menus.ReservaMenu;
 import java.sql.SQLException;
 
 public class Main {
@@ -33,10 +32,6 @@ public class Main {
                 System.out.println("[Error] Ha habido un problema a la hora de iniciar sesion.");
                 break;
         }
-
-        // Una vez finalizado el programa.
-        ReservaMenu reserva = new ReservaMenu();
-        reserva.start();
 
         System.out.println("[Info] Aplicación cerrada.");
 

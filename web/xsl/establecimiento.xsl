@@ -80,7 +80,7 @@
                 </footer>
 
                 <script>
-                    // añadir un evento "onclick" por cada establecimiento.
+                    // añadir un evento "click" por cada establecimiento.
                     document.querySelectorAll(".establecimiento").forEach(e => {
                         e.addEventListener("click", () => {
                             const id = e.getAttribute("data-id");

@@ -58,14 +58,16 @@ Este proyecto se desarrolla como parte del Grado Superior en Desarrollo de Aplic
    - Ejecuta los scripts SQL en el directorio `/sql` para crear y poblar las tablas.
    - Creacion de los usuarios:
     ```sql
-        CREATE USER 'dbadmin'@'%' IDENTIFIED BY 'contrasenaAdmin';
-        GRANT ALL PRIVILEGES ON jaiskibel.* TO 'dbadmin'@'%';
+        CREATE USER 'dbadmin'@'localhost' IDENTIFIED BY 'contrasenaAdmin';
+        GRANT ALL PRIVILEGES ON jaiskibel.* TO 'dbadmin'@'localhost';
 
         CREATE USER 'jaiskibel'@'%' IDENTIFIED BY 'ContrasenaUsuarioApp';
         GRANT SELECT ON jaiskibel.* TO 'jaiskibel'@'%';
         GRANT INSERT ON jaiskibel.articuloReservado TO 'jaiskibel'@'%';
         GRANT INSERT ON jaiskibel.Reserva TO 'jaiskibel'@'%';
         GRANT INSERT ON jaiskibel.Usuario TO 'jaiskibel'@'%';
+        GRANT DELETE ON jaiskibel.Usuario TO 'jaiskibel'@'%';
+        GRANT DELETE ON jaiskibel.Reserva TO 'jaiskibel'@'%';
 
         FLUSH PRIVILEGES;
     ```

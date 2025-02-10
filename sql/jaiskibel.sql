@@ -13,11 +13,11 @@ CREATE TABLE Usuario(
     PRIMARY KEY (dni)
 ); 
 
-INSERT INTO Usuario VALUES("763497M","Paco","Calleja","Santos","H","$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS","Cliente");
-INSERT INTO Usuario VALUES("12345678A", "Juan", "Pérez", "García", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
-INSERT INTO Usuario VALUES("23456789B", "María", "López", "Fernández", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
-INSERT INTO Usuario VALUES("34567890C", "Pedro", "Sánchez", "Martín", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
-INSERT INTO Usuario VALUES("45678901D", "Laura", "García", "Rodríguez", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
+INSERT INTO Usuario VALUES("17263847R","Paco","Calleja","Santos","H","$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS","Cliente");
+INSERT INTO Usuario VALUES("17263848W", "Juan", "Pérez", "García", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
+INSERT INTO Usuario VALUES("17263849A", "María", "López", "Fernández", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
+INSERT INTO Usuario VALUES("17263850G", "Pedro", "Sánchez", "Martín", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
+INSERT INTO Usuario VALUES("17263851M", "Laura", "García", "Rodríguez", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
 INSERT INTO Usuario VALUES("49580251W", "Ivan", "Martin", "Rivas", "H", "$2a$10$xCOMkdedEz04R86kNN.MK.HK55XADgb0CeiH3XWq5l0Yd6.EOV72e", "Admin");
 
 CREATE TABLE Establecimiento(
@@ -44,10 +44,10 @@ CREATE TABLE Reserva(
     CHECK(fechaFin>=fechaInicio)
 ); 
 
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("12345678A", 1,"2025-01-01", "2025-01-05");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("23456789B", 1,"2025-01-20", "2025-01-23");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("34567890C", 2,"2025-02-01", "2025-02-06");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("45678901D", 4,"2025-03-10", "2025-03-11");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263851M", 1,"2025-01-01", "2025-01-05");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263850G", 1,"2025-01-20", "2025-01-23");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263851M", 2,"2025-02-01", "2025-02-06");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263849A", 4,"2025-03-10", "2025-03-11");
 
 CREATE TABLE Articulo(
 	id SMALLINT AUTO_INCREMENT,
@@ -74,7 +74,7 @@ CREATE TABLE Ski(
     modalidad ENUM("Competicion","Pista","Montaña"),
 	nivel ENUM("Principiante","Medio","Avanzado"),
     PRIMARY KEY(idArticulo),
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id)
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
 ); 
 
 INSERT INTO Ski (idArticulo, modalidad, nivel) VALUES(1, "Montaña", "medio");
@@ -86,7 +86,7 @@ CREATE TABLE Snowboard(
 	idArticulo SMALLINT NOT NULL,
     modalidad ENUM("Competicion","Pista","Montaña") NOT NULL,
     PRIMARY KEY(idArticulo),
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id)
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
 );
 
 INSERT INTO Snowboard (idArticulo, modalidad) VALUES(2, "Pista");
@@ -97,7 +97,7 @@ CREATE TABLE Accesorios(
 	idArticulo SMALLINT AUTO_INCREMENT,
     tipo VARCHAR(40) DEFAULT("Accesorio"),
     PRIMARY KEY(idArticulo),
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id)
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
 ); 
 
 INSERT INTO Accesorios (idArticulo, tipo) VALUES(3, "Botas");
@@ -113,8 +113,8 @@ CREATE TABLE articuloEstablecimiento(
     idEstablecimiento SMALLINT NOT NULL,
     cantidad SMALLINT NOT NULL CHECK(cantidad>=0),
     PRIMARY KEY (idArticulo, idEstablecimiento),
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id),
-    FOREIGN KEY (idEstablecimiento) REFERENCES Establecimiento(id)
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE,
+    FOREIGN KEY (idEstablecimiento) REFERENCES Establecimiento(id) ON DELETE CASCADE
 ); 
 
 INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VALUES(1, 1, 48);
@@ -139,7 +139,7 @@ CREATE TABLE articuloReservado(
     idArticulo SMALLINT NOT NULL,
     cantidad SMALLINT NOT NULL CHECK(cantidad>=0),
     PRIMARY KEY (idReserva, idArticulo),
-    FOREIGN KEY (idReserva) REFERENCES Reserva(id),
+    FOREIGN KEY (idReserva) REFERENCES Reserva(id) ON DELETE CASCADE,
     FOREIGN KEY (idArticulo) REFERENCES Articulo(id)
 ); 
 

@@ -41,6 +41,10 @@ public class ClientMenu {
         String[] titulos = {"ID", "Fecha Inicio", "Fecha Fin", "Establecimiento", "Articulos", "A Pagar"};
 
         ArrayList<Reserva> reservas = ReservaRepo.getReservasDeCliente(AuthMenu.getUsuario().getDNI());
+        if (reservas.isEmpty()){
+            System.out.println("[Info] No hay reservas a tu nombre.");
+            return;
+        }
         ArrayList<String[]> valores = new ArrayList<>();
         for (Reserva r : reservas) valores.add(r.getDataArray());
         MenuUtil.generateTable(titulos, valores);
@@ -81,6 +85,10 @@ public class ClientMenu {
 
         boolean finalizar = menuEstablecimiento(establecimiento);
         while (!finalizar) finalizar = menuEstablecimiento(establecimiento);
+
+        // Una vez finalizada la reserva.
+        ReservaMenu reserva = new ReservaMenu();
+        reserva.start();
     }
 
     private boolean menuEstablecimiento(Establecimiento establecimiento){

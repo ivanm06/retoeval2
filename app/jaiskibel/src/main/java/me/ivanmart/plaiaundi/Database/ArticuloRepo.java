@@ -93,7 +93,7 @@ public class ArticuloRepo {
     }
 
     public static HashMap<Integer, Integer> getStock(int idEstablecimiento, Fecha fechaReserva){
-        String query = "select ae.idArticulo, ae.cantidad - coalesce(ventas.vendido, 0) from articuloEstablecimiento ae " +
+        String query = "select ae.idArticulo, ae.cantidad - coalesce(ventas.vendido, 0) as stock from articuloEstablecimiento ae " +
                 "left join ( " +
                 "SELECT ae.idArticulo, sum(ar.cantidad) as vendido from articuloEstablecimiento ae " +
                 "left join articuloReservado ar using(idArticulo) " +
@@ -104,14 +104,17 @@ public class ArticuloRepo {
                 "or (r.fechaInicio between ? and ?)) /* Check si hay una reserva total (dentro) dentro de la fecha a reservar.*/ " +
                 "group by ar.idArticulo " +
                 ") as ventas " +
-                "using(idArticulo) where ae.idEstablecimiento = 1;";
+                "using(idArticulo) where ae.idEstablecimiento = ?;";
         
         HashMap<Integer, Integer> map = new HashMap<>();
 
         try{
             PreparedStatement statement = DBConnector.con.prepareStatement(query);
-            statement.setInt(1, idEstablecimiento);
+            statement.setTimestamp(1, fechaReserva.getInicio());
             statement.setTimestamp(2, fechaReserva.getFin());
+            statement.setTimestamp(3, fechaReserva.getInicio());
+            statement.setTimestamp(4, fechaReserva.getFin());
+            statement.setInt(5, idEstablecimiento);
             statement.execute();
             ResultSet set = statement.getResultSet();
             while (set.next()) map.put(set.getInt("idArticulo"), set.getInt("stock"));

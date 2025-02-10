@@ -83,12 +83,9 @@ public class AdminMenu {
 
                 // Solicitar el DNI del usuario a eliminar
                 String dni = obtenerDNIParaEliminar();
-
-                // Eliminar usuario si el DNI es válido y no es "0"
-                if (!dni.equals("0")) {
-                    eliminarUsuario(dni);  // Realiza la eliminación y no vuelve a mostrar la tabla
-                }
-                break;
+                if (dni != null) eliminarUsuario(dni);
+                continuar();
+                return;
             case 8:
                 // Mostrar tabla de reservas
                 valores2 = EstadisticasRepo.getReservas();
@@ -155,20 +152,15 @@ public class AdminMenu {
         System.out.println("+" + "-".repeat(21 + (total+"").length()) + "+");
     }
 
-    //Obtener DNI
+    // Obtener DNI
     private String obtenerDNIParaEliminar() {
-        String dni;
-        do {
-            dni = MenuUtil.getString("Introduce el DNI del Usuario a eliminar. (0 para volver atrás)");
-            if (dni.equals("0")) {
-                showMenu();  // Si el usuario quiere volver atrás, se regresa al menú principal
-                return dni;
-
-            }
-            if (dni.isEmpty() /* || !MenuUtil.checkDNI(dni) ---> si se quiere verificar que sea real*/ ) {
-                System.out.println("[Info] Inserta un DNI válido.");
-            }
-        } while (dni.isEmpty() /* || !MenuUtil.checkDNI(dni) ---> si se quiere verificar que sea real*/ );
+        boolean continuar = MenuUtil.getBoolean("si", "Deseas continuar? (si/no)");
+        if (!continuar) return null;
+        String dni = MenuUtil.getDNI("Introduce el DNI del Usuario a eliminar.");
+        if (dni.equals(AuthMenu.getUsuario().getDNI())){
+            System.out.println("[Error] No te puedes eliminar a tí mismo.");
+            return null;
+        }
         return dni;
     }
 
