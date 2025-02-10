@@ -11,7 +11,7 @@
 </head>
 <body>
     <header class="w-screen text-white flex flex-row justify-between items-center align-center p-6 bg-black relative">
-        <a href="./" class="text-[1.4rem] md:text-[2rem]" style='font-family: "Nosifer", serif;'>Jai<span class="text-blue-200">SKI</span>bel</a>
+        <a href="./" class="text-[1.4rem] md:text-[2rem] brand">Jai<span class="text-blue-200">SKI</span>bel</a>
         <label class="md:hidden" for="menu"><svg class="w-10 h-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 18h18"/><path d="M3 6h18"/></svg></label>
         <input class="hidden" type="checkbox" name="menu" id="menu">
         <nav class="dp hidden absolute top-[99%] bg-[#111] p-2 px-4 z-[5] right-0 min-w-[60vw] justify-center rounded-b-md text-md">
@@ -34,15 +34,27 @@
 
     <main>
         <div id="landing-bg" class="relative flex items-center px-2 md:pl-20 h-screen text-white">
-            <section class="max-w-[700px] z-[3] flex flex-col gap-4">
+            <section class="max-w-[800px] z-[3] flex flex-col gap-8 text-2xl">
                 <h1 class="font-bold text-4xl md:text-[4rem]">Tu Aventura En La Nieve Comienza Aquí</h1>
                 <p>Equipo profesional de ski y snowboard para todos los niveles. <span class="text-[1.4rem] font-bold">Reserva ahora</span> y disfruta de la mejor experiencia en la nieve.</p>
-                <div class="flex gap-4 flex-wrap">
-                    <a class="bg-blue-700 p-2 px-4 rounded-lg cursor-pointer hover:bg-blue-600 flex items-center gap-2" href="./reserva.html">Reserva Ahora <span class="text-3xl">&#129046;</span></a> 
-                    <a class="bg-white text-black p-2 px-4 rounded-lg cursor-pointer hover:bg-gray-100 flex items-center gap-2" href="./establecimiento.xml">Ver Equipamiento <span class="text-3xl">&#129046;</span></a>
+                <div class="flex gap-4 flex-wrap text-xl">
+                    <a class="bg-blue-700 p-3 px-5 rounded-lg cursor-pointer hover:bg-blue-600 flex items-center gap-2" href="./reserva.html">
+                        Reserva ahora
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-auto">
+                            <path d="M18 8L22 12L18 16"/>
+                            <path d="M2 12H22"/>
+                        </svg>
+                    </a> 
+                    <a class="bg-white text-black p-3 px-4 rounded-lg cursor-pointer hover:bg-gray-100 flex items-center gap-2" href="./establecimiento.xml">
+                        Ver equipamiento
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-auto">
+                            <path d="M18 8L22 12L18 16"/>
+                            <path d="M2 12H22"/>
+                        </svg>
+                    </a> 
                 </div>
             </section>
-            <div class="bg-black/20 absolute w-screen h-screen left-0 top-0 z-[2]"></div>
+            <div class="bg-black/30 absolute w-screen h-screen left-0 top-0 z-[2]"></div>
         </div>
         <a href="./index.html#aboutme"><svg class="animate-[bounce_2s_infinite] absolute w-20 h-auto z-[10] top-[95vh] md:top-[90vh] text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:text-gray-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></a>
         <div class="text-center bg-gray-100 w-full p-4 py-8">
@@ -77,7 +89,7 @@
         </div>
     </main>
 
-    <footer class="p-4 pt-8 flex flex-col md:flex-row h-auto items-center bg-black text-white gap-10 md:gap-8 text-lg md:text-md">
+    <footer class="p-4 pt-8 flex flex-col h-auto items-center bg-black text-white gap-10 md:gap-8 text-lg md:text-md">
         <section class="flex flex-col md:flex-row justify-between w-full items-center px-2 md:px-10 flex-wrap gap-8">
             <div>
                 <p class="text-center text-bold my-4 md:text-lg text-xl">Enlaces</p>
@@ -90,9 +102,9 @@
             <div>
                 <p class="text-center text-bold my-4 md:text-lg text-xl">Redes Sociales</p>
                 <div class="flex items-center gap-4">
-                    <a href="https://1dam3.es"><svg class="w-10 h-auto text-gray-400 hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
-                    <a href="https://1dam3.es"><svg class="w-10 h-auto text-gray-400 hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-                    <a href="https://1dam3.es"><svg class="w-10 h-auto text-gray-400 hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="https://reto.1dam3.es"><svg class="w-10 h-auto text-gray-400 hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                    <a href="https://reto.1dam3.es"><svg class="w-10 h-auto text-gray-400 hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://reto.1dam3.es"><svg class="w-10 h-auto text-gray-400 hover:text-gray-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
                 </div>
             </div>
         </section>
