@@ -11,6 +11,12 @@ import java.util.ArrayList;
 
 public class ReservaRepo {
 
+    /**
+     * Reserva artículos por un tiempo en concreto.
+     *
+     * @param articulos {@link ArrayList} de Artículos a reservar.
+     * @param fecha Objeto {@link Fecha} que guarda fechaInicio y fechaFin.
+     * */
     public static boolean reservar(ArrayList<ArticuloReserva> articulos, Fecha fecha){
         Usuario user = AuthMenu.getUsuario();
         int idReserva = 1;
@@ -82,14 +88,12 @@ public class ReservaRepo {
         return articulos;
     }
 
-
     /**
      * Devuelve las reservas de un cliente
      *
      * @param dni Dni del usuario
      * @return {@link ArrayList}<{@link Reserva}>
      * */
-
     public static ArrayList<Reserva> getReservasDeCliente(String dni){
         String query = "select r.id, r.fechaInicio, r.fechaFin, e.id as idEstablecimiento, e.nombre as establecimiento, sum(ar.cantidad) as articulos, (sum(a.precio*ar.cantidad) * timestampdiff(DAY, r.fechaInicio, r.fechaFin)) as precio from Reserva r join Establecimiento e on e.id = r.idEstablecimiento join articuloReservado ar on r.id = ar.idReserva join Articulo a on ar.idArticulo = a.id where r.dniUsuario = ? group by r.id order by precio desc;";
         ArrayList<Reserva> reservas = new ArrayList<>();
@@ -100,8 +104,7 @@ public class ReservaRepo {
             ResultSet set = statement.getResultSet();
             while (set.next()) reservas.add(new Reserva(
                     set.getInt("id"),
-                    set.getTimestamp("fechaInicio"),
-                    set.getTimestamp("fechaFin"),
+                    new Fecha(set.getTimestamp("fechaInicio"), set.getTimestamp("fechaFin")),
                     set.getInt("idEstablecimiento"),
                     set.getString("establecimiento"),
                     set.getInt("articulos"),
@@ -113,8 +116,10 @@ public class ReservaRepo {
         return reservas;
     }
 
-    //Eliminar un reserva
-
+    /**
+     * Elimina una reserva en base a su ID
+     * @param reservaID ID de la reserva a eliminar
+     * */
     public static void anularReserva(int reservaID) {
         String query = "DELETE FROM Reserva WHERE id = ?;";
         try {

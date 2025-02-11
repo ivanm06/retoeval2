@@ -61,13 +61,13 @@ Este proyecto se desarrolla como parte del Grado Superior en Desarrollo de Aplic
         CREATE USER 'dbadmin'@'localhost' IDENTIFIED BY 'contrasenaAdmin';
         GRANT ALL PRIVILEGES ON jaiskibel.* TO 'dbadmin'@'localhost';
 
-        CREATE USER 'jaiskibel'@'%' IDENTIFIED BY 'ContrasenaUsuarioApp';
-        GRANT SELECT ON jaiskibel.* TO 'jaiskibel'@'%';
-        GRANT INSERT ON jaiskibel.articuloReservado TO 'jaiskibel'@'%';
-        GRANT INSERT ON jaiskibel.Reserva TO 'jaiskibel'@'%';
-        GRANT INSERT ON jaiskibel.Usuario TO 'jaiskibel'@'%';
-        GRANT DELETE ON jaiskibel.Usuario TO 'jaiskibel'@'%';
-        GRANT DELETE ON jaiskibel.Reserva TO 'jaiskibel'@'%';
+        CREATE USER 'jaiskibel'@'localhost' IDENTIFIED BY 'ContrasenaUsuarioApp';
+        GRANT SELECT ON jaiskibel.* TO 'jaiskibel'@'localhost';
+        GRANT INSERT ON jaiskibel.articuloReservado TO 'jaiskibel'@'localhost';
+        GRANT INSERT ON jaiskibel.Reserva TO 'jaiskibel'@'localhost';
+        GRANT INSERT ON jaiskibel.Usuario TO 'jaiskibel'@'localhost';
+        GRANT DELETE ON jaiskibel.Usuario TO 'jaiskibel'@'localhost';
+        GRANT DELETE ON jaiskibel.Reserva TO 'jaiskibel'@'localhost';
 
         FLUSH PRIVILEGES;
     ```
@@ -103,3 +103,5 @@ Este proyecto está licenciado bajo la licencia [Creative Commons BY-NC-SA 4.0](
 Para preguntas o soporte, por favor, contacta con:
 - Equipo de Desarrollo **JaiSKIBel**
 - Correo: info@1dam3.es
+
+

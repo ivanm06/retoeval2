@@ -1,5 +1,8 @@
+-- Creación de la base de datos.
 drop database if exists jaiskibel;
 create database jaiskibel;
+
+-- Creación de las tablas
 USE jaiskibel;
 
 CREATE TABLE Usuario(
@@ -13,41 +16,24 @@ CREATE TABLE Usuario(
     PRIMARY KEY (dni)
 ); 
 
-INSERT INTO Usuario VALUES("17263847R","Paco","Calleja","Santos","H","$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS","Cliente");
-INSERT INTO Usuario VALUES("17263848W", "Juan", "Pérez", "García", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
-INSERT INTO Usuario VALUES("17263849A", "María", "López", "Fernández", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
-INSERT INTO Usuario VALUES("17263850G", "Pedro", "Sánchez", "Martín", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
-INSERT INTO Usuario VALUES("17263851M", "Laura", "García", "Rodríguez", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
-INSERT INTO Usuario VALUES("49580251W", "Ivan", "Martin", "Rivas", "H", "$2a$10$xCOMkdedEz04R86kNN.MK.HK55XADgb0CeiH3XWq5l0Yd6.EOV72e", "Admin");
-
 CREATE TABLE Establecimiento(
 	id SMALLINT AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
 	localizacion VARCHAR(100) NOT NULL,
     PRIMARY KEY (id)
-); 
-
-INSERT INTO Establecimiento (nombre, localizacion) VALUES("Estación de Esquí Baqueira Beret", "Baqueira, Lleida, España");
-INSERT INTO Establecimiento (nombre, localizacion) VALUES("Sierra Nevada", "Granada, Andalucía, España");
-INSERT INTO Establecimiento (nombre, localizacion) VALUES("Formigal-Panticosa", "Huesca, Aragón, España");
-INSERT INTO Establecimiento (nombre, localizacion) VALUES("La Molina", "Girona, Cataluña, España");
+);
 
 CREATE TABLE Reserva(
 	id SMALLINT AUTO_INCREMENT,
-    idEstablecimiento SMALLINT NOT NULL,
-    dniUsuario VARCHAR(9) NOT NULL,
+    idEstablecimiento SMALLINT,
+    dniUsuario VARCHAR(9),
     fechaInicio TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     fechaFin TIMESTAMP NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (dniUsuario) REFERENCES Usuario(dni),
-	FOREIGN KEY (idEstablecimiento) REFERENCES Establecimiento(id),
+	FOREIGN KEY (dniUsuario) REFERENCES Usuario(dni) ON DELETE SET NULL,
+	FOREIGN KEY (idEstablecimiento) REFERENCES Establecimiento(id) ON DELETE SET NULL,
     CHECK(fechaFin>=fechaInicio)
-); 
-
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263851M", 1,"2025-01-01", "2025-01-05");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263850G", 1,"2025-01-20", "2025-01-23");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263851M", 2,"2025-02-01", "2025-02-06");
-INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263849A", 4,"2025-03-10", "2025-03-11");
+);
 
 CREATE TABLE Articulo(
 	id SMALLINT AUTO_INCREMENT,
@@ -58,6 +44,69 @@ CREATE TABLE Articulo(
     PRIMARY KEY (id)
 ); 
 
+CREATE TABLE Ski(
+	idArticulo SMALLINT NOT NULL,
+    modalidad ENUM("Competicion","Pista","Montaña"),
+	nivel ENUM("Principiante","Medio","Avanzado"),
+    PRIMARY KEY(idArticulo),
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
+); 
+
+CREATE TABLE Snowboard(
+	idArticulo SMALLINT NOT NULL,
+    modalidad ENUM("Competicion","Pista","Montaña") NOT NULL,
+    PRIMARY KEY(idArticulo),
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Accesorios(
+	idArticulo SMALLINT AUTO_INCREMENT,
+    tipo VARCHAR(40) DEFAULT("Accesorio"),
+    PRIMARY KEY(idArticulo),
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
+);
+
+CREATE TABLE articuloEstablecimiento(
+	idArticulo SMALLINT NOT NULL,
+    idEstablecimiento SMALLINT NOT NULL,
+    cantidad SMALLINT NOT NULL CHECK(cantidad>=0),
+    PRIMARY KEY (idArticulo, idEstablecimiento),
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE,
+    FOREIGN KEY (idEstablecimiento) REFERENCES Establecimiento(id) ON DELETE CASCADE
+);
+
+CREATE TABLE articuloReservado(
+	idReserva SMALLINT NOT NULL,
+    idArticulo SMALLINT NOT NULL,
+    cantidad SMALLINT NOT NULL CHECK(cantidad>=0),
+    PRIMARY KEY (idReserva, idArticulo),
+    FOREIGN KEY (idReserva) REFERENCES Reserva(id) ON DELETE CASCADE,
+    FOREIGN KEY (idArticulo) REFERENCES Articulo(id)
+); 
+
+-- Inserción de datos
+
+# Usuarios
+INSERT INTO Usuario VALUES("17263847R","Paco","Calleja","Santos","H","$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS","Cliente");
+INSERT INTO Usuario VALUES("17263848W", "Juan", "Pérez", "García", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
+INSERT INTO Usuario VALUES("17263849A", "María", "López", "Fernández", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
+INSERT INTO Usuario VALUES("17263850G", "Pedro", "Sánchez", "Martín", "H", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Cliente");
+INSERT INTO Usuario VALUES("17263851M", "Laura", "García", "Rodríguez", "M", "$2a$10$519yFlebqWaY0q1L2tpJnuERijidRd0DLQM7EONIMBF3zGRWmX5SS", "Admin");
+INSERT INTO Usuario VALUES("49580251W", "Ivan", "Martin", "Rivas", "H", "$2a$10$xCOMkdedEz04R86kNN.MK.HK55XADgb0CeiH3XWq5l0Yd6.EOV72e", "Admin");
+
+# Establecimientos
+INSERT INTO Establecimiento (nombre, localizacion) VALUES("Estación de Esquí Baqueira Beret", "Baqueira, Lleida, España");
+INSERT INTO Establecimiento (nombre, localizacion) VALUES("Sierra Nevada", "Granada, Andalucía, España");
+INSERT INTO Establecimiento (nombre, localizacion) VALUES("Formigal-Panticosa", "Huesca, Aragón, España");
+INSERT INTO Establecimiento (nombre, localizacion) VALUES("La Molina", "Girona, Cataluña, España");
+
+# Reservas
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263851M", 1,"2025-01-01", "2025-01-05");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263850G", 1,"2025-01-20", "2025-01-23");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263851M", 2,"2025-02-01", "2025-02-06");
+INSERT INTO Reserva (dniUsuario, idEstablecimiento, fechaInicio, fechaFin) VALUES("17263849A", 4,"2025-03-10", "2025-03-11");
+
+# Articulos
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Esquís All Mountain", "Esquís versátiles ideales para todo tipo de terrenos y condiciones de nieve.", "M", 20);
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Tabla de Snowboard Freestyle", "Snowboard diseñada para saltos y trucos en el parque de nieve, con un diseño más flexible.", "L", 25);
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Botas de Esquí Rápidas", "Botas de esquí de alta calidad con cierre rápido y ajuste perfecto para mayor comodidad.", "S", 8);
@@ -69,36 +118,11 @@ INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Bolsa Térmica
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Esquís Racing", "Esquís  ideales para los mejores competidores", "XL", 40);
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES("Tabla de Snowboard Competición", "Snowboard diseñada para alcanzar mayor velocidad y maniobraridad.", "L", 35);
 
-CREATE TABLE Ski(
-	idArticulo SMALLINT NOT NULL,
-    modalidad ENUM("Competicion","Pista","Montaña"),
-	nivel ENUM("Principiante","Medio","Avanzado"),
-    PRIMARY KEY(idArticulo),
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
-); 
-
 INSERT INTO Ski (idArticulo, modalidad, nivel) VALUES(1, "Montaña", "medio");
 INSERT INTO Ski (idArticulo, modalidad, nivel) VALUES(9, "Competicion", "Avanzado");
 
-
-
-CREATE TABLE Snowboard(
-	idArticulo SMALLINT NOT NULL,
-    modalidad ENUM("Competicion","Pista","Montaña") NOT NULL,
-    PRIMARY KEY(idArticulo),
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
-);
-
 INSERT INTO Snowboard (idArticulo, modalidad) VALUES(2, "Pista");
 INSERT INTO Snowboard (idArticulo, modalidad) VALUES(10, "Competicion");
-
-
-CREATE TABLE Accesorios(
-	idArticulo SMALLINT AUTO_INCREMENT,
-    tipo VARCHAR(40) DEFAULT("Accesorio"),
-    PRIMARY KEY(idArticulo),
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE
-); 
 
 INSERT INTO Accesorios (idArticulo, tipo) VALUES(3, "Botas");
 INSERT INTO Accesorios (idArticulo, tipo) VALUES(4, "Chaqueta");
@@ -108,15 +132,7 @@ INSERT INTO Accesorios (idArticulo, tipo) VALUES(7, "Cadenas para Neumáticos");
 INSERT INTO Accesorios (idArticulo, tipo) VALUES(8, "Bolsa Térmica para Botellas");
 
 
-CREATE TABLE articuloEstablecimiento(
-	idArticulo SMALLINT NOT NULL,
-    idEstablecimiento SMALLINT NOT NULL,
-    cantidad SMALLINT NOT NULL CHECK(cantidad>=0),
-    PRIMARY KEY (idArticulo, idEstablecimiento),
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id) ON DELETE CASCADE,
-    FOREIGN KEY (idEstablecimiento) REFERENCES Establecimiento(id) ON DELETE CASCADE
-); 
-
+# Articulos por establecimiento
 INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VALUES(1, 1, 48);
 INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VALUES(2, 2, 53);
 INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VALUES(3, 3, 65);
@@ -134,15 +150,8 @@ INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VA
 INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VALUES(10, 2, 76);
 INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VALUES(10, 1, 48);
 
-CREATE TABLE articuloReservado(
-	idReserva SMALLINT NOT NULL,
-    idArticulo SMALLINT NOT NULL,
-    cantidad SMALLINT NOT NULL CHECK(cantidad>=0),
-    PRIMARY KEY (idReserva, idArticulo),
-    FOREIGN KEY (idReserva) REFERENCES Reserva(id) ON DELETE CASCADE,
-    FOREIGN KEY (idArticulo) REFERENCES Articulo(id)
-); 
 
+# Articulos Reservados
 INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(1, 1, 11);
 INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(2, 2, 15);
 INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(3, 3, 19);
@@ -155,8 +164,22 @@ INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(2, 9, 27)
 INSERT INTO articuloReservado (idReserva, idArticulo, cantidad) VALUES(3, 10, 20);
 
 
--- Extra
 
+-- Creación de los usuarios
+CREATE USER if not exists 'dbadmin'@'localhost' IDENTIFIED BY 'contrasenaAdmin';
+GRANT ALL PRIVILEGES ON jaiskibel.* TO 'dbadmin'@'localhost';
+
+CREATE USER if not exists 'jaiskibel'@'localhost' IDENTIFIED BY 'ContrasenaUsuarioApp';
+GRANT SELECT ON jaiskibel.* TO 'jaiskibel'@'localhost';
+GRANT INSERT ON jaiskibel.articuloReservado TO 'jaiskibel'@'localhost';
+GRANT INSERT ON jaiskibel.Reserva TO 'jaiskibel'@'localhost';
+GRANT INSERT ON jaiskibel.Usuario TO 'jaiskibel'@'localhost';
+GRANT DELETE ON jaiskibel.Reserva TO 'jaiskibel'@'localhost';
+GRANT DELETE ON jaiskibel.Usuario TO 'jaiskibel'@'localhost';
+
+FLUSH PRIVILEGES;
+
+/*------------------------------------ EXTRA ------------------------------------*/
 INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES
 ("Guantes térmicos", "Guantes con aislamiento térmico y resistencia al agua para el esquí.", "M", 5),
 ("Casco de esquí", "Casco ligero y resistente para mayor seguridad en la nieve.", "L", 12),
@@ -183,7 +206,6 @@ INSERT INTO Articulo (nombre, descripcion, talla, precio) VALUES
 ("Snowboard All-Mountain", "Tabla versátil para todo tipo de terrenos y estilos de conducción.", "L", 28),
 ("Snowboard Freeride", "Snowboard diseñado para nieve polvo y terrenos escarpados.", "XL", 20);
 
--- Inserción de accesorios en la tabla Accesorios
 INSERT INTO Accesorios (idArticulo, tipo) VALUES
 ((SELECT id FROM Articulo WHERE nombre = "Guantes térmicos"), "Guantes"),
 ((SELECT id FROM Articulo WHERE nombre = "Casco de esquí"), "Casco"),
@@ -206,38 +228,15 @@ INSERT INTO Accesorios (idArticulo, tipo) VALUES
 ((SELECT id FROM Articulo WHERE nombre = "Linterna frontal"), "Linterna"),
 ((SELECT id FROM Articulo WHERE nombre = "Cinturón portaobjetos"), "Cinturón");
 
--- Inserción de esquís en la tabla Ski
 INSERT INTO Ski (idArticulo, modalidad, nivel) VALUES
 ((SELECT id FROM Articulo WHERE nombre = "Esquís Freeride"), "Montaña", "Avanzado"),
 ((SELECT id FROM Articulo WHERE nombre = "Esquís de travesía"), "Montaña", "Medio");
 
--- Inserción de snowboards en la tabla Snowboard
 INSERT INTO Snowboard (idArticulo, modalidad) VALUES
 ((SELECT id FROM Articulo WHERE nombre = "Snowboard All-Mountain"), "Pista"),
 ((SELECT id FROM Articulo WHERE nombre = "Snowboard Freeride"), "Montaña");
 
-INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) VALUES
-(11, 1, 10),  -- Guantes térmicos
-(12, 1, 10),  -- Casco de esquí
-(13, 1, 10),  -- Gafas de esquí antivaho
-(14, 1, 10),  -- Pantalones de esquí
-(15, 1, 10),  -- Calcetines térmicos
-(16, 1, 10),  -- Mochila para nieve
-(17, 1, 10),  -- Rodilleras de protección
-(18, 1, 10),  -- Camiseta térmica
-(19, 1, 10),  -- Polainas para nieve
-(20, 1, 10), -- Cera para esquís
-(21, 1, 10), -- Bastones de esquí
-(22, 1, 10), -- Protector de espalda
-(23, 1, 10), -- Botella térmica
-(24, 1, 10), -- Bufanda polar
-(25, 1, 10), -- Mono de esquí
-(26, 1, 10), -- Crampones para nieve
-(27, 1, 10), -- Gorro de lana
-(28, 1, 10), -- Forro polar
-(29, 1, 10), -- Linterna frontal
-(30, 1, 10), -- Cinturón portaobjetos
-(31, 1, 10), -- Esquís Freeride
-(32, 1, 10), -- Esquís de travesía
-(33, 1, 10), -- Snowboard All-Mountain
-(34, 1, 10); -- Snowboard Freeride
+INSERT INTO articuloEstablecimiento (idArticulo, idEstablecimiento, cantidad) 
+VALUES (11, 1, 10), (12, 1, 10), (13, 1, 10), (14, 1, 10), (15, 1, 10), (16, 1, 10), (17, 1, 10), (18, 1, 10), (19, 1, 10),
+(20, 1, 10), (21, 1, 10), (22, 1, 10),  (23, 1, 10), (24, 1, 10), (25, 1, 10),  (26, 1, 10), (27, 1, 10), (28, 1, 10), (29, 1, 10),
+(30, 1, 10), (31, 1, 10), (33, 1, 10), (32, 1, 10), (34, 1, 10);

@@ -1,29 +1,24 @@
 package me.ivanmart.plaiaundi.Model;
 
-import java.sql.Timestamp;
-
 public class Reserva {
     // Atributos
     private int id;
-    private Timestamp fechaInicio;
-    private Timestamp fechaFin;
-    private int idEstablecimiento;
+    private Fecha fecha;
     private String establecimiento;
+    private int idEstablecimiento;
     private int articulos;
     private int precio;
 
     // Constructores
 
-    public Reserva(int id, Timestamp fechaInicio, Timestamp fechaFin) {
+    public Reserva(int id, Fecha fecha) {
         this.id = id;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.fecha = fecha;
     }
 
-    public Reserva(int id, Timestamp fechaInicio, Timestamp fechaFin, int idEstablecimiento, String establecimiento, int articulos, int precio) {
+    public Reserva(int id, Fecha fecha, int idEstablecimiento, String establecimiento, int articulos, int precio) {
         this.id = id;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.fecha = fecha;
         this.idEstablecimiento = idEstablecimiento;
         this.establecimiento = establecimiento;
         this.articulos = articulos;
@@ -31,12 +26,11 @@ public class Reserva {
     }
 
     // Metodos
-
     public String[] getDataArray() {
         return new String[]{
                 String.valueOf(this.id),
-                String.valueOf(this.fechaInicio),
-                String.valueOf(this.fechaFin),
+                String.valueOf(this.fecha.getInicio()),
+                String.valueOf(this.fecha.getFin()),
                 this.establecimiento,
                 String.valueOf(this.articulos),
                 String.valueOf(this.precio)

@@ -30,11 +30,12 @@ public class AdminMenu {
             ClientMenu menu = new ClientMenu();
             menu.start();
         }else{ // c == 2
-            continuar();
+            boolean finalizar = continuar();
+            while (!finalizar) finalizar = continuar();
         }
     }
 
-    private void continuar() {
+    private boolean continuar() {
         showMenu();
         int c = MenuUtil.getInt();
         while (c < 0 || c > 8) c = MenuUtil.getInt("[Error] Valor inválido.");
@@ -81,11 +82,21 @@ public class AdminMenu {
                 // Mostrar la tabla solo cuando se entra en esta sección
                 MenuUtil.generateTable(titulos2, valores2);
 
-                // Solicitar el DNI del usuario a eliminar
-                String dni = obtenerDNIParaEliminar();
-                if (dni != null) eliminarUsuario(dni);
-                continuar();
-                return;
+                // Le pregunta al usuario si quiere seguir con la eliminación.
+                boolean seguir = MenuUtil.getBoolean("si", "Deseas continuar? (si/no)");
+                if (!seguir) return false;
+
+                // Solicitar el DNI del usuario a eliminar.
+                String dni = MenuUtil.getDNI("Introduce el DNI del Usuario a eliminar.");
+
+                // Si se intenta eliminar a sí mismo.
+                if (dni.equals(AuthMenu.getUsuario().getDNI())){
+                    System.out.println("[Error] No te puedes eliminar a tí mismo.");
+                }else{
+                    // Eliminar.
+                    eliminarUsuario(dni);
+                }
+                break;
             case 8:
                 // Mostrar tabla de reservas
                 valores2 = EstadisticasRepo.getReservas();
@@ -94,26 +105,25 @@ public class AdminMenu {
 
                 // Solicitar el ID de la reserva a anular
                 int reservaId = MenuUtil.getInt("Introduce el ID de la reserva a anular. (0 para volver atrás)");
-                while (reservaId < 0) {
-                    reservaId = MenuUtil.getInt("[Error] Introduce un ID válido.");
-                }
+                while (reservaId < 0) reservaId = MenuUtil.getInt("[Error] Introduce un ID válido.");
 
                 // Si el usuario elige 0 volver atrás
                 if (reservaId == 0) {
-                   showMenu();
-                } else {
-                    anularReserva(reservaId);  // Realiza la anulación de la reserva
+                   return false;
                 }
+
+                anularReserva(reservaId);  // Realiza la anulación de la reserva
                 break;
             case 0:
                 start();
-                return;
+                return true;
         }
 
         MenuUtil.generateTable(titulos2, valores2);
         if (c==5) mostrarIngresosTotales();
         if (c == 1) menuReservas();
-        continuar();
+
+        return false;
     }
 
     private void showMenu(){
@@ -132,6 +142,7 @@ public class AdminMenu {
             +--------------------------------+
             """);
     }
+
     private void menuReservas(){
         int r = MenuUtil.getInt("Inserta el id de la reserva a ver. (0 para volver atrás)");
         while (r < 0) r = MenuUtil.getInt("[Error] inserta un id válido.");
@@ -150,18 +161,6 @@ public class AdminMenu {
         int total = EstadisticasRepo.getIngresosTotales();
         System.out.println("\033[F\r" + "| Ingresos totales: " + total + "€€" + " |");
         System.out.println("+" + "-".repeat(21 + (total+"").length()) + "+");
-    }
-
-    // Obtener DNI
-    private String obtenerDNIParaEliminar() {
-        boolean continuar = MenuUtil.getBoolean("si", "Deseas continuar? (si/no)");
-        if (!continuar) return null;
-        String dni = MenuUtil.getDNI("Introduce el DNI del Usuario a eliminar.");
-        if (dni.equals(AuthMenu.getUsuario().getDNI())){
-            System.out.println("[Error] No te puedes eliminar a tí mismo.");
-            return null;
-        }
-        return dni;
     }
 
 
