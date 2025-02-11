@@ -25,6 +25,7 @@ public class ReservaMenu {
         boolean reservar = MenuUtil.getBoolean("si", "Quieres Reservar los articulos seleccionados? (si/no)");
         // Reservar artículos
         if (reservar) reservar(fecha);
+        else Cesta.vaciar();
     }
 
     private void mostrarArticulos(Fecha fecha){
@@ -55,6 +56,7 @@ public class ReservaMenu {
     private void reservar(Fecha fecha){
         boolean res = ReservaRepo.reservar(Cesta.getCesta(), fecha);
 
+        Cesta.vaciar();
         if (res) System.out.println("[Info] Se han reservado los artículos con éxito.Gracias por contar con nosotros!");
         else System.out.println("[Error] Error al reservar los artículos.");
     }

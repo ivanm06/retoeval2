@@ -129,7 +129,7 @@ public class AdminMenu {
     private void showMenu(){
         System.out.println("""
             +--------------------------------+
-            |           Estadisticas         |
+            |         Administracion         |
             | 1. Mostrar todas las reservas  |
             | 2. Artículos más pedidos       |
             | 3. Clientes habituales         |

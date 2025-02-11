@@ -200,7 +200,7 @@
   
 - **Métodos:**
   - `public static void addToCesta(ArticuloReserva art)`: Añade artículos a la cesta, si la cesta ya contiene ese artículo, le suma la cantidad extra.
-
+  - `public static void vaciar()`: Vacía la cesta.
 ### `Fecha`
 
 - **Atributos:**

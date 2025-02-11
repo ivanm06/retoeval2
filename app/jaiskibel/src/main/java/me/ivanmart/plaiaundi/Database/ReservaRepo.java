@@ -95,7 +95,7 @@ public class ReservaRepo {
      * @return {@link ArrayList}<{@link Reserva}>
      * */
     public static ArrayList<Reserva> getReservasDeCliente(String dni){
-        String query = "select r.id, r.fechaInicio, r.fechaFin, e.id as idEstablecimiento, e.nombre as establecimiento, sum(ar.cantidad) as articulos, (sum(a.precio*ar.cantidad) * timestampdiff(DAY, r.fechaInicio, r.fechaFin)) as precio from Reserva r join Establecimiento e on e.id = r.idEstablecimiento join articuloReservado ar on r.id = ar.idReserva join Articulo a on ar.idArticulo = a.id where r.dniUsuario = ? group by r.id order by precio desc;";
+        String query = "select r.id, r.fechaInicio, r.fechaFin, e.id as idEstablecimiento, e.nombre as establecimiento, sum(ar.cantidad) as articulos, (sum(a.precio*ar.cantidad) * (timestampdiff(DAY, r.fechaInicio, r.fechaFin) + 1)) as precio from Reserva r join Establecimiento e on e.id = r.idEstablecimiento join articuloReservado ar on r.id = ar.idReserva join Articulo a on ar.idArticulo = a.id where r.dniUsuario = ? group by r.id order by precio desc;";
         ArrayList<Reserva> reservas = new ArrayList<>();
         try{
             PreparedStatement statement = DBConnector.con.prepareStatement(query);

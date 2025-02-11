@@ -18,6 +18,8 @@ public class Cesta {
         else cesta.add(art);
     }
 
+    public static void vaciar(){ cesta.clear(); }
+
 
     // Getters & Setters
 
