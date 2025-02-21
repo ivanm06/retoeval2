@@ -6,11 +6,6 @@ import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 public class ArticuloReserva extends Articulo {
     private int cantidad;
 
-    public ArticuloReserva(int id, int cantidad) {
-        super(id);
-        this.cantidad = cantidad;
-    }
-
     public ArticuloReserva(int id, String nombre, String descripcion, int precio, Talla talla, int cantidad, TipoArticulo tipo) {
         super(id, nombre, descripcion, precio, talla, tipo);
         this.cantidad = cantidad;
@@ -24,6 +19,7 @@ public class ArticuloReserva extends Articulo {
         this.cantidad += cantidad;
     }
 
+    @Override
     public String[] getDataArray(int extra){
         String[] dataArray = new String[]{String.valueOf(super.getId()), super.getNombre(), super.getDescripcion(), String.valueOf(super.getTalla()), String.valueOf(super.getPrecio()), String.valueOf(this.cantidad)};
         String[] extended = new String[dataArray.length + extra];

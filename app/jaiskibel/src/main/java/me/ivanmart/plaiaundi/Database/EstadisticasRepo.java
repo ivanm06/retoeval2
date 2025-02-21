@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class EstadisticasRepo {
     public static ArrayList<String[]> getReservasPorDinero(){
         ArrayList<String[]> reservas = new ArrayList<>();
-        String query = "select r.*, count(a.id) articulos, (sum(a.precio) * (TIMESTAMPDIFF(DAY, r.fechaInicio, r.fechaFin) + 1)) total from Reserva r join articuloReservado ar on r.id = ar.idReserva join Articulo a on a.id = ar.idArticulo group by r.id order by total desc;";
+        String query = "select r.*, count(a.id) articulos, (sum(a.precio * ar.cantidad) * (TIMESTAMPDIFF(DAY, r.fechaInicio, r.fechaFin) + 1)) total from Reserva r join articuloReservado ar on r.id = ar.idReserva join Articulo a on a.id = ar.idArticulo group by r.id order by total desc;";
         try{
             Statement statement = DBConnector.con.createStatement();
             statement.execute(query);
@@ -98,7 +98,7 @@ public class EstadisticasRepo {
     }
 
     public static int getIngresosTotales(){
-        String query = "select sum(total) as total from (select (sum(a.precio) * TIMESTAMPDIFF(DAY, r.fechaInicio, r.fechaFin)) total from Reserva r join articuloReservado ar on r.id = ar.idReserva join Articulo a on a.id = ar.idArticulo group by r.id) as tabla;";
+        String query = "select sum(total) as total from (select (sum(a.precio * ar.cantidad) * (TIMESTAMPDIFF(DAY, r.fechaInicio, r.fechaFin)+1)) total from Reserva r join articuloReservado ar on r.id = ar.idReserva join Articulo a on a.id = ar.idArticulo group by r.id) as tabla;";
         try{
             Statement statement = DBConnector.con.createStatement();
             statement.execute(query);

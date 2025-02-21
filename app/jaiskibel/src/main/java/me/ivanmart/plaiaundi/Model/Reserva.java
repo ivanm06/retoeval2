@@ -5,21 +5,13 @@ public class Reserva {
     private int id;
     private Fecha fecha;
     private String establecimiento;
-    private int idEstablecimiento;
     private int articulos;
     private int precio;
 
     // Constructores
-
-    public Reserva(int id, Fecha fecha) {
+    public Reserva(int id, Fecha fecha, String establecimiento, int articulos, int precio) {
         this.id = id;
         this.fecha = fecha;
-    }
-
-    public Reserva(int id, Fecha fecha, int idEstablecimiento, String establecimiento, int articulos, int precio) {
-        this.id = id;
-        this.fecha = fecha;
-        this.idEstablecimiento = idEstablecimiento;
         this.establecimiento = establecimiento;
         this.articulos = articulos;
         this.precio = precio;

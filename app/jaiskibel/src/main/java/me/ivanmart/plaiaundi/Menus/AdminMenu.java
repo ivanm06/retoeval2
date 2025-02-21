@@ -159,8 +159,8 @@ public class AdminMenu {
 
     private void mostrarIngresosTotales(){
         int total = EstadisticasRepo.getIngresosTotales();
-        System.out.println("\033[F\r" + "| Ingresos totales: " + total + "€€" + " |");
-        System.out.println("+" + "-".repeat(21 + (total+"").length()) + "+");
+        System.out.println("\033[F\r" + "| Ingresos totales: " + total + " euros" + " |");
+        System.out.println("+" + "-".repeat(26 + (total+"").length()) + "+");
     }
 
 

@@ -105,7 +105,6 @@ public class ReservaRepo {
             while (set.next()) reservas.add(new Reserva(
                     set.getInt("id"),
                     new Fecha(set.getTimestamp("fechaInicio"), set.getTimestamp("fechaFin")),
-                    set.getInt("idEstablecimiento"),
                     set.getString("establecimiento"),
                     set.getInt("articulos"),
                     set.getInt("precio")

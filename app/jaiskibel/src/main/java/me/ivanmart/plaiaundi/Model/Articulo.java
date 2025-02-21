@@ -3,7 +3,7 @@ package me.ivanmart.plaiaundi.Model;
 import me.ivanmart.plaiaundi.Enums.Talla;
 import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 
-public class Articulo {
+public abstract class Articulo {
     // Atributos
     private final int id;
     private String nombre;
@@ -20,10 +20,6 @@ public class Articulo {
         this.precio = precio;
         this.talla = talla;
         this.tipo = tipo;
-    }
-
-    public Articulo(int id) {
-        this.id = id;
     }
 
     // Getters && Setters
@@ -59,12 +55,7 @@ public class Articulo {
      * @param extra Cantidad de items extra que se quieran añadir a la lista.
      * @return {@link String}[]
      */
-    public String[] getDataArray(int extra) {
-        String[] dataArray = new String[]{String.valueOf(this.getId()), this.getNombre(), this.getDescripcion(), this.getTalla().toString(), String.valueOf(this.getPrecio())};
-        String[] extended = new String[dataArray.length + extra];
-        System.arraycopy(dataArray, 0, extended, 0, dataArray.length);
-        return extended;
-    }
+    public abstract String[] getDataArray(int extra);
 
     @Override
     public String toString() {
