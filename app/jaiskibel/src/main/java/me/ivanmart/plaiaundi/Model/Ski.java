@@ -21,7 +21,7 @@ public class Ski extends Articulo{
 
     @Override
     public String[] getDataArray(int extra){
-        String[] dataArray = new String[]{String.valueOf(this.getId()), this.getNombre(), this.getDescripcion(), this.getTalla().toString(), this.modalidad.toString(), this.nivel.toString(), String.valueOf(this.getPrecio())};
+        String[] dataArray = new String[]{String.valueOf(this.id), this.nombre, this.descripcion, String.valueOf(this.talla), String.valueOf(this.modalidad), String.valueOf(this.nivel), String.valueOf(this.precio)};
         String[] extended = new String[dataArray.length + extra];
         System.arraycopy(dataArray, 0, extended, 0, dataArray.length);
         return extended;

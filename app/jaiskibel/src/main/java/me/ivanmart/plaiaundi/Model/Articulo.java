@@ -5,12 +5,12 @@ import me.ivanmart.plaiaundi.Enums.TipoArticulo;
 
 public abstract class Articulo {
     // Atributos
-    private final int id;
-    private String nombre;
-    private String descripcion;
-    private int precio;
-    private Talla talla;
-    private TipoArticulo tipo;
+    protected final int id;
+    protected String nombre;
+    protected String descripcion;
+    protected int precio;
+    protected Talla talla;
+    protected TipoArticulo tipo;
 
     // Constructor
     public Articulo(int id, String nombre, String descripcion, int precio, Talla talla, TipoArticulo tipo) {
@@ -22,33 +22,7 @@ public abstract class Articulo {
         this.tipo = tipo;
     }
 
-    // Getters && Setters
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public int getPrecio() {
-        return precio;
-    }
-
-    public Talla getTalla() {
-        return talla;
-    }
-
-    public TipoArticulo getTipo() {
-        return tipo;
-    }
-
     // Metodos
-
     /**
      * Devuelve un array de {@link String} con la información del objeto
      *
