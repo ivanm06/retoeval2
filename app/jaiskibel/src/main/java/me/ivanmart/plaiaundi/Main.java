@@ -5,16 +5,16 @@ import me.ivanmart.plaiaundi.Enums.Privilegio;
 import me.ivanmart.plaiaundi.Menus.AdminMenu;
 import me.ivanmart.plaiaundi.Menus.AuthMenu;
 import me.ivanmart.plaiaundi.Menus.ClientMenu;
+
 import java.sql.SQLException;
 
 public class Main {
     private static final AuthMenu auth = new AuthMenu();
 
-
     public static void main(String[] args) {
         // Conectarse a la Base de Datos.
-        boolean conectado = conectarDB(0);
-        if (!conectado) return;
+        DBConnector conexion = conectarDB(0);
+        if (conexion == null) return;
 
         // Mostrar Menú Auth.
         auth.start();
@@ -37,23 +37,24 @@ public class Main {
 
         // Cerrar conexión a la Base de Datos.
         try{
-            DBConnector.close();
+            conexion.close();
         } catch (SQLException e) {
             System.out.printf("[Error] Error al cerrar la conexión con la base de datos. %s%n", e.getMessage());
         }
     }
 
-    private static boolean conectarDB(int intento){
+    private static DBConnector conectarDB(int intento){
+        DBConnector conn = new DBConnector();
         if (intento >= 3){
             System.out.println("[Error] Se ha llegado al número máximo de intentos, cerrando programa.");
-            return false;
+            return null;
         }
         try{
-            DBConnector.start();
+            conn.start();
         }catch (SQLException e){
             System.out.printf("[Error] error al conectar con la BD, Intentando de nuevo. %s%n", e.getMessage());
             return conectarDB(intento + 1);
         }
-        return true;
+        return conn;
     }
 }

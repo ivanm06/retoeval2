@@ -1,6 +1,7 @@
 package me.ivanmart.plaiaundi.Menus;
 
 import me.ivanmart.plaiaundi.Database.ReservaRepo;
+import me.ivanmart.plaiaundi.Interfaces.Menu;
 import me.ivanmart.plaiaundi.Model.ArticuloReserva;
 import me.ivanmart.plaiaundi.Model.Cesta;
 import me.ivanmart.plaiaundi.Model.Fecha;
@@ -8,7 +9,7 @@ import me.ivanmart.plaiaundi.Utils.MenuUtil;
 
 import java.util.ArrayList;
 
-public class ReservaMenu {
+public class ReservaMenu implements Menu {
 
     public void start(){
         if (Cesta.getCesta().isEmpty()){

@@ -4,13 +4,14 @@ import me.ivanmart.plaiaundi.Database.ArticuloRepo;
 import me.ivanmart.plaiaundi.Database.EstablecimientoRepo;
 import me.ivanmart.plaiaundi.Database.ReservaRepo;
 import me.ivanmart.plaiaundi.Enums.TipoArticulo;
+import me.ivanmart.plaiaundi.Interfaces.Menu;
 import me.ivanmart.plaiaundi.Model.*;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ClientMenu {
+public class ClientMenu implements Menu {
 
     public void start(){
         System.out.println("""

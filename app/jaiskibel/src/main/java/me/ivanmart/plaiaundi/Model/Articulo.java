@@ -23,6 +23,7 @@ public abstract class Articulo {
     }
 
     // Metodos
+
     /**
      * Devuelve un array de {@link String} con la información del objeto
      *
@@ -41,4 +42,13 @@ public abstract class Articulo {
         if (!(o instanceof Articulo that)) return false;
         return id == that.id;
     }
+
+    // Getters&Setters
+
+    public int getId() { return id; }
+    public String getNombre() { return nombre; }
+    public String getDescripcion() { return descripcion; }
+    public int getPrecio() { return precio; }
+    public Talla getTalla() { return talla; }
+    public TipoArticulo getTipo() { return tipo; }
 }

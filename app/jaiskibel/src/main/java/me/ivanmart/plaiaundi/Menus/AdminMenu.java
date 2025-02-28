@@ -3,6 +3,7 @@ package me.ivanmart.plaiaundi.Menus;
 import me.ivanmart.plaiaundi.Database.AuthRepo;
 import me.ivanmart.plaiaundi.Database.EstadisticasRepo;
 import me.ivanmart.plaiaundi.Database.ReservaRepo;
+import me.ivanmart.plaiaundi.Interfaces.Menu;
 import me.ivanmart.plaiaundi.Model.ArticuloReserva;
 import me.ivanmart.plaiaundi.Model.Usuario;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
@@ -12,8 +13,9 @@ import java.util.ArrayList;
 import static me.ivanmart.plaiaundi.Database.AuthRepo.eliminarUsuario;
 import static me.ivanmart.plaiaundi.Database.ReservaRepo.anularReserva;
 
-public class AdminMenu {
+public class AdminMenu implements Menu {
 
+    @Override
     public void start(){
         System.out.println("""
                 +------------------------------+
@@ -34,7 +36,6 @@ public class AdminMenu {
             while (!finalizar) finalizar = continuar();
         }
     }
-
     private boolean continuar() {
         showMenu();
         int c = MenuUtil.getInt();

@@ -3,14 +3,17 @@ package me.ivanmart.plaiaundi.Menus;
 import me.ivanmart.plaiaundi.Database.AuthRepo;
 import me.ivanmart.plaiaundi.Enums.Privilegio;
 import me.ivanmart.plaiaundi.Enums.Sexo;
+import me.ivanmart.plaiaundi.Interfaces.Autenticacion;
+import me.ivanmart.plaiaundi.Interfaces.Menu;
 import me.ivanmart.plaiaundi.Model.Usuario;
 import me.ivanmart.plaiaundi.Utils.MenuUtil;
 import me.ivanmart.plaiaundi.Utils.Password;
 
 
-public class AuthMenu {
+public class AuthMenu implements Menu, Autenticacion {
     private static Usuario usuario = new Usuario();
 
+    @Override
     public void start(){
         System.out.println("""
                     +-------------------+
@@ -26,7 +29,7 @@ public class AuthMenu {
         if (c == 1) login();
         else register();
     }
-
+    @Override
     public void login(){
         // Insertar DNI
         String dni = MenuUtil.getDNI("Inserta tu DNI.");
@@ -41,7 +44,7 @@ public class AuthMenu {
             System.out.printf("[Info] Bienvenido %s %s %s.%n", usuario.getNombre(), usuario.getApellido1(), usuario.getApellido2());
         }
     }
-
+    @Override
     public void register() {
         // Insertar DNI
         String dni = MenuUtil.getDNI("Inserta tu DNI.");
